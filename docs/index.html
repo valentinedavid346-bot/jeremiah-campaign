@@ -291,34 +291,30 @@ dialog.lightbox img{display:block;max-width:100%;max-height:82vh;border-radius:1
 
 
 
-/* ---------- intro: alarm lock screen ---------- */
+/* ---------- intro: ringing clock -> countdown ---------- */
 body.intro-on{overflow:hidden}
-.intro{position:fixed;inset:0;z-index:100;color:#fff;background:#07040D;display:grid;grid-template-rows:auto 1fr auto;padding:28px 24px calc(36px + env(safe-area-inset-bottom));text-align:center;overflow:hidden;transition:transform .9s cubic-bezier(.7,0,.2,1),opacity .9s ease}
-.intro::before{content:"";position:absolute;inset:-20%;background:radial-gradient(40% 35% at 50% 38%,rgba(124,58,237,.38),transparent 70%),radial-gradient(30% 25% at 80% 90%,rgba(91,33,182,.25),transparent 70%);animation:glow 4s ease-in-out infinite alternate;pointer-events:none}
-@keyframes glow{to{transform:scale(1.08);opacity:.75}}
-.intro>*{position:relative}
-.intro.gone{transform:translateY(-100%);opacity:.6}
-.intro-top{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);max-width:720px;width:100%;margin-inline:auto}
-.intro-top b{font-family:var(--display);font-weight:400;letter-spacing:.02em;font-size:22px;color:#fff}
-.intro-top b span{color:var(--lilac)}
-.intro-mid{align-self:center;display:grid;justify-items:center;gap:6px}
-.intro-label{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--lilac)}
-.intro-label svg{width:18px;height:18px;animation:bell 1.2s ease-in-out infinite;transform-origin:50% 10%}
-@keyframes bell{0%,50%,100%{transform:rotate(0)}10%,30%{transform:rotate(14deg)}20%,40%{transform:rotate(-14deg)}}
-.intro-time{font-family:var(--display);font-weight:400;font-size:clamp(110px,26vw,220px);line-height:.9;letter-spacing:.01em;display:flex;align-items:flex-start;gap:10px;animation:breathe 2s ease-in-out infinite}
-.intro-time small{font-family:var(--body);font-weight:600;font-size:clamp(18px,3.4vw,28px);letter-spacing:.08em;margin-top:.7em;color:rgba(255,255,255,.7)}
-@keyframes breathe{50%{opacity:.82}}
-.intro-date{font-size:clamp(16px,2.6vw,20px);font-weight:600;color:rgba(255,255,255,.75)}
-.intro-title{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(28px,5vw,44px);line-height:1;margin-top:22px}
-.intro-bot{display:grid;justify-items:center;gap:14px}
-.intro-stop{position:relative;font:700 18px var(--body);letter-spacing:.04em;color:#000;background:#fff;border:0;border-radius:999px;padding:18px 64px;cursor:pointer;transition:transform .15s}
-.intro-stop::before,.intro-stop::after{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid rgba(196,181,253,.7);animation:pulse 2s ease-out infinite;pointer-events:none}
-.intro-stop::after{animation-delay:1s}
-@keyframes pulse{from{transform:scale(1);opacity:1}to{transform:scale(1.35,1.8);opacity:0}}
-.intro-stop:hover{transform:scale(1.03)}
-.intro-stop:focus-visible{outline:3px solid var(--lilac);outline-offset:6px}
-.intro-hint{font-size:13px;color:rgba(255,255,255,.45);letter-spacing:.06em}
-@media (prefers-reduced-motion:reduce){.intro::before,.intro-label svg,.intro-time,.intro-stop::before,.intro-stop::after{animation:none}.intro{transition:opacity .4s}.intro.gone{transform:none;opacity:0}}
+.intro{position:fixed;inset:0;z-index:100;background:#000;color:#fff;display:grid;place-items:center;padding:24px;text-align:center;overflow:hidden;transition:transform .9s cubic-bezier(.7,0,.2,1)}
+.intro.gone{transform:translateY(-100%)}
+.intro-stage{grid-area:1/1;display:grid;justify-items:center;gap:18px;transition:opacity .5s ease,transform .5s ease}
+.intro-clock{background:none;border:0;padding:0;cursor:pointer;width:min(260px,58vw);border-radius:50%;-webkit-tap-highlight-color:transparent}
+.intro-clock svg{width:100%;height:auto;display:block;overflow:visible;animation:rattle .07s linear infinite alternate;transform-origin:50% 62%}
+.intro-clock .zz{animation:buzz .2s steps(2) infinite}
+.intro-clock:focus-visible{outline:3px solid var(--lilac);outline-offset:10px}
+@keyframes rattle{0%{transform:rotate(-7deg) translateX(-3px)}100%{transform:rotate(7deg) translateX(3px)}}
+.intro-hint{font-size:14px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.intro.snoozed .intro-ring{opacity:0;transform:scale(.8);pointer-events:none}
+.intro-count{opacity:0;transform:translateY(16px);pointer-events:none}
+.intro.snoozed .intro-count{opacity:1;transform:none;pointer-events:auto;transition-delay:.25s}
+.intro-count .k{font-size:14px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--lilac)}
+.intro-count .tiles{display:flex;gap:clamp(8px,2vw,18px)}
+.intro-count .t{min-width:clamp(68px,17vw,140px);border:2px solid rgba(255,255,255,.9);border-radius:20px;padding:14px 6px 10px;background:#0d0717}
+.intro-count .t b{display:block;font-family:var(--display);font-weight:400;font-size:clamp(42px,10vw,96px);line-height:1;font-variant-numeric:tabular-nums}
+.intro-count .t small{display:block;margin-top:6px;font-size:clamp(10px,1.8vw,13px);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lilac)}
+.intro-count .d{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(26px,5vw,48px);line-height:1}
+.intro-count .s{font-size:clamp(15px,2.4vw,19px);color:rgba(255,255,255,.7)}
+.intro-enter{font:700 16px var(--body);color:#000;background:#fff;border:0;border-radius:999px;padding:14px 34px;cursor:pointer;margin-top:8px}
+.intro-enter:focus-visible{outline:3px solid var(--lilac);outline-offset:5px}
+@media (prefers-reduced-motion:reduce){.intro-clock svg,.intro-clock .zz{animation:none}.intro{transition:opacity .4s}.intro.gone{transform:none;opacity:0}}
 
 /* ---------- fun features ---------- */
 .mood{margin-top:56px;border-top:2px solid #000;padding-top:40px}
@@ -537,17 +533,35 @@ footer a{color:#fff}
 </style>
 </head>
 <body class="intro-on">
-<div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="introTitle">
-  <div class="intro-top"><b>JD<span>.</span></b><span>Belmont Prep · Student Council</span></div>
-  <div class="intro-mid">
-    <p class="intro-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>Alarm</p>
-    <p class="intro-time" aria-label="7:00 AM">7:00<small>AM</small></p>
-    <p class="intro-date" id="introDate"></p>
-    <p class="intro-title" id="introTitle">Make the alarm worth it.</p>
+<div class="intro" id="intro" role="dialog" aria-modal="true" aria-label="Wake up, Belmont">
+  <div class="intro-stage intro-ring">
+    <button class="intro-clock" id="introBtn" type="button" aria-label="Snooze the alarm">
+      <svg viewBox="0 0 140 150" aria-hidden="true">
+        <g class="zz" stroke="#fff" stroke-width="5" stroke-linecap="round">
+          <path d="M6 40 L18 48"/><path d="M2 62 L16 64"/><path d="M134 40 L122 48"/><path d="M138 62 L124 64"/>
+        </g>
+        <circle cx="36" cy="30" r="20" fill="#fff"/>
+        <circle cx="104" cy="30" r="20" fill="#fff"/>
+        <path d="M40 132 L28 146 M100 132 L112 146" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="70" cy="84" r="56" fill="#5B21B6" stroke="#fff" stroke-width="7"/>
+        <circle cx="70" cy="84" r="44" fill="#fff"/>
+        <path d="M70 84 L70 54 M70 84 L90 96" stroke="#000" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="70" cy="84" r="6" fill="#7C3AED"/>
+      </svg>
+    </button>
+    <p class="intro-hint">Tap to snooze</p>
   </div>
-  <div class="intro-bot">
-    <button class="intro-stop" id="introBtn" type="button">Stop</button>
-    <p class="intro-hint">Tap stop to wake up Belmont</p>
+  <div class="intro-stage intro-count" aria-live="polite">
+    <p class="k">Countdown to election day</p>
+    <div class="tiles">
+      <div class="t"><b id="icD">0</b><small>days</small></div>
+      <div class="t"><b id="icH">00</b><small>hours</small></div>
+      <div class="t"><b id="icM">00</b><small>min</small></div>
+      <div class="t"><b id="icS">00</b><small>sec</small></div>
+    </div>
+    <p class="d" id="icDate"></p>
+    <p class="s" id="icLine"></p>
+    <button class="intro-enter" id="introEnter" type="button">Enter the site</button>
   </div>
 </div>
 
@@ -1018,7 +1032,7 @@ footer a{color:#fff}
       await navigator.clipboard.writeText(url); toast("Link copied");
     } catch(e){ if (e.name !== "AbortError") toast("Copy the link from your address bar"); }
   }); }); }
-  const F = Object.assign({ alarmClock:false, intro:true, clubQuiz:true, poll:true, supporters:true, ideaWall:true, hoops:true, dreamCard:true, moodCheck:true, easterEgg:true }, C.features || {});
+  const F = Object.assign({ alarmClock:true, intro:true, clubQuiz:true, poll:true, supporters:true, ideaWall:true, hoops:true, dreamCard:true, moodCheck:true, easterEgg:true }, C.features || {});
   const mailto = subj => C.email ? `mailto:${C.email}?subject=${encodeURIComponent(subj)}` : "";
 
   /* ---------- home ---------- */
@@ -1479,22 +1493,68 @@ footer a{color:#fff}
   const clockSVG = `<svg viewBox="0 0 140 150" aria-hidden="true"><circle cx="36" cy="30" r="20" fill="#000"/><circle cx="104" cy="30" r="20" fill="#000"/><path d="M40 132 L28 146 M100 132 L112 146" stroke="#000" stroke-width="8" stroke-linecap="round"/><circle cx="70" cy="84" r="56" fill="#5B21B6" stroke="#000" stroke-width="7"/><circle cx="70" cy="84" r="44" fill="#fff"/><path d="M70 84 L70 54 M70 84 L90 96" stroke="#000" stroke-width="7" stroke-linecap="round"/></svg>`;
 
 
-  /* ---------- intro: tap the alarm to open the site ---------- */
+  /* ---------- intro: ringing clock -> snooze -> countdown -> site ---------- */
   const intro = $("intro");
+  // old-school twin-bell alarm: metallic partials hammered ~18 times a second
+  const bell = (dur = 1.1) => {
+    if (C.alarmSound === false) return;
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === "suspended") actx.resume();
+      const t0 = actx.currentTime + 0.01, out = actx.createGain(); out.gain.value = 0.09; out.connect(actx.destination);
+      const strikes = Math.floor(dur * 18);
+      for (let i = 0; i < strikes; i++) {
+        const t = t0 + i / 18;
+        [2093, 2637, 3322, 4186].forEach((f, k) => {
+          const o = actx.createOscillator(), gn = actx.createGain();
+          o.type = "sine"; o.frequency.value = f * (i % 2 ? 1.012 : 1);
+          gn.gain.setValueAtTime(0.0001, t); gn.gain.exponentialRampToValueAtTime([1, 0.6, 0.35, 0.2][k], t + 0.004);
+          gn.gain.exponentialRampToValueAtTime(0.0001, t + 0.09);
+          o.connect(gn); gn.connect(out); o.start(t); o.stop(t + 0.1);
+        });
+      }
+      // the "snooze" click
+      const tc = t0 + dur + 0.02, oc = actx.createOscillator(), gc = actx.createGain();
+      oc.type = "triangle"; oc.frequency.setValueAtTime(700, tc); oc.frequency.exponentialRampToValueAtTime(140, tc + 0.06);
+      gc.gain.setValueAtTime(0.5, tc); gc.gain.exponentialRampToValueAtTime(0.001, tc + 0.08);
+      oc.connect(gc); gc.connect(out); oc.start(tc); oc.stop(tc + 0.1);
+    } catch {}
+  };
   if (F.intro === false) { intro.remove(); document.body.classList.remove("intro-on"); }
   else {
-    const wake = () => {
+    let timer = null, auto = null;
+    const pad = n => String(n).padStart(2, "0");
+    const target = C.electionDate ? new Date(C.electionDate) : null;
+    const tickIntro = () => {
+      if (!target) return;
+      const ms = Math.max(0, target - new Date());
+      $("icD").textContent = Math.floor(ms / 864e5); $("icH").textContent = pad(Math.floor(ms / 36e5) % 24);
+      $("icM").textContent = pad(Math.floor(ms / 6e4) % 60); $("icS").textContent = pad(Math.floor(ms / 1e3) % 60);
+    };
+    if (target) {
+      $("icDate").textContent = target.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+      $("icLine").textContent = `Vote ${full}. ${C.slogan || ""}`;
+    }
+    const enter = () => {
       if (intro.classList.contains("gone")) return;
-      beep(1320, 0.12, 0.06, "sine"); setTimeout(() => beep(1760, 0.18, 0.05, "sine"), 110);
+      clearTimeout(auto); clearInterval(timer);
       intro.classList.add("gone"); document.body.classList.remove("intro-on");
-      setTimeout(() => confetti(140), 450);
+      setTimeout(() => confetti(150), 450);
       setTimeout(() => intro.remove(), 950);
     };
-    { const d = C.electionDate ? new Date(C.electionDate) : new Date();
-      $("introDate").textContent = d.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }) + (C.electionDate ? " · Election Day" : ""); }
-    $("introBtn").addEventListener("click", wake);
-    addEventListener("keydown", e => { if (e.key === "Escape" && document.contains(intro)) wake(); });
-    $("introBtn").focus();
+    const snooze = () => {
+      if (intro.classList.contains("snoozed")) return;
+      bell(1.0);
+      setTimeout(() => {
+        if (!target || target <= new Date()) { enter(); return; }
+        tickIntro(); timer = setInterval(tickIntro, 1000);
+        intro.classList.add("snoozed");
+        auto = setTimeout(enter, 5000);
+      }, 900);
+    };
+    $("introBtn").addEventListener("click", snooze);
+    $("introEnter").addEventListener("click", enter);
+    addEventListener("keydown", e => { if (e.key === "Escape" && document.contains(intro)) enter(); });
   }
 
   /* ---------- 2. dream belmont card ---------- */

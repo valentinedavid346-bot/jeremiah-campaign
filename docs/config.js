@@ -101,8 +101,8 @@ const CONFIG = {
 
   // ---------- TURN FEATURES ON / OFF (true = on, false = off) ----------
   features: {
-    intro: true,          // dark "Wake up, Belmont" alarm screen when the site opens
-    alarmClock: false,    // extra alarm clock over "The plan" on the home page
+    intro: true,          // ringing alarm clock on a black screen when the site opens, then the countdown
+    alarmClock: true,     // tap-the-alarm clock that reveals "The plan" on the home page
     clubQuiz: true,       // club match quiz (Join in page)
     poll: true,           // live "What matters most?" poll (needs firebase below)
     supporters: true,     // live supporter counter (needs firebase below)
