@@ -107,28 +107,13 @@ const CONFIG = {
     poll: true,           // live "What matters most?" poll (needs firebase below)
     supporters: true,     // live supporter counter (needs firebase below)
     ideaWall: true,       // live idea wall with approval (needs firebase below)
-    hoops: true,          // Belmont Ballers 1v1 basketball game (Get involved menu)
+    snake: true,          // Snooze Snake game with daily + all-time leaderboards (Get involved menu)
     dreamCard: true,      // "Dream Belmont" card maker (Get involved menu)
     moodCheck: true,      // "How'd you wake up today?" check-in (Be a part of Belmont page; live totals need firebase)
     easterEgg: true,      // tap the JD logo 5 times
   },
   supportersMinToShow: 10,  // hide the number until at least this many people join
   alarmSound: true,          // alarm clock beeps when tapped (false = silent)
-
-  // ---------- BELMONT BALLERS (1v1 basketball game) ----------
-  // Opponents are played in this order, easiest first. colors: [jersey, trim].
-  // Law's green and white are confirmed. The others are best guesses:
-  // swap in the real school colors when you know them.
-  hoops: {
-    pointsToWin: 11,
-    gameSeconds: 90,
-    opponents: [
-      { name: "Leadership",   colors: ["#1E3A8A", "#FACC15"] },   // guess: navy + gold
-      { name: "Fordham Arts", colors: ["#B91C1C", "#111111"] },   // guess: red + black
-      { name: "KAPPA",        colors: ["#90C787", "#111111"] },   // green from KAPPA's website theme
-      { name: "Law",          colors: ["#15803D", "#FFFFFF"] },   // green + white (Eagles)
-    ],
-  },
 
   // ---------- THEN VS NOW SLIDER (Why Jeremiah page) ----------
   // Put two photos of the same spot next to this page. Stays hidden until both are filled in.

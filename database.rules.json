@@ -84,22 +84,26 @@
         }
       }
     },
-    "hoops": {
+    "snake": {
       ".read": true,
       ".indexOn": [
-        "wins"
+        "best",
+        "day"
       ],
       "$uid": {
         ".write": "auth != null && auth.uid === $uid",
-        ".validate": "newData.hasChildren(['name','wins','diff','ts']) && (!data.exists() || now - data.child('ts').val() > 15000)",
+        ".validate": "newData.hasChildren(['name','best','dayBest','day','ts']) && (!data.exists() || now - data.child('ts').val() > 8000)",
         "name": {
           ".validate": "newData.isString() && newData.val().matches(/^[A-Za-z0-9 ._-]{2,12}$/)"
         },
-        "wins": {
-          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 4 && newData.val() % 1 === 0"
+        "best": {
+          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 3000 && newData.val() % 1 === 0"
         },
-        "diff": {
-          ".validate": "newData.isNumber() && newData.val() >= -99 && newData.val() <= 99 && newData.val() % 1 === 0"
+        "dayBest": {
+          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= newData.parent().child('best').val() && newData.val() % 1 === 0"
+        },
+        "day": {
+          ".validate": "newData.isString() && newData.val().matches(/^\\d{4}-\\d{2}-\\d{2}$/)"
         },
         "ts": {
           ".validate": "newData.val() === now"
