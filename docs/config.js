@@ -14,7 +14,7 @@ const CONFIG = {
 
   // ---------- HOME ----------
   // Election: date-time in local time, e.g. "2026-10-15T08:00"
-  electionDate: "",
+  electionDate: "2026-10-29T08:00",
   howToVote: [
     // Steps, in order. Example:
     // "Vote in your homeroom during first period.",
