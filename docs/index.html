@@ -255,19 +255,33 @@ textarea{min-height:140px;resize:vertical}
 .reach .soc{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
 .reach .soc a{background:#fff;color:#000;text-decoration:none;padding:8px 16px;border-radius:999px;font-size:15px}
 
-/* ---------- belmont community + cooking club ---------- */
-.community .shout{font-family:var(--display);text-transform:uppercase;font-size:clamp(30px,4.5vw,46px);line-height:1;color:#000;margin-bottom:12px}
-.club-title{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(30px,4vw,40px);line-height:1;color:var(--blue);margin:56px 0 18px}
-.club-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.club-pic{padding:0;border:3px solid #000;border-radius:20px;overflow:hidden;cursor:zoom-in;background:#000;aspect-ratio:3/4;transition:transform .15s}
-.club-pic:hover{transform:translateY(-3px)}
+/* ---------- cooking club (why page) + connect page ---------- */
+.club{padding-top:0}
+.club-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:32px}
+.club-pic{margin:0}
+.club-pic button{display:block;width:100%;padding:0;border:3px solid #000;border-radius:20px;overflow:hidden;cursor:zoom-in;background:#000;aspect-ratio:3/4;transition:transform .15s}
+.club-pic button:hover{transform:translateY(-3px)}
 .club-pic img{width:100%;height:100%;object-fit:cover;display:block}
-.club-pic.big{grid-column:span 2;grid-row:span 2;aspect-ratio:auto;box-shadow:8px 8px 0 var(--blue)}
-@media (max-width:700px){.club-grid{grid-template-columns:repeat(2,1fr)}.club-pic.big{grid-row:span 1;aspect-ratio:3/4}}
-dialog.lightbox{border:0;padding:0;background:transparent;max-width:min(900px,100% - 32px);max-height:90vh;margin:auto}
+.club-pic figcaption{font-weight:700;font-size:16px;margin-top:8px}
+.club-pic.big{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column}
+.club-pic.big button{flex:1;aspect-ratio:auto;box-shadow:8px 8px 0 var(--blue)}
+.club-pic.big figcaption{margin-top:14px}
+@media (max-width:700px){.club-grid{grid-template-columns:repeat(2,1fr)}.club-pic.big{grid-row:span 1}.club-pic.big button{aspect-ratio:3/4;flex:none}}
+dialog.lightbox{border:0;padding:0;background:transparent;max-width:min(900px,100% - 32px);max-height:92vh;margin:auto;overflow:visible}
 dialog.lightbox::backdrop{background:rgba(0,0,0,.85)}
-dialog.lightbox img{display:block;max-width:100%;max-height:90vh;border-radius:16px}
+dialog.lightbox img{display:block;max-width:100%;max-height:82vh;border-radius:16px;margin:auto}
+.lb-cap{color:#fff;text-align:center;font-weight:700;font-size:18px;margin-top:10px}
 .lb-close{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:#000;font-size:28px;line-height:1;cursor:pointer}
+.connect .shout{font-family:var(--display);text-transform:uppercase;font-size:clamp(40px,7vw,76px);line-height:.95;color:var(--blue);margin-bottom:18px}
+.connect-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+.connect-steps>div{background:#fff;border:2px solid #000;border-radius:24px;padding:24px}
+.connect-steps>div:nth-child(2){background:var(--blue);color:#fff;border-color:var(--blue)}
+.connect-steps b{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#000;color:#fff;font-size:20px;margin-bottom:12px}
+.connect-steps>div:nth-child(2) b{background:#fff;color:var(--blue)}
+.connect-steps h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:30px;line-height:1}
+.connect-steps p{margin-top:8px;font-size:17px}
+@media (max-width:760px){.connect-steps{grid-template-columns:1fr}}
+.foot-contact{font-weight:700}
 
 /* ideas + share */
 .ideas{background:#000;color:#fff;border-top:8px solid var(--blue)}
@@ -425,7 +439,7 @@ footer a{color:#fff}
         <button class="dd-btn" type="button" id="ddBtn" aria-expanded="false" aria-controls="ddMenu">Get involved</button>
         <ul class="dd-menu" id="ddMenu"></ul>
       </li>
-      <li><a href="#/contact" data-page="contact">Contact</a></li>
+      <li><a href="#/connect" data-page="connect">Connect with Belmont</a></li>
     </ul>
     <div class="right">
       <a href="#/frame" class="vote-btn" id="ctaBtn">Make your frame</a>
@@ -519,31 +533,6 @@ footer a{color:#fff}
     </div>
   </section>
 
-  <section class="block community" id="community">
-    <div class="wrap">
-      <h2>Belmont Community</h2>
-      <p class="shout">You say it, we shout it!</p>
-      <p class="lead">We want students to take the initiative in advocating for what they want at Belmont.</p>
-      <div class="actions">
-        <button class="btn btn-purple" type="button" id="communityBtn" data-msg="idea">Have a suggestion? Tap here</button>
-      </div>
-
-      <h3 class="club-title">Cooking Club</h3>
-      <div class="club-grid" id="clubGrid">
-        <button type="button" class="club-pic big" data-full="img/cooking-1.jpg"><img src="img/cooking-1.jpg" alt="A student cooking taco meat in a pan" loading="lazy"></button>
-        <button type="button" class="club-pic" data-full="img/cooking-2.jpg"><img src="img/cooking-2.jpg" alt="Taco bar spread with cheese, lettuce, tomatoes, sour cream and shells" loading="lazy"></button>
-        <button type="button" class="club-pic" data-full="img/cooking-3.jpg"><img src="img/cooking-3.jpg" alt="A finished taco on a plate" loading="lazy"></button>
-        <button type="button" class="club-pic" data-full="img/cooking-4.jpg"><img src="img/cooking-4.jpg" alt="A student and a teacher giving a thumbs up with a taco" loading="lazy"></button>
-        <button type="button" class="club-pic" data-full="img/cooking-5.jpg"><img src="img/cooking-5.jpg" alt="A student enjoying a taco" loading="lazy"></button>
-      </div>
-    </div>
-  </section>
-
-  <dialog class="lightbox" id="lightbox" aria-label="Photo">
-    <button type="button" class="lb-close" id="lbClose" aria-label="Close">&times;</button>
-    <img id="lbImg" alt="">
-  </dialog>
-
   <section class="block" id="involved" hidden>
     <div class="wrap">
       <h2>Get involved</h2>
@@ -571,7 +560,7 @@ footer a{color:#fff}
       <h2>What should change at Belmont?</h2>
       <p class="lead">This campaign is built on what students actually want. Tell Jeremiah what you'd fix, add or keep.</p>
       <div class="actions">
-        <button class="btn btn-white" type="button" id="ideasBtn" data-msg="idea">Send your idea</button>
+        <a class="btn btn-white" href="#/connect" id="ideasBtn">Have a suggestion?</a>
         <button class="btn btn-ghost" type="button" data-share>Share with a friend</button>
       </div>
     </div>
@@ -585,6 +574,21 @@ footer a{color:#fff}
     <p>The reasons to put his name first on your ballot.</p>
   </div></header>
   <section class="block"><div class="wrap" id="reasonList"></div></section>
+  <section class="block club"><div class="wrap">
+      <h2>Already building community</h2>
+      <p class="lead">Jeremiah's cooking club brings students and teachers together over food. This is the kind of Belmont he wants: people from every grade in one room, making something together.</p>
+      <div class="club-grid" id="clubGrid">
+        <figure class="club-pic big"><button type="button" data-full="img/cooking-1.jpg" data-cap="Cooking the taco meat"><img src="img/cooking-1.jpg" alt="A student cooking taco meat in a pan" loading="lazy"></button><figcaption>Cooking the taco meat</figcaption></figure>
+        <figure class="club-pic "><button type="button" data-full="img/cooking-2.jpg" data-cap="The taco bar, all set up"><img src="img/cooking-2.jpg" alt="Taco bar spread with cheese, lettuce, tomatoes, sour cream and shells" loading="lazy"></button><figcaption>The taco bar, all set up</figcaption></figure>
+        <figure class="club-pic "><button type="button" data-full="img/cooking-3.jpg" data-cap="The finished product"><img src="img/cooking-3.jpg" alt="A finished taco on a plate" loading="lazy"></button><figcaption>The finished product</figcaption></figure>
+        <figure class="club-pic "><button type="button" data-full="img/cooking-4.jpg" data-cap="Teachers came through too"><img src="img/cooking-4.jpg" alt="A student and a teacher giving a thumbs up with a taco" loading="lazy"></button><figcaption>Teachers came through too</figcaption></figure>
+        <figure class="club-pic "><button type="button" data-full="img/cooking-5.jpg" data-cap="Students digging in"><img src="img/cooking-5.jpg" alt="A student enjoying a taco" loading="lazy"></button><figcaption>Students digging in</figcaption></figure>
+      </div>
+  </div></section>
+  <dialog class="lightbox" id="lightbox" aria-label="Photo">
+    <button type="button" class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+    <img id="lbImg" alt=""><p class="lb-cap" id="lbCap"></p>
+  </dialog>
   <section class="closer"><div class="wrap">
     <h2>Vote<span id="closerName"></span></h2>
     <p id="closerLine"></p>
@@ -730,6 +734,27 @@ footer a{color:#fff}
   </div></section>
 </div>
 
+<!-- =============== CONNECT WITH BELMONT =============== -->
+<div class="page" id="page-connect">
+  <header class="page-head"><div class="wrap">
+    <h1>Connect with Belmont</h1>
+    <p>Your ideas. Your school. Your voice.</p>
+  </div></header>
+  <section class="block connect"><div class="wrap">
+    <p class="shout">You say it, we shout it!</p>
+    <p class="lead">We want students to take the initiative in advocating for what they want at Belmont. Got an idea for a club, an event, or something that should change? Tell us and we'll push for it.</p>
+    <div class="actions">
+      <button class="btn btn-purple" type="button" id="communityBtn" data-msg="idea">Have a suggestion? Tap here</button>
+      <button class="btn btn-outline" type="button" data-share>Share with a friend</button>
+    </div>
+    <div class="connect-steps">
+      <div><b>1</b><h3>You say it</h3><p>Send your idea. Big or small, it counts.</p></div>
+      <div><b>2</b><h3>We shout it</h3><p>The best ideas get brought to the council and shared with the school.</p></div>
+      <div><b>3</b><h3>We follow up</h3><p>You'll hear what happened because of your idea.</p></div>
+    </div>
+  </div></section>
+</div>
+
 <!-- =============== CONTACT =============== -->
 <div class="page" id="page-contact">
   <header class="page-head"><div class="wrap">
@@ -757,6 +782,7 @@ footer a{color:#fff}
 <footer>
   <div class="wrap">
     <span id="footLine"></span>
+    <a href="#/contact" class="foot-contact">Contact Jeremiah</a>
     <div class="soc" id="footSocials"></div>
   </div>
 </footer>
@@ -1149,7 +1175,7 @@ footer a{color:#fff}
   $("tiles").innerHTML = onPages.map(x => `<a class="tile" href="#/${x.id}"><h3>${x.label}</h3><p>${esc(x.tile)}</p><b>${x.go} &rarr;</b></a>`).join("");
   $("involved").hidden = !onPages.length;
   if (!F.photoFrame) { $("ctaBtn").href = "#/contact"; $("ctaBtn").textContent = "Contact"; }
-  if (F.ideaWall && liveReady) { const b = $("ideasBtn"); const a = document.createElement("a"); a.className = b.className; a.id = "ideasBtn"; a.href = "#/ideas"; a.textContent = "Post your idea"; b.replaceWith(a);
+  if (F.ideaWall && liveReady) {
     const cb = $("communityBtn"); const ca = document.createElement("a"); ca.className = cb.className; ca.id = "communityBtn"; ca.href = "#/ideas"; ca.textContent = cb.textContent; cb.replaceWith(ca); }
   const ddItem = $("ddItem"), ddBtn = $("ddBtn");
   const ddSet = open => { ddItem.classList.toggle("open", open); ddBtn.setAttribute("aria-expanded", open); };
@@ -1182,8 +1208,8 @@ footer a{color:#fff}
   // cooking club photo viewer
   const lb = $("lightbox"), lbImg = $("lbImg");
   $("clubGrid").addEventListener("click", e => {
-    const p = e.target.closest(".club-pic"); if (!p) return;
-    lbImg.src = p.dataset.full; lbImg.alt = p.querySelector("img").alt;
+    const p = e.target.closest(".club-pic button"); if (!p) return;
+    lbImg.src = p.dataset.full; lbImg.alt = p.querySelector("img").alt; $("lbCap").textContent = p.dataset.cap;
     if (lb.showModal) lb.showModal(); else lb.setAttribute("open", "");
   });
   const closeLb = () => { if (lb.close) lb.close(); else lb.removeAttribute("open"); };
@@ -1261,7 +1287,7 @@ footer a{color:#fff}
   });
 
   /* ---------- router ---------- */
-  const titles = { home: C.position ? `${full} for ${C.position}` : full, why:`Why ${C.firstName}`, video:"Campaign video", cabinet:"Meet the cabinet", agenda:"Agenda", poll:"Poll", ideas:"Idea wall", frame:"Photo frame", quiz:"Club quiz", qa:"Q&A", endorsements:"Endorsements", contact:"Contact" };
+  const titles = { home: C.position ? `${full} for ${C.position}` : full, why:`Why ${C.firstName}`, video:"Campaign video", cabinet:"Meet the cabinet", agenda:"Agenda", poll:"Poll", ideas:"Idea wall", frame:"Photo frame", quiz:"Club quiz", qa:"Q&A", endorsements:"Endorsements", contact:"Contact", connect:"Connect with Belmont" };
   const navList = $("navList"), menuBtn = $("menuBtn");
   const route = () => {
     const [pageId = "home", anchor] = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
