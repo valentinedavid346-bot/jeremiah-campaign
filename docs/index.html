@@ -283,6 +283,66 @@ dialog.lightbox img{display:block;max-width:100%;max-height:82vh;border-radius:1
 @media (max-width:760px){.connect-steps{grid-template-columns:1fr}}
 .foot-contact{font-weight:700}
 
+
+/* ---------- fun features ---------- */
+.hype{background:var(--blue);color:#fff;text-align:center;overflow:hidden;position:relative}
+.hype h2{color:#fff}
+.hype .lead{color:#EDE7FB;margin-inline:auto}
+.hype-btn{margin:32px auto 0;width:180px;height:180px;border-radius:50%;border:8px solid #000;background:#fff;color:var(--blue);font:400 34px/1 var(--display);text-transform:uppercase;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;transition:transform .1s;box-shadow:0 10px 0 #000}
+.hype-btn.held{transform:translateY(6px) scale(.97);box-shadow:0 4px 0 #000}
+.hype-meter{max-width:520px;height:28px;margin:28px auto 0;border:4px solid #000;border-radius:999px;background:#2E1065;overflow:hidden}
+.hype-meter i{display:block;height:100%;width:0;background:repeating-linear-gradient(45deg,#fff 0 14px,var(--lilac) 14px 28px)}
+.hype-msg{font:400 clamp(40px,9vw,96px)/.9 var(--display);text-transform:uppercase;margin-top:24px;min-height:1em;color:#fff}
+.hype.blast{animation:blast .5s ease 3}
+@keyframes blast{50%{background:#000}}
+.mood{margin-top:56px;border-top:2px solid #000;padding-top:40px}
+.mood h3,.compare-wrap h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(32px,5vw,48px);line-height:1;color:var(--blue)}
+.mood-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px;max-width:720px}
+.mood-row button{font:inherit;background:#fff;border:2px solid #000;border-radius:20px;padding:14px 6px;cursor:pointer;display:grid;gap:6px;justify-items:center;transition:transform .15s}
+.mood-row button:hover{transform:translateY(-3px)}
+.mood-row button[aria-pressed="true"]{background:var(--blue);color:#fff;border-color:var(--blue)}
+.mood-row .e{font-size:36px;line-height:1}
+.mood-row small{font-weight:700;font-size:13px}
+.mood-row .pc{font-family:var(--display);font-size:22px}
+.mood-note{margin-top:14px;font-weight:700;color:var(--blue);min-height:1.4em}
+.game{max-width:760px}
+.game-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-weight:700;font-size:18px}
+.game-bar b{font-family:var(--display);font-weight:400;font-size:40px;color:var(--blue);line-height:1}
+.arena{position:relative;height:min(440px,60vh);margin-top:16px;border:4px solid #000;border-radius:28px;background:#fff;overflow:hidden;touch-action:manipulation}
+.arena .clock-target{position:absolute;width:84px;height:84px;padding:0;border:0;background:none;cursor:pointer;animation:jiggle .12s infinite alternate}
+.arena .clock-target svg{width:100%;height:100%}
+@keyframes jiggle{to{transform:rotate(8deg)}}
+.arena .start{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:16px;text-align:center;padding:24px;background:var(--paper)}
+.arena .start h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(34px,6vw,56px);line-height:.95;color:var(--blue)}
+.arena .start p{font-size:18px;color:var(--muted);max-width:40ch}
+.pop{position:absolute;font:400 28px var(--display);color:var(--blue);pointer-events:none;animation:popup .6s ease forwards}
+@keyframes popup{to{transform:translateY(-40px);opacity:0}}
+.dream-grid{display:grid;grid-template-columns:1fr minmax(0,420px);gap:40px;align-items:start}
+@media (max-width:860px){.dream-grid{grid-template-columns:1fr}}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.chips button{font:600 16px var(--body);padding:10px 16px;border-radius:999px;border:2px solid #000;background:#fff;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--blue);color:#fff;border-color:var(--blue)}
+.dream-stage canvas{width:100%;height:auto;border:4px solid #000;border-radius:20px;display:block;box-shadow:10px 10px 0 var(--blue)}
+.compare-wrap{margin-top:8px}
+.compare{position:relative;margin-top:20px;border:4px solid #000;border-radius:24px;overflow:hidden;aspect-ratio:4/3;max-width:900px;touch-action:none;user-select:none;--x:50%}
+.compare img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.compare .after{clip-path:inset(0 0 0 var(--x))}
+.compare .handle{position:absolute;top:0;bottom:0;left:var(--x);width:4px;background:#fff;transform:translateX(-2px);pointer-events:none}
+.compare .handle::after{content:"\2194";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:#fff;border:3px solid #000;display:grid;place-items:center;font-size:22px}
+.compare .tag{position:absolute;top:14px;background:#000;color:#fff;font-weight:700;padding:6px 12px;border-radius:999px;font-size:14px}
+.compare .tag.l{left:14px}.compare .tag.r{right:14px;background:var(--blue)}
+.compare input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.shake{animation:shake .08s 10 alternate}
+@keyframes shake{from{transform:translate(-6px,2px)}to{transform:translate(6px,-2px)}}
+.egg{position:fixed;inset:0;z-index:60;display:grid;place-items:center;overflow:auto;background:rgba(91,33,182,.94);color:#fff;text-align:center;padding:24px}
+.egg h2{font:400 clamp(40px,8vw,88px)/.95 var(--display);text-transform:uppercase}
+.egg .ring{font-size:64px;line-height:1;margin-bottom:12px}
+.egg p{font-size:20px;margin-top:16px;color:#EDE7FB}
+.egg .btn{margin-top:24px;background:#fff;color:#000}
+.confetti{position:fixed;top:-20px;width:10px;height:16px;z-index:61;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media (prefers-reduced-motion:reduce){.arena .clock-target,.shake,.hype.blast,.confetti{animation:none}}
+
 /* ideas + share */
 .ideas{background:#000;color:#fff;border-top:8px solid var(--blue)}
 .ideas h2{color:#fff}
@@ -555,6 +615,16 @@ footer a{color:#fff}
     </div>
   </section>
 
+  <section class="block hype" id="hypeSec">
+    <div class="wrap">
+      <h2>Hype meter</h2>
+      <p class="lead">Press and hold to wake up Belmont. Fill the meter all the way.</p>
+      <button class="hype-btn" type="button" id="hypeBtn" aria-label="Press and hold to fill the hype meter">Hold</button>
+      <div class="hype-meter" aria-hidden="true"><i id="hypeFill"></i></div>
+      <p class="hype-msg" id="hypeMsg" role="status"></p>
+    </div>
+  </section>
+
   <section class="block ideas">
     <div class="wrap">
       <h2>What should change at Belmont?</h2>
@@ -584,6 +654,16 @@ footer a{color:#fff}
         <figure class="club-pic "><button type="button" data-full="img/cooking-4.jpg" data-cap="Teachers came through too"><img src="img/cooking-4.jpg" alt="A student and a teacher giving a thumbs up with a taco" loading="lazy"></button><figcaption>Teachers came through too</figcaption></figure>
         <figure class="club-pic "><button type="button" data-full="img/cooking-5.jpg" data-cap="Students digging in"><img src="img/cooking-5.jpg" alt="A student enjoying a taco" loading="lazy"></button><figcaption>Students digging in</figcaption></figure>
       </div>
+  </div></section>
+  <section class="block compare-sec" id="compareSec" hidden><div class="wrap compare-wrap">
+    <h3>Then vs. now</h3>
+    <p class="lead" id="compareLead">Drag the slider to see the difference.</p>
+    <div class="compare" id="compare">
+      <img id="cmpBefore" alt=""><img class="after" id="cmpAfter" alt="">
+      <span class="tag l" id="cmpL"></span><span class="tag r" id="cmpR"></span>
+      <div class="handle"></div>
+      <input type="range" min="0" max="100" value="50" id="cmpRange" aria-label="Compare the two photos">
+    </div>
   </div></section>
   <dialog class="lightbox" id="lightbox" aria-label="Photo">
     <button type="button" class="lb-close" id="lbClose" aria-label="Close">&times;</button>
@@ -734,6 +814,48 @@ footer a{color:#fff}
   </div></section>
 </div>
 
+<!-- =============== SNOOZE GAME =============== -->
+<div class="page" id="page-snooze">
+  <header class="page-head"><div class="wrap">
+    <h1>Snooze game</h1>
+    <p>The alarm won't stop. Hit snooze as many times as you can in 10 seconds.</p>
+  </div></header>
+  <section class="block"><div class="wrap game">
+    <div class="game-bar"><span>Snoozes <b id="gScore">0</b></span><span>Time <b id="gTime">10.0</b></span><span>Best <b id="gBest">0</b></span></div>
+    <div class="arena" id="arena">
+      <div class="start" id="gStart">
+        <h3 id="gTitle">Ready?</h3>
+        <p id="gText">Tap the alarm clock every time it jumps. It gets faster.</p>
+        <div class="actions" style="margin-top:0;justify-content:center">
+          <button class="btn btn-purple" type="button" id="gGo">Start</button>
+          <button class="btn btn-outline" type="button" id="gShare" hidden>Share my score</button>
+        </div>
+      </div>
+    </div>
+  </div></section>
+</div>
+
+<!-- =============== DREAM BELMONT =============== -->
+<div class="page" id="page-dream">
+  <header class="page-head"><div class="wrap">
+    <h1>Dream Belmont</h1>
+    <p>Pick the 3 things you'd add to Belmont and get your own card to post.</p>
+  </div></header>
+  <section class="block"><div class="wrap dream-grid">
+    <div>
+      <p class="lead">Pick up to 3.</p>
+      <div class="chips" id="dreamChips"></div>
+      <label style="margin-top:24px;max-width:360px">Your first name <small>(optional)</small><input id="dreamName" maxlength="16" autocomplete="given-name"></label>
+      <div class="actions">
+        <button class="btn btn-purple" type="button" id="dreamDownload">Download my card</button>
+        <button class="btn btn-outline" type="button" id="dreamShare" hidden>Share</button>
+        <button class="btn btn-outline" type="button" data-msg="idea">Suggest something else</button>
+      </div>
+    </div>
+    <div class="dream-stage"><canvas id="dreamCanvas" width="1080" height="1350" aria-label="Preview of your Dream Belmont card"></canvas></div>
+  </div></section>
+</div>
+
 <!-- =============== CONNECT WITH BELMONT =============== -->
 <div class="page" id="page-connect">
   <header class="page-head"><div class="wrap">
@@ -751,6 +873,12 @@ footer a{color:#fff}
       <div><b>1</b><h3>You say it</h3><p>Send your idea. Big or small, it counts.</p></div>
       <div><b>2</b><h3>We shout it</h3><p>The best ideas get brought to the council and shared with the school.</p></div>
       <div><b>3</b><h3>We follow up</h3><p>You'll hear what happened because of your idea.</p></div>
+    </div>
+    <div class="mood" id="moodSec">
+      <h3>How'd you wake up today?</h3>
+      <p class="lead" id="moodLead">Tap one. See how the rest of Belmont is feeling.</p>
+      <div class="mood-row" id="moodRow"></div>
+      <p class="mood-note" id="moodNote" role="status"></p>
     </div>
   </div></section>
 </div>
@@ -816,7 +944,7 @@ footer a{color:#fff}
       await navigator.clipboard.writeText(url); toast("Link copied");
     } catch(e){ if (e.name !== "AbortError") toast("Copy the link from your address bar"); }
   }); }); }
-  const F = Object.assign({ alarmClock:true, photoFrame:true, clubQuiz:true, poll:true, supporters:true, ideaWall:true }, C.features || {});
+  const F = Object.assign({ alarmClock:true, photoFrame:true, clubQuiz:true, poll:true, supporters:true, ideaWall:true, snoozeGame:true, dreamCard:true, hypeMeter:true, moodCheck:true, easterEgg:true }, C.features || {});
   const mailto = subj => C.email ? `mailto:${C.email}?subject=${encodeURIComponent(subj)}` : "";
 
   /* ---------- home ---------- */
@@ -1168,6 +1296,8 @@ footer a{color:#fff}
     { id: "ideas", on: F.ideaWall && liveReady, label: "Idea wall", tile: "Post what you'd change at Belmont.", go: "Add your idea" },
     { id: "frame", on: !!F.photoFrame, label: "Photo frame", tile: `Put your photo in an \u201cI'm voting ${C.firstName}\u201d frame for your story.`, go: "Make yours" },
     { id: "quiz",  on: !!quizOn, label: "Club quiz", tile: "Find the club that fits you in 5 questions.", go: "Take the quiz" },
+    { id: "snooze", on: !!F.snoozeGame, label: "Snooze game", tile: "Hit snooze as fast as you can. 10 seconds.", go: "Play" },
+    { id: "dream", on: !!F.dreamCard, label: "Dream Belmont", tile: "Pick what you'd add to Belmont and get a card to post.", go: "Make yours" },
   ];
   const onPages = extras.filter(x => x.on);
   $("ddMenu").innerHTML = onPages.map(x => `<li><a href="#/${x.id}" data-page="${x.id}">${x.label}</a></li>`).join("");
@@ -1287,7 +1417,7 @@ footer a{color:#fff}
   });
 
   /* ---------- router ---------- */
-  const titles = { home: C.position ? `${full} for ${C.position}` : full, why:`Why ${C.firstName}`, video:"Campaign video", cabinet:"Meet the cabinet", agenda:"Agenda", poll:"Poll", ideas:"Idea wall", frame:"Photo frame", quiz:"Club quiz", qa:"Q&A", endorsements:"Endorsements", contact:"Contact", connect:"Connect with Belmont" };
+  const titles = { home: C.position ? `${full} for ${C.position}` : full, why:`Why ${C.firstName}`, video:"Campaign video", cabinet:"Meet the cabinet", agenda:"Agenda", poll:"Poll", ideas:"Idea wall", frame:"Photo frame", quiz:"Club quiz", qa:"Q&A", endorsements:"Endorsements", contact:"Contact", connect:"Connect with Belmont", snooze:"Snooze game", dream:"Dream Belmont" };
   const navList = $("navList"), menuBtn = $("menuBtn");
   const route = () => {
     const [pageId = "home", anchor] = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
@@ -1314,6 +1444,211 @@ footer a{color:#fff}
   const toast = t => { const el=$("toast"); el.textContent=t; el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),2200); };
   bindShare();
   window.CAMPAIGN = { F, esc, toast, full };
+})();
+</script>
+<!-- Fun features: snooze game, dream card, hype meter, mood check-in, then vs now, easter egg -->
+<script>
+(function(){
+  const C = CONFIG, $ = id => document.getElementById(id), { F, esc, toast, full } = window.CAMPAIGN;
+  const store = { get(k){ try { return localStorage.getItem(k); } catch { return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch {} } };
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let actx = null;
+  const beep = (freq = 1760, dur = 0.06, vol = 0.08, type = "square") => {
+    if (C.alarmSound === false) return;
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === "suspended") actx.resume();
+      const t = actx.currentTime + 0.01, o = actx.createOscillator(), g = actx.createGain();
+      o.type = type; o.frequency.value = freq; o.connect(g); g.connect(actx.destination);
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      o.start(t); o.stop(t + dur + 0.02);
+    } catch {}
+  };
+  const alarm = () => { for (let i = 0; i < 6; i++) setTimeout(() => beep(1760, 0.07, 0.1), i * 140 + (i % 2) * 0); };
+  const confetti = (n = 60) => {
+    if (reduce) return;
+    const cols = ["#5B21B6", "#7C3AED", "#C4B5FD", "#FFFFFF", "#000000"];
+    for (let i = 0; i < n; i++) {
+      const c = document.createElement("i"); c.className = "confetti";
+      c.style.left = Math.random() * 100 + "vw"; c.style.background = cols[i % cols.length];
+      c.style.animationDuration = 1.6 + Math.random() * 1.6 + "s"; c.style.animationDelay = Math.random() * 0.4 + "s";
+      document.body.appendChild(c); setTimeout(() => c.remove(), 3800);
+    }
+  };
+  const shareText = async (text) => {
+    const url = location.href.split("#")[0];
+    try {
+      if (navigator.share) { await navigator.share({ title: `Vote ${full}`, text, url }); return; }
+      await navigator.clipboard.writeText(`${text} ${url}`); toast("Copied. Paste it anywhere.");
+    } catch (e) { if (e.name !== "AbortError") toast("Couldn't share. Try a screenshot."); }
+  };
+  const canvasShare = async (canvas, name) => {
+    const blob = await new Promise(r => canvas.toBlob(r, "image/png"));
+    const file = new File([blob], name, { type: "image/png" });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) { try { await navigator.share({ files: [file] }); } catch {} }
+    else { const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); }
+  };
+  const clockSVG = `<svg viewBox="0 0 140 150" aria-hidden="true"><circle cx="36" cy="30" r="20" fill="#000"/><circle cx="104" cy="30" r="20" fill="#000"/><path d="M40 132 L28 146 M100 132 L112 146" stroke="#000" stroke-width="8" stroke-linecap="round"/><circle cx="70" cy="84" r="56" fill="#5B21B6" stroke="#000" stroke-width="7"/><circle cx="70" cy="84" r="44" fill="#fff"/><path d="M70 84 L70 54 M70 84 L90 96" stroke="#000" stroke-width="7" stroke-linecap="round"/></svg>`;
+
+  /* ---------- 1. snooze game ---------- */
+  if (F.snoozeGame) {
+    const arena = $("arena"), start = $("gStart");
+    let score = 0, best = +(store.get("snoozeBest") || 0), running = false, endAt = 0, target = null, hopTimer = null, tick = null;
+    $("gBest").textContent = best;
+    const rank = n => n >= 22 ? ["Belmont morning legend", "You'd never miss first period."]
+      : n >= 15 ? ["Certified early riser", "The alarm fears you."]
+      : n >= 8 ? ["Snooze addict", "Five more minutes, right?"]
+      : ["Still asleep", "Wake up, Belmont. Try again."];
+    const place = () => {
+      if (!target) return;
+      const w = arena.clientWidth - 84, h = arena.clientHeight - 84;
+      target.style.left = Math.random() * w + "px"; target.style.top = Math.random() * h + "px";
+      beep(1500 + Math.random() * 500, 0.05, 0.05);
+    };
+    const hop = () => { place(); const left = endAt - performance.now(); hopTimer = setTimeout(hop, Math.max(380, 900 * left / 10000 + 300)); };
+    const end = () => {
+      running = false; clearTimeout(hopTimer); clearInterval(tick); target && target.remove(); target = null;
+      $("gTime").textContent = "0.0";
+      const newBest = score > best; if (newBest) { best = score; store.set("snoozeBest", best); $("gBest").textContent = best; }
+      const [t, line] = rank(score);
+      $("gTitle").textContent = t; $("gText").textContent = `${score} snoozes. ${line}${newBest && score ? " New best!" : ""}`;
+      $("gGo").textContent = "Play again"; $("gShare").hidden = false; start.hidden = false;
+      if (score >= 15) confetti(50);
+    };
+    $("gGo").addEventListener("click", () => {
+      score = 0; $("gScore").textContent = 0; start.hidden = true; running = true; endAt = performance.now() + 10000;
+      target = document.createElement("button"); target.type = "button"; target.className = "clock-target"; target.setAttribute("aria-label", "Snooze");
+      target.innerHTML = clockSVG; arena.appendChild(target);
+      target.addEventListener("pointerdown", e => {
+        e.preventDefault(); if (!running) return;
+        score++; $("gScore").textContent = score; beep(300, 0.08, 0.08, "triangle");
+        const p = document.createElement("span"); p.className = "pop"; p.textContent = "+1";
+        p.style.left = target.style.left; p.style.top = target.style.top; arena.appendChild(p); setTimeout(() => p.remove(), 600);
+        clearTimeout(hopTimer); hop();
+      });
+      hop();
+      tick = setInterval(() => { const left = Math.max(0, endAt - performance.now()); $("gTime").textContent = (left / 1000).toFixed(1); if (!left) end(); }, 50);
+    });
+    $("gShare").addEventListener("click", () => shareText(`I hit snooze ${score} times in 10 seconds. ${rank(score)[0]}. Can you beat me? ${C.slogan}`));
+  }
+
+  /* ---------- 2. dream belmont card ---------- */
+  if (F.dreamCard) {
+    const ideas = C.dreamOptions && C.dreamOptions.length ? C.dreamOptions : ["More clubs", "Spirit weeks", "A lunch study room", "Better lunch options", "More field trips", "Grade-to-grade mentoring", "Easy-to-find tutoring", "Intramural sports", "Music & art shows", "College & career help", "Free printing", "Student surveys", "More school trips", "A cooking club night"];
+    const picked = [];
+    $("dreamChips").innerHTML = ideas.map((t, i) => `<button type="button" data-i="${i}" aria-pressed="false">${esc(t)}</button>`).join("");
+    const cv = $("dreamCanvas"), x = cv.getContext("2d");
+    const font = (w, sz, fam) => `${w} ${sz}px ${fam}`;
+    const draw = () => {
+      const W = 1080, H = 1350; x.clearRect(0, 0, W, H);
+      x.fillStyle = "#5B21B6"; x.fillRect(0, 0, W, H);
+      for (let i = 0; i < W; i += 80) { x.fillStyle = (i / 80) % 2 ? "#fff" : "#000"; x.fillRect(i, H - 24, 80, 24); x.fillRect(i, 0, 80, 24); }
+      const nm = ($("dreamName").value || "").trim();
+      x.fillStyle = "#C4B5FD"; x.font = font(600, 42, "Archivo, sans-serif"); x.textAlign = "left";
+      x.fillText(nm ? `${nm.toUpperCase()}'S` : "MY", 80, 140);
+      x.fillStyle = "#fff"; x.font = font(400, 150, "Anton, Impact, sans-serif");
+      x.fillText("DREAM", 74, 290); x.fillText("BELMONT", 74, 440);
+      const list = picked.length ? picked.map(i => ideas[i]) : ["Pick 3 things", "on the left", "to fill this in"];
+      list.forEach((t, k) => {
+        const y = 560 + k * 170;
+        x.fillStyle = picked.length ? "#fff" : "rgba(255,255,255,.25)"; x.beginPath(); x.roundRect(80, y, 920, 130, 30); x.fill();
+        x.fillStyle = "#000"; x.beginPath(); x.arc(160, y + 65, 42, 0, Math.PI * 2); x.fill();
+        x.fillStyle = "#fff"; x.font = font(400, 54, "Anton, Impact, sans-serif"); x.textAlign = "center"; x.fillText(String(k + 1), 160, y + 85);
+        x.fillStyle = picked.length ? "#000" : "#fff"; x.textAlign = "left"; x.font = font(700, 50, "Archivo, sans-serif");
+        let s = t; while (x.measureText(s).width > 760 && s.length > 4) s = s.slice(0, -2) + "…";
+        x.fillText(s, 230, y + 82);
+      });
+      x.fillStyle = "#fff"; x.font = font(400, 64, "Anton, Impact, sans-serif"); x.textAlign = "left";
+      x.fillText((C.slogan || "").toUpperCase(), 80, 1170);
+      x.fillStyle = "#C4B5FD"; x.font = font(600, 40, "Archivo, sans-serif");
+      x.fillText(`Vote ${full}${C.electionDate ? " · " + new Date(C.electionDate).toLocaleDateString("en-US", { month: "long", day: "numeric" }) : ""}`, 80, 1240);
+    };
+    $("dreamChips").addEventListener("click", e => {
+      const b = e.target.closest("button"); if (!b) return; const i = +b.dataset.i, at = picked.indexOf(i);
+      if (at > -1) picked.splice(at, 1); else if (picked.length < 3) picked.push(i); else { toast("Only 3. Unpick one first."); return; }
+      $("dreamChips").querySelectorAll("button").forEach(c => c.setAttribute("aria-pressed", picked.includes(+c.dataset.i)));
+      draw();
+    });
+    $("dreamName").addEventListener("input", draw);
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(draw); draw();
+    const fname = () => "my-dream-belmont.png";
+    $("dreamDownload").addEventListener("click", () => { if (!picked.length) { toast("Pick at least one first."); return; }
+      cv.toBlob(b => { const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = fname(); a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); }); });
+    if (navigator.canShare) { $("dreamShare").hidden = false; $("dreamShare").addEventListener("click", () => picked.length ? canvasShare(cv, fname()) : toast("Pick at least one first.")); }
+  }
+
+  /* ---------- 3. hype meter ---------- */
+  if (F.hypeMeter) {
+    const btn = $("hypeBtn"), fill = $("hypeFill"), msg = $("hypeMsg"), sec = $("hypeSec");
+    let lvl = 0, holding = false, done = false, last = 0, beepAt = 0;
+    const loop = t => {
+      const dt = last ? (t - last) / 1000 : 0; last = t;
+      if (!done) lvl = Math.max(0, Math.min(1, lvl + (holding ? dt / 2.5 : -dt / 1.5)));
+      fill.style.width = lvl * 100 + "%";
+      if (holding && !done && t > beepAt) { beep(300 + lvl * 1200, 0.05, 0.05, "sawtooth"); beepAt = t + 120 - lvl * 70; }
+      if (lvl >= 1 && !done) {
+        done = true; holding = false; btn.classList.remove("held");
+        msg.textContent = "Belmont is awake!"; sec.classList.add("blast"); alarm(); confetti(90);
+        setTimeout(() => { sec.classList.remove("blast"); }, 1600);
+        setTimeout(() => { done = false; msg.textContent = ""; }, 4000);
+      }
+      if (holding || lvl > 0 || done) requestAnimationFrame(loop); else last = 0;
+    };
+    const down = e => { e.preventDefault(); if (done) return; holding = true; btn.classList.add("held"); if (!last) requestAnimationFrame(loop); };
+    const up = () => { holding = false; btn.classList.remove("held"); };
+    btn.addEventListener("pointerdown", down);
+    ["pointerup", "pointerleave", "pointercancel"].forEach(ev => btn.addEventListener(ev, up));
+    btn.addEventListener("keydown", e => { if ((e.key === " " || e.key === "Enter") && !e.repeat) down(e); });
+    btn.addEventListener("keyup", e => { if (e.key === " " || e.key === "Enter") up(); });
+    btn.addEventListener("contextmenu", e => e.preventDefault());
+  } else $("hypeSec").hidden = true;
+
+  /* ---------- 4. mood check-in ---------- */
+  const moods = [["😴", "Barely"], ["😐", "Meh"], ["🙂", "Okay"], ["😄", "Good"], ["🔥", "Ready"]];
+  const replies = ["Same. Coffee and the countdown will get you there.", "We've all been there. Make the alarm worth it.", "Solid. Keep it going.", "Love that energy.", "That's the Belmont we're talking about."];
+  window.CAMPAIGN_MOOD = { counts: null, save: null };
+  if (F.moodCheck) {
+    const today = new Date().toLocaleDateString("en-CA");
+    let mine = (() => { const v = store.get("mood"); return v && v.startsWith(today) ? +v.split("|")[1] : null; })();
+    const paint = () => {
+      const c = window.CAMPAIGN_MOOD.counts, total = c ? c.reduce((a, b) => a + b, 0) : 0;
+      $("moodRow").innerHTML = moods.map(([e, l], i) => `<button type="button" data-v="${i}" aria-pressed="${mine === i}"><span class="e">${e}</span><small>${l}</small>${c && mine !== null ? `<span class="pc">${total ? Math.round(c[i] / total * 100) : 0}%</span>` : ""}</button>`).join("");
+      $("moodNote").textContent = mine === null ? "" : replies[mine] + (c ? ` ${total} ${total === 1 ? "person has" : "people have"} checked in today.` : "");
+    };
+    $("moodRow").addEventListener("click", async e => {
+      const b = e.target.closest("button"); if (!b) return; mine = +b.dataset.v; store.set("mood", `${today}|${mine}`);
+      if (window.CAMPAIGN_MOOD.save) { try { await window.CAMPAIGN_MOOD.save(mine, today); } catch { toast("That didn't save. Try again in a minute."); } }
+      paint();
+    });
+    window.CAMPAIGN_MOOD.paint = paint; window.CAMPAIGN_MOOD.today = today; paint();
+  } else $("moodSec").hidden = true;
+
+  /* ---------- 5. then vs now slider ---------- */
+  const cmp = C.compare || {};
+  if (cmp.before && cmp.after) {
+    $("compareSec").hidden = false;
+    $("cmpBefore").src = cmp.before; $("cmpAfter").src = cmp.after;
+    $("cmpBefore").alt = cmp.beforeLabel || "Before"; $("cmpAfter").alt = cmp.afterLabel || "After";
+    $("cmpL").textContent = cmp.beforeLabel || "Belmont now"; $("cmpR").textContent = cmp.afterLabel || `Belmont with ${C.firstName}`;
+    if (cmp.caption) $("compareLead").textContent = cmp.caption;
+    $("cmpRange").addEventListener("input", e => $("compare").style.setProperty("--x", e.target.value + "%"));
+  }
+
+  /* ---------- 6. easter egg: tap the JD logo 5 times ---------- */
+  if (F.easterEgg) {
+    let taps = 0, timer = null;
+    document.querySelector(".nav .mark").addEventListener("click", e => {
+      taps++; clearTimeout(timer); timer = setTimeout(() => taps = 0, 1500);
+      if (taps < 5) return;
+      e.preventDefault(); taps = 0; alarm(); confetti(120);
+      if (!reduce) { const els = document.querySelectorAll(".nav, .page, footer"); els.forEach(el => el.classList.add("shake")); setTimeout(() => els.forEach(el => el.classList.remove("shake")), 900); }
+      const o = document.createElement("div"); o.className = "egg"; o.setAttribute("role", "dialog"); o.setAttribute("aria-label", "Secret found");
+      o.innerHTML = `<div><div class="ring" aria-hidden="true">⏰</div><h2>You found<br>the secret alarm</h2><p>Only real ones tap the logo 5 times. Now you have to vote ${esc(C.firstName)}${C.electionDate ? " on " + new Date(C.electionDate).toLocaleDateString("en-US", { month: "long", day: "numeric" }) : ""}.</p><button class="btn" type="button">I'm awake</button></div>`;
+      document.body.appendChild(o);
+      const close = () => o.remove(); o.querySelector("button").addEventListener("click", close); o.addEventListener("click", ev => { if (ev.target === o) close(); });
+      o.querySelector("button").focus();
+    });
+  }
 })();
 </script>
 <!-- Live features: poll, supporter counter, idea wall (Firebase Realtime Database) -->
@@ -1390,6 +1725,16 @@ if (fb.apiKey && fb.databaseURL && wantLive) {
       };
       D.onValue(D.ref(db, "votes"), snap => { votes = snap.val() || {}; paint(); }, () => {});
       ready.then(paint);
+    }
+
+    /* ----- mood check-in ----- */
+    if (F.moodCheck && window.CAMPAIGN_MOOD && window.CAMPAIGN_MOOD.paint) {
+      const M = window.CAMPAIGN_MOOD;
+      M.save = async (v, d) => { const id = await ready; await D.set(D.ref(db, `moods/${id}`), { v, d }); };
+      D.onValue(D.ref(db, "moods"), snap => {
+        const c = [0, 0, 0, 0, 0]; snap.forEach(ch => { const m = ch.val(); if (m && m.d === M.today && c[m.v] !== undefined) c[m.v]++; });
+        M.counts = c; M.paint();
+      }, () => {});
     }
 
     /* ----- idea wall ----- */

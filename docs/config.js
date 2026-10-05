@@ -107,9 +107,24 @@ const CONFIG = {
     poll: true,           // live "What matters most?" poll (needs firebase below)
     supporters: true,     // live supporter counter (needs firebase below)
     ideaWall: true,       // live idea wall with approval (needs firebase below)
+    snoozeGame: true,     // 10-second snooze button game (Get involved menu)
+    dreamCard: true,      // "Dream Belmont" card maker (Get involved menu)
+    hypeMeter: true,      // press-and-hold hype meter (home page)
+    moodCheck: true,      // "How'd you wake up today?" check-in (Connect page; live totals need firebase)
+    easterEgg: true,      // tap the JD logo 5 times
   },
-  supportersMinToShow: 10,
-  alarmSound: true,          // alarm clock beeps when tapped (false = silent)   // hide the number until at least this many people join
+  supportersMinToShow: 10,  // hide the number until at least this many people join
+  alarmSound: true,          // alarm clock beeps when tapped (false = silent)
+
+  // ---------- THEN VS NOW SLIDER (Why Jeremiah page) ----------
+  // Put two photos of the same spot next to this page. Stays hidden until both are filled in.
+  compare: {
+    before: "",                 // e.g. "img/hallway-now.jpg"
+    after: "",                  // e.g. "img/hallway-idea.jpg"
+    beforeLabel: "Belmont now",
+    afterLabel: "Belmont with Jeremiah",
+    caption: "",                // optional line above the slider
+  },
 
   // ---------- LIVE FEATURES (Firebase Realtime Database) ----------
   // Paste your project's web config here. Until apiKey and databaseURL are
