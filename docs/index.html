@@ -95,12 +95,19 @@ a{color:inherit}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* countdown strip */
-.count{background:#000;color:#fff}
-.count .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 32px;padding:18px 0}
-.count p{font-weight:700;font-size:18px}
-.count .clock{display:flex;gap:18px}
-.count .unit{text-align:center;min-width:52px}
-.count .unit b{color:var(--lilac);font-family:var(--display);font-weight:400;font-size:40px;line-height:1;display:block}
+.count{background:#000;color:#fff;position:relative;overflow:hidden}
+.count::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 120% at 50% 0,rgba(124,58,237,.35),transparent 70%);pointer-events:none}
+.count .wrap{position:relative;display:grid;justify-items:center;text-align:center;gap:18px;padding:56px 0 48px}
+.count .kicker{font-size:14px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--lilac)}
+.count p#countLabel{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(24px,5.5vw,56px);line-height:1;max-width:100%}
+.count .clock{display:flex;gap:clamp(8px,2vw,20px);align-items:flex-start;margin-top:6px}
+.count .unit{text-align:center;background:var(--blue);border:3px solid #fff;border-radius:22px;padding:14px 6px 10px;min-width:clamp(68px,17vw,150px);box-shadow:0 10px 0 rgba(124,58,237,.45)}
+.count .unit b{color:#fff;font-family:var(--display);font-weight:400;font-size:clamp(44px,10vw,104px);line-height:1;display:block;font-variant-numeric:tabular-nums}
+.count .unit small{display:block;margin-top:6px;font-size:clamp(11px,1.8vw,14px);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lilac)}
+.count .sep{font-family:var(--display);font-size:clamp(36px,8vw,84px);line-height:1;color:var(--lilac);padding-top:clamp(14px,2.4vw,24px)}
+.count .vote-line{font-size:clamp(16px,2.4vw,20px);color:#ddd;max-width:46ch}
+.count .vote-line b{color:#fff}
+@media (max-width:520px){.count .sep{display:none}}
 .count .unit small{font-size:13px;font-weight:600}
 
 @media (max-width:860px){
@@ -284,18 +291,34 @@ dialog.lightbox img{display:block;max-width:100%;max-height:82vh;border-radius:1
 
 
 
-/* ---------- intro alarm ---------- */
+/* ---------- intro: alarm lock screen ---------- */
 body.intro-on{overflow:hidden}
-.intro{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at 50% 42%,#1E0B3D 0,#07030F 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;text-align:center;transition:opacity .7s ease,visibility .7s}
-.intro.gone{opacity:0;visibility:hidden}
-.intro-clock{background:none;border:0;padding:0;cursor:pointer;width:min(220px,52vw);border-radius:50%}
-.intro-clock svg{width:100%;height:auto;display:block;overflow:visible;animation:ring 1.4s ease-in-out infinite;transform-origin:50% 60%;filter:drop-shadow(0 0 40px rgba(124,58,237,.55))}
-.intro-clock .zz{animation:buzz .35s steps(2) infinite}
-.intro-clock:focus-visible{outline:4px solid #C4B5FD;outline-offset:8px}
-.intro.gone .intro-clock svg{animation:none;transform:scale(1.25);transition:transform .7s ease}
-.intro-title{font-family:var(--display);text-transform:uppercase;color:#fff;font-size:clamp(40px,8vw,84px);line-height:.95;margin-top:18px}
-.intro-sub{color:#C4B5FD;font-size:20px;font-weight:600}
-@media (prefers-reduced-motion:reduce){.intro-clock svg,.intro-clock .zz{animation:none}}
+.intro{position:fixed;inset:0;z-index:100;color:#fff;background:#07040D;display:grid;grid-template-rows:auto 1fr auto;padding:28px 24px calc(36px + env(safe-area-inset-bottom));text-align:center;overflow:hidden;transition:transform .9s cubic-bezier(.7,0,.2,1),opacity .9s ease}
+.intro::before{content:"";position:absolute;inset:-20%;background:radial-gradient(40% 35% at 50% 38%,rgba(124,58,237,.38),transparent 70%),radial-gradient(30% 25% at 80% 90%,rgba(91,33,182,.25),transparent 70%);animation:glow 4s ease-in-out infinite alternate;pointer-events:none}
+@keyframes glow{to{transform:scale(1.08);opacity:.75}}
+.intro>*{position:relative}
+.intro.gone{transform:translateY(-100%);opacity:.6}
+.intro-top{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);max-width:720px;width:100%;margin-inline:auto}
+.intro-top b{font-family:var(--display);font-weight:400;letter-spacing:.02em;font-size:22px;color:#fff}
+.intro-top b span{color:var(--lilac)}
+.intro-mid{align-self:center;display:grid;justify-items:center;gap:6px}
+.intro-label{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--lilac)}
+.intro-label svg{width:18px;height:18px;animation:bell 1.2s ease-in-out infinite;transform-origin:50% 10%}
+@keyframes bell{0%,50%,100%{transform:rotate(0)}10%,30%{transform:rotate(14deg)}20%,40%{transform:rotate(-14deg)}}
+.intro-time{font-family:var(--display);font-weight:400;font-size:clamp(110px,26vw,220px);line-height:.9;letter-spacing:.01em;display:flex;align-items:flex-start;gap:10px;animation:breathe 2s ease-in-out infinite}
+.intro-time small{font-family:var(--body);font-weight:600;font-size:clamp(18px,3.4vw,28px);letter-spacing:.08em;margin-top:.7em;color:rgba(255,255,255,.7)}
+@keyframes breathe{50%{opacity:.82}}
+.intro-date{font-size:clamp(16px,2.6vw,20px);font-weight:600;color:rgba(255,255,255,.75)}
+.intro-title{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(28px,5vw,44px);line-height:1;margin-top:22px}
+.intro-bot{display:grid;justify-items:center;gap:14px}
+.intro-stop{position:relative;font:700 18px var(--body);letter-spacing:.04em;color:#000;background:#fff;border:0;border-radius:999px;padding:18px 64px;cursor:pointer;transition:transform .15s}
+.intro-stop::before,.intro-stop::after{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid rgba(196,181,253,.7);animation:pulse 2s ease-out infinite;pointer-events:none}
+.intro-stop::after{animation-delay:1s}
+@keyframes pulse{from{transform:scale(1);opacity:1}to{transform:scale(1.35,1.8);opacity:0}}
+.intro-stop:hover{transform:scale(1.03)}
+.intro-stop:focus-visible{outline:3px solid var(--lilac);outline-offset:6px}
+.intro-hint{font-size:13px;color:rgba(255,255,255,.45);letter-spacing:.06em}
+@media (prefers-reduced-motion:reduce){.intro::before,.intro-label svg,.intro-time,.intro-stop::before,.intro-stop::after{animation:none}.intro{transition:opacity .4s}.intro.gone{transform:none;opacity:0}}
 
 /* ---------- fun features ---------- */
 .mood{margin-top:56px;border-top:2px solid #000;padding-top:40px}
@@ -515,22 +538,17 @@ footer a{color:#fff}
 </head>
 <body class="intro-on">
 <div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="introTitle">
-  <button class="intro-clock" id="introBtn" type="button" aria-label="Tap the alarm to open the site">
-    <svg viewBox="0 0 140 150" aria-hidden="true">
-      <g class="zz" stroke="#C4B5FD" stroke-width="5" stroke-linecap="round">
-        <path d="M6 40 L18 48"/><path d="M2 62 L16 64"/><path d="M134 40 L122 48"/><path d="M138 62 L124 64"/>
-      </g>
-      <circle cx="36" cy="30" r="20" fill="#fff"/>
-      <circle cx="104" cy="30" r="20" fill="#fff"/>
-      <path d="M40 132 L28 146 M100 132 L112 146" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
-      <circle cx="70" cy="84" r="56" fill="#5B21B6" stroke="#fff" stroke-width="7"/>
-      <circle cx="70" cy="84" r="44" fill="#fff"/>
-      <path d="M70 84 L70 54 M70 84 L90 96" stroke="#000" stroke-width="7" stroke-linecap="round"/>
-      <circle cx="70" cy="84" r="6" fill="#7C3AED"/>
-    </svg>
-  </button>
-  <p class="intro-title" id="introTitle">Wake up, Belmont.</p>
-  <p class="intro-sub">Tap the alarm.</p>
+  <div class="intro-top"><b>JD<span>.</span></b><span>Belmont Prep · Student Council</span></div>
+  <div class="intro-mid">
+    <p class="intro-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>Alarm</p>
+    <p class="intro-time" aria-label="7:00 AM">7:00<small>AM</small></p>
+    <p class="intro-date" id="introDate"></p>
+    <p class="intro-title" id="introTitle">Make the alarm worth it.</p>
+  </div>
+  <div class="intro-bot">
+    <button class="intro-stop" id="introBtn" type="button">Stop</button>
+    <p class="intro-hint">Tap stop to wake up Belmont</p>
+  </div>
 </div>
 
 <nav class="nav" aria-label="Main">
@@ -587,12 +605,15 @@ footer a{color:#fff}
 
   <div class="count">
     <div class="wrap">
+      <p class="kicker" id="countKicker" hidden>Countdown to election day</p>
       <p id="countLabel">Election day is coming. Date to be announced.</p>
-      <div class="clock" id="clock" hidden>
-        <div class="unit"><b id="cd">0</b><small>days</small></div>
-        <div class="unit"><b id="ch">0</b><small>hours</small></div>
-        <div class="unit"><b id="cm">0</b><small>minutes</small></div>
+      <div class="clock" id="clock" hidden role="timer" aria-live="off">
+        <div class="unit"><b id="cd">0</b><small>days</small></div><span class="sep" aria-hidden="true">:</span>
+        <div class="unit"><b id="ch">00</b><small>hours</small></div><span class="sep" aria-hidden="true">:</span>
+        <div class="unit"><b id="cm">00</b><small>minutes</small></div><span class="sep" aria-hidden="true">:</span>
+        <div class="unit"><b id="cs">00</b><small>seconds</small></div>
       </div>
+      <p class="vote-line" id="voteLine" hidden></p>
       <div class="cal" id="electionCal" hidden></div>
     </div>
   </div>
@@ -1117,13 +1138,16 @@ footer a{color:#fff}
         $("countLabel").textContent = ms > -864e5 ? `Today's the day. Vote ${full}.` : "Thank you for voting.";
         return;
       }
-      $("clock").hidden = false;
-      $("countLabel").textContent = `Election day: ${target.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"})}`;
+      $("clock").hidden = false; $("countKicker").hidden = false;
+      $("countLabel").textContent = target.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"});
+      const pad = n => String(n).padStart(2, "0");
       $("cd").textContent = Math.floor(ms/864e5);
-      $("ch").textContent = Math.floor(ms/36e5)%24;
-      $("cm").textContent = Math.floor(ms/6e4)%60;
+      $("ch").textContent = pad(Math.floor(ms/36e5)%24);
+      $("cm").textContent = pad(Math.floor(ms/6e4)%60);
+      $("cs").textContent = pad(Math.floor(ms/1e3)%60);
     };
-    tick(); setInterval(tick, 30000);
+    tick(); setInterval(tick, 1000);
+    $("voteLine").innerHTML = `Vote <b>${esc(full)}</b>${C.position ? ` for ${esc(C.position)}` : ""}. ${esc(C.slogan || "")}`; $("voteLine").hidden = false;
     if (target > new Date()){
       const allDay = !/T\d/.test(C.electionDate);
       $("electionCal").innerHTML = calLinks({ title: `Election day: vote ${full}`, start: allDay ? parseDay(C.electionDate.slice(0,10)) : target, allDay,
@@ -1461,10 +1485,13 @@ footer a{color:#fff}
   else {
     const wake = () => {
       if (intro.classList.contains("gone")) return;
-      alarm(); intro.classList.add("gone"); document.body.classList.remove("intro-on");
-      setTimeout(() => confetti(160), 150);
-      setTimeout(() => intro.remove(), 800);
+      beep(1320, 0.12, 0.06, "sine"); setTimeout(() => beep(1760, 0.18, 0.05, "sine"), 110);
+      intro.classList.add("gone"); document.body.classList.remove("intro-on");
+      setTimeout(() => confetti(140), 450);
+      setTimeout(() => intro.remove(), 950);
     };
+    { const d = C.electionDate ? new Date(C.electionDate) : new Date();
+      $("introDate").textContent = d.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }) + (C.electionDate ? " · Election Day" : ""); }
     $("introBtn").addEventListener("click", wake);
     addEventListener("keydown", e => { if (e.key === "Escape" && document.contains(intro)) wake(); });
     $("introBtn").focus();
