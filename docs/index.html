@@ -256,7 +256,6 @@ textarea{min-height:140px;resize:vertical}
 .reach .soc a{background:#fff;color:#000;text-decoration:none;padding:8px 16px;border-radius:999px;font-size:15px}
 
 /* ---------- cooking club (why page) + connect page ---------- */
-.club{padding-top:0}
 .club-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:32px}
 .club-pic{margin:0}
 .club-pic button{display:block;width:100%;padding:0;border:3px solid #000;border-radius:20px;overflow:hidden;cursor:zoom-in;background:#000;aspect-ratio:3/4;transition:transform .15s}
@@ -284,17 +283,21 @@ dialog.lightbox img{display:block;max-width:100%;max-height:82vh;border-radius:1
 .foot-contact{font-weight:700}
 
 
+
+/* ---------- intro alarm ---------- */
+body.intro-on{overflow:hidden}
+.intro{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at 50% 42%,#1E0B3D 0,#07030F 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;text-align:center;transition:opacity .7s ease,visibility .7s}
+.intro.gone{opacity:0;visibility:hidden}
+.intro-clock{background:none;border:0;padding:0;cursor:pointer;width:min(220px,52vw);border-radius:50%}
+.intro-clock svg{width:100%;height:auto;display:block;overflow:visible;animation:ring 1.4s ease-in-out infinite;transform-origin:50% 60%;filter:drop-shadow(0 0 40px rgba(124,58,237,.55))}
+.intro-clock .zz{animation:buzz .35s steps(2) infinite}
+.intro-clock:focus-visible{outline:4px solid #C4B5FD;outline-offset:8px}
+.intro.gone .intro-clock svg{animation:none;transform:scale(1.25);transition:transform .7s ease}
+.intro-title{font-family:var(--display);text-transform:uppercase;color:#fff;font-size:clamp(40px,8vw,84px);line-height:.95;margin-top:18px}
+.intro-sub{color:#C4B5FD;font-size:20px;font-weight:600}
+@media (prefers-reduced-motion:reduce){.intro-clock svg,.intro-clock .zz{animation:none}}
+
 /* ---------- fun features ---------- */
-.hype{background:var(--blue);color:#fff;text-align:center;overflow:hidden;position:relative}
-.hype h2{color:#fff}
-.hype .lead{color:#EDE7FB;margin-inline:auto}
-.hype-btn{margin:32px auto 0;width:180px;height:180px;border-radius:50%;border:8px solid #000;background:#fff;color:var(--blue);font:400 34px/1 var(--display);text-transform:uppercase;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;transition:transform .1s;box-shadow:0 10px 0 #000}
-.hype-btn.held{transform:translateY(6px) scale(.97);box-shadow:0 4px 0 #000}
-.hype-meter{max-width:520px;height:28px;margin:28px auto 0;border:4px solid #000;border-radius:999px;background:#2E1065;overflow:hidden}
-.hype-meter i{display:block;height:100%;width:0;background:repeating-linear-gradient(45deg,#fff 0 14px,var(--lilac) 14px 28px)}
-.hype-msg{font:400 clamp(40px,9vw,96px)/.9 var(--display);text-transform:uppercase;margin-top:24px;min-height:1em;color:#fff}
-.hype.blast{animation:blast .5s ease 3}
-@keyframes blast{50%{background:#000}}
 .mood{margin-top:56px;border-top:2px solid #000;padding-top:40px}
 .mood h3,.compare-wrap h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(32px,5vw,48px);line-height:1;color:var(--blue)}
 .mood-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px;max-width:720px}
@@ -341,7 +344,7 @@ dialog.lightbox img{display:block;max-width:100%;max-height:82vh;border-radius:1
 .egg .btn{margin-top:24px;background:#fff;color:#000}
 .confetti{position:fixed;top:-20px;width:10px;height:16px;z-index:61;pointer-events:none;animation:fall linear forwards}
 @keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
-@media (prefers-reduced-motion:reduce){.arena .clock-target,.shake,.hype.blast,.confetti{animation:none}}
+@media (prefers-reduced-motion:reduce){.arena .clock-target,.shake,.confetti{animation:none}}
 
 /* ideas + share */
 .ideas{background:#000;color:#fff;border-top:8px solid var(--blue)}
@@ -398,18 +401,7 @@ dialog.lightbox img{display:block;max-width:100%;max-height:82vh;border-radius:1
 .note:nth-child(3n+2){background:var(--lilac);transform:rotate(1.2deg);box-shadow:6px 6px 0 #fff}
 .note:nth-child(3n){background:var(--blue);color:#fff;transform:rotate(-.6deg);box-shadow:6px 6px 0 var(--lilac)}
 
-/* ---------- join in page ---------- */
-.join-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
-@media (max-width:900px){.join-grid{grid-template-columns:1fr}}
-.frame-stage{background:#000;border-radius:24px;padding:16px;box-shadow:10px 10px 0 var(--blue)}
-.frame-stage canvas{display:block;width:100%;max-width:360px;margin-inline:auto;border-radius:10px;touch-action:none;cursor:grab;background:#222}
-.frame-stage canvas.square{max-width:460px}
-.frame-controls{display:grid;gap:16px}
-.seg{display:inline-flex;border:2px solid #000;border-radius:999px;overflow:hidden;width:max-content}
-.seg button{font:700 15px var(--body);padding:10px 18px;border:0;background:#fff;cursor:pointer}
-.seg button[aria-pressed="true"]{background:#000;color:#fff}
-.file-btn{position:relative;overflow:hidden;justify-self:start}
-.file-btn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+/* ---------- quiz + shared ---------- */
 input[type=range]{padding:0;accent-color:var(--blue);background:none;border:0}
 .hint{color:var(--muted);font-size:15px}
 .quiz{background:#fff;border:2px solid #000;border-radius:28px;padding:32px;max-width:760px}
@@ -482,7 +474,25 @@ footer a{color:#fff}
 }
 </style>
 </head>
-<body>
+<body class="intro-on">
+<div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+  <button class="intro-clock" id="introBtn" type="button" aria-label="Tap the alarm to open the site">
+    <svg viewBox="0 0 140 150" aria-hidden="true">
+      <g class="zz" stroke="#C4B5FD" stroke-width="5" stroke-linecap="round">
+        <path d="M6 40 L18 48"/><path d="M2 62 L16 64"/><path d="M134 40 L122 48"/><path d="M138 62 L124 64"/>
+      </g>
+      <circle cx="36" cy="30" r="20" fill="#fff"/>
+      <circle cx="104" cy="30" r="20" fill="#fff"/>
+      <path d="M40 132 L28 146 M100 132 L112 146" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="70" cy="84" r="56" fill="#5B21B6" stroke="#fff" stroke-width="7"/>
+      <circle cx="70" cy="84" r="44" fill="#fff"/>
+      <path d="M70 84 L70 54 M70 84 L90 96" stroke="#000" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="70" cy="84" r="6" fill="#7C3AED"/>
+    </svg>
+  </button>
+  <p class="intro-title" id="introTitle">Wake up, Belmont.</p>
+  <p class="intro-sub">Tap the alarm.</p>
+</div>
 
 <nav class="nav" aria-label="Main">
   <div class="wrap">
@@ -499,10 +509,10 @@ footer a{color:#fff}
         <button class="dd-btn" type="button" id="ddBtn" aria-expanded="false" aria-controls="ddMenu">Get involved</button>
         <ul class="dd-menu" id="ddMenu"></ul>
       </li>
-      <li><a href="#/connect" data-page="connect">Connect with Belmont</a></li>
+      <li><a href="#/connect" data-page="connect">Be a part of Belmont</a></li>
     </ul>
     <div class="right">
-      <a href="#/frame" class="vote-btn" id="ctaBtn">Make your frame</a>
+      <a href="#/connect" class="vote-btn" id="ctaBtn">Share an idea</a>
       <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navList">Menu</button>
     </div>
   </div>
@@ -615,16 +625,6 @@ footer a{color:#fff}
     </div>
   </section>
 
-  <section class="block hype" id="hypeSec">
-    <div class="wrap">
-      <h2>Hype meter</h2>
-      <p class="lead">Press and hold to wake up Belmont. Fill the meter all the way.</p>
-      <button class="hype-btn" type="button" id="hypeBtn" aria-label="Press and hold to fill the hype meter">Hold</button>
-      <div class="hype-meter" aria-hidden="true"><i id="hypeFill"></i></div>
-      <p class="hype-msg" id="hypeMsg" role="status"></p>
-    </div>
-  </section>
-
   <section class="block ideas">
     <div class="wrap">
       <h2>What should change at Belmont?</h2>
@@ -643,7 +643,6 @@ footer a{color:#fff}
     <h1 id="whyTitle">Why Jeremiah</h1>
     <p>The reasons to put his name first on your ballot.</p>
   </div></header>
-  <section class="block"><div class="wrap" id="reasonList"></div></section>
   <section class="block club"><div class="wrap">
       <h2>Already building community</h2>
       <p class="lead">Jeremiah's cooking club brings students and teachers together over food. This is the kind of Belmont he wants: people from every grade in one room, making something together.</p>
@@ -655,6 +654,7 @@ footer a{color:#fff}
         <figure class="club-pic "><button type="button" data-full="img/cooking-5.jpg" data-cap="Students digging in"><img src="img/cooking-5.jpg" alt="A student enjoying a taco" loading="lazy"></button><figcaption>Students digging in</figcaption></figure>
       </div>
   </div></section>
+  <section class="block" style="padding-top:0"><div class="wrap" id="reasonList"></div></section>
   <section class="block compare-sec" id="compareSec" hidden><div class="wrap compare-wrap">
     <h3>Then vs. now</h3>
     <p class="lead" id="compareLead">Drag the slider to see the difference.</p>
@@ -774,35 +774,6 @@ footer a{color:#fff}
   </div></section>
 </div>
 
-<!-- =============== PHOTO FRAME =============== -->
-<div class="page" id="page-frame">
-  <header class="page-head"><div class="wrap">
-    <h1>Photo frame</h1>
-    <p>Rep the campaign on your story.</p>
-  </div></header>
-  <section class="block"><div class="wrap">
-    <div>
-      <div class="join-grid">
-        <div class="frame-stage"><canvas id="frameCanvas" width="1080" height="1920" aria-label="Preview of your campaign photo"></canvas></div>
-        <div class="frame-controls">
-          <p class="lead">Add your photo, drag it into place, and post it to your story. Your photo stays on your phone. Nothing gets uploaded.</p>
-          <label class="btn btn-purple file-btn">Choose a photo<input type="file" id="frameFile" accept="image/*"></label>
-          <div class="seg" role="group" aria-label="Size">
-            <button type="button" data-fmt="story" aria-pressed="true">Story</button>
-            <button type="button" data-fmt="square" aria-pressed="false">Square post</button>
-          </div>
-          <label>Zoom <input type="range" id="frameZoom" min="1" max="3" step="0.01" value="1"></label>
-          <p class="hint">Drag the photo on the preview to move it.</p>
-          <div class="actions" style="margin-top:0">
-            <button class="btn btn-purple" type="button" id="frameDownload">Download</button>
-            <button class="btn btn-outline" type="button" id="frameShare" hidden>Share</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div></section>
-</div>
-
 <!-- =============== CLUB QUIZ =============== -->
 <div class="page" id="page-quiz">
   <header class="page-head"><div class="wrap">
@@ -856,10 +827,10 @@ footer a{color:#fff}
   </div></section>
 </div>
 
-<!-- =============== CONNECT WITH BELMONT =============== -->
+<!-- =============== BE A PART OF BELMONT =============== -->
 <div class="page" id="page-connect">
   <header class="page-head"><div class="wrap">
-    <h1>Connect with Belmont</h1>
+    <h1>Be a part of Belmont</h1>
     <p>Your ideas. Your school. Your voice.</p>
   </div></header>
   <section class="block connect"><div class="wrap">
@@ -870,9 +841,9 @@ footer a{color:#fff}
       <button class="btn btn-outline" type="button" data-share>Share with a friend</button>
     </div>
     <div class="connect-steps">
-      <div><b>1</b><h3>You say it</h3><p>Send your idea. Big or small, it counts.</p></div>
-      <div><b>2</b><h3>We shout it</h3><p>The best ideas get brought to the council and shared with the school.</p></div>
-      <div><b>3</b><h3>We follow up</h3><p>You'll hear what happened because of your idea.</p></div>
+      <div><b>1</b><h3>You recommend</h3><p>Send us your idea. A club, an event, a change at Belmont. Big or small, it counts.</p></div>
+      <div><b>2</b><h3>We listen</h3><p>We read every idea and bring the strongest ones to the student council.</p></div>
+      <div><b>3</b><h3>We push it</h3><p>We take it to the staff, advocating and working with <strong>you</strong> to make it a reality.</p></div>
     </div>
     <div class="mood" id="moodSec">
       <h3>How'd you wake up today?</h3>
@@ -944,7 +915,7 @@ footer a{color:#fff}
       await navigator.clipboard.writeText(url); toast("Link copied");
     } catch(e){ if (e.name !== "AbortError") toast("Copy the link from your address bar"); }
   }); }); }
-  const F = Object.assign({ alarmClock:true, photoFrame:true, clubQuiz:true, poll:true, supporters:true, ideaWall:true, snoozeGame:true, dreamCard:true, hypeMeter:true, moodCheck:true, easterEgg:true }, C.features || {});
+  const F = Object.assign({ alarmClock:false, intro:true, clubQuiz:true, poll:true, supporters:true, ideaWall:true, snoozeGame:true, dreamCard:true, moodCheck:true, easterEgg:true }, C.features || {});
   const mailto = subj => C.email ? `mailto:${C.email}?subject=${encodeURIComponent(subj)}` : "";
 
   /* ---------- home ---------- */
@@ -1084,7 +1055,7 @@ footer a{color:#fff}
   $("whyTitle").textContent = `Why ${C.firstName}`;
   $("closerName").textContent = full;
   $("closerLine").textContent = C.position ? `For ${C.position} at ${C.school}.` : `For student government at ${C.school}.`;
-  if (!C.howToVote.length) { $("closerVote").href = "#/frame"; $("closerVote").textContent = "Make your frame"; }
+  if (!C.howToVote.length) { $("closerVote").href = "#/connect"; $("closerVote").textContent = "Be a part of Belmont"; }
   $("reasonList").innerHTML = C.reasons.length
     ? `<div>${C.reasons.map(r => `<div class="reason"><h3>${esc(r.title)}</h3><p>${esc(r.detail)}</p></div>`).join("")}</div>`
     : `<div class="empty"><p>The full case for ${esc(C.firstName)} is coming soon. Voting for him? Tell him why.</p>
@@ -1180,93 +1151,6 @@ footer a{color:#fff}
     : `<div class="empty"><p>Endorsements are rolling in. Be one of the first names on this page.</p></div>`;
 
 
-  /* ---------- photo frame maker ---------- */
-  const frame = { img: null, fmt: "story", zoom: 1, ox: 0, oy: 0 };
-  const cv = $("frameCanvas"), cx = cv.getContext("2d");
-  const fitText = (text, font, size, maxW) => { do { cx.font = `${font.replace("%", size)}`; if (cx.measureText(text).width <= maxW) break; size -= 4; } while (size > 20); return size; };
-  function drawFrame(){
-    const W = 1080, H = frame.fmt === "story" ? 1920 : 1080, story = frame.fmt === "story";
-    if (cv.height !== H) cv.height = H;
-    cv.classList.toggle("square", !story);
-    const band = story ? 600 : 380, ph = H - band, S = story ? 1 : 0.72;
-    cx.fillStyle = "#5B21B6"; cx.fillRect(0, 0, W, H);
-    if (frame.img){
-      const iw = frame.img.naturalWidth, ih = frame.img.naturalHeight;
-      const sc = Math.max(W / iw, ph / ih) * frame.zoom, dw = iw * sc, dh = ih * sc;
-      frame.oy = Math.min(Math.max(frame.oy, -(dh - ph) / 2), (dh - ph) / 2);
-      frame.ox = Math.min(Math.max(frame.ox, -(dw - W) / 2), (dw - W) / 2);
-      cx.save(); cx.beginPath(); cx.rect(0, 0, W, ph); cx.clip();
-      cx.drawImage(frame.img, (W - dw) / 2 + frame.ox, (ph - dh) / 2 + frame.oy, dw, dh); cx.restore();
-    } else {
-      cx.fillStyle = "rgba(255,255,255,.12)";
-      for (let y = -W; y < ph; y += 120) { cx.save(); cx.translate(0, y); cx.rotate(-0.35); cx.fillRect(-200, 0, W * 2, 44); cx.restore(); }
-      cx.fillStyle = "#fff"; cx.textAlign = "center";
-      cx.font = `700 ${Math.round(52 * S)}px Archivo, sans-serif`; cx.fillText("Tap \u201cChoose a photo\u201d", W / 2, ph / 2);
-      cx.textAlign = "left";
-    }
-    // checker stripe + black band
-    cx.fillStyle = "#000"; cx.fillRect(0, ph, W, band);
-    for (let x = 0; x < W; x += 80) { cx.fillStyle = "#fff"; cx.fillRect(x + 40, ph, 40, 16); }
-    const L = 70;
-    const nameSize = fitText(full.toUpperCase(), "400 %px Anton, Impact, sans-serif", Math.round(170 * S), W - L * 2);
-    const blockH = Math.round(48 * S) + Math.round(nameSize * 0.98) + (C.slogan ? Math.round(78 * S) : 0) + Math.round(58 * S);
-    let y = ph + 16 + (band - 16 - blockH) / 2 + Math.round(40 * S);
-    cx.fillStyle = "#C4B5FD"; cx.font = `700 ${Math.round(48 * S)}px Archivo, sans-serif`; cx.fillText("I'M VOTING", L, y);
-    y += Math.round(nameSize * 0.98); cx.fillStyle = "#fff"; cx.font = `400 ${nameSize}px Anton, Impact, sans-serif`; cx.fillText(full.toUpperCase(), L, y);
-    if (C.slogan){ y += Math.round(78 * S); cx.font = `700 ${Math.round(50 * S)}px Archivo, sans-serif`; cx.fillText(C.slogan, L, y); }
-    y += Math.round(58 * S); cx.fillStyle = "#bbb"; cx.font = `500 ${Math.round(34 * S)}px Archivo, sans-serif`;
-    cx.fillText([C.position && `For ${C.position}`, "Belmont Prep"].filter(Boolean).join(" \u00b7 "), L, y);
-    // badge
-    const r = Math.round(118 * S), bx = W - 60 - r, by = 60 + r;
-    cx.save(); cx.translate(bx, by); cx.rotate(-0.14);
-    cx.beginPath(); cx.arc(0, 0, r + 12, 0, Math.PI * 2); cx.fillStyle = "#000"; cx.fill();
-    cx.beginPath(); cx.arc(0, 0, r, 0, Math.PI * 2); cx.fillStyle = "#fff"; cx.fill();
-    cx.textAlign = "center"; cx.fillStyle = "#7C3AED"; cx.font = `400 ${Math.round(48 * S)}px Anton, Impact, sans-serif`; cx.fillText("VOTE", 0, -r * 0.12);
-    const bs = fitText(C.firstName.toUpperCase(), "400 %px Anton, Impact, sans-serif", Math.round(62 * S), r * 1.6);
-    cx.fillStyle = "#000"; cx.fillText(C.firstName.toUpperCase(), 0, -r * 0.12 + bs * 0.95); cx.restore(); cx.textAlign = "left";
-    // outer frame
-    cx.lineWidth = 24; cx.strokeStyle = "#5B21B6"; cx.strokeRect(12, 12, W - 24, H - 24);
-  }
-  if (F.photoFrame){
-    (document.fonts ? Promise.all([document.fonts.load("400 100px Anton"), document.fonts.load("700 40px Archivo"), document.fonts.load("500 30px Archivo")]).catch(()=>{}) : Promise.resolve()).then(drawFrame);
-    drawFrame();
-    $("frameFile").addEventListener("change", e => {
-      const file = e.target.files[0]; if (!file) return;
-      const img = new Image(); img.onload = () => { frame.img = img; frame.zoom = 1; frame.ox = frame.oy = 0; $("frameZoom").value = 1; drawFrame(); URL.revokeObjectURL(img.src); };
-      img.onerror = () => toast("That photo didn't load. Try a JPG or PNG.");
-      img.src = URL.createObjectURL(file);
-    });
-    document.querySelectorAll("[data-fmt]").forEach(b => b.addEventListener("click", () => {
-      frame.fmt = b.dataset.fmt; frame.ox = frame.oy = 0;
-      document.querySelectorAll("[data-fmt]").forEach(x => x.setAttribute("aria-pressed", x === b)); drawFrame();
-    }));
-    $("frameZoom").addEventListener("input", e => { frame.zoom = +e.target.value; drawFrame(); });
-    let drag = null;
-    cv.addEventListener("pointerdown", e => { if (!frame.img) return; drag = { x: e.clientX, y: e.clientY }; cv.setPointerCapture(e.pointerId); cv.style.cursor = "grabbing"; });
-    cv.addEventListener("pointermove", e => {
-      if (!drag) return; const k = cv.width / cv.clientWidth;
-      frame.ox += (e.clientX - drag.x) * k; frame.oy += (e.clientY - drag.y) * k; drag = { x: e.clientX, y: e.clientY }; drawFrame();
-    });
-    const endDrag = () => { drag = null; cv.style.cursor = ""; };
-    cv.addEventListener("pointerup", endDrag); cv.addEventListener("pointercancel", endDrag);
-    const blob = () => new Promise(res => cv.toBlob(res, "image/png"));
-    const fname = () => `voting-${C.firstName.toLowerCase()}-${frame.fmt}.png`;
-    $("frameDownload").addEventListener("click", async () => {
-      const url = URL.createObjectURL(await blob()), a = document.createElement("a");
-      a.href = url; a.download = fname(); document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 5000); toast("Saved. Now post it!");
-    });
-    try {
-      if (navigator.canShare && navigator.canShare({ files: [new File(["x"], "t.png", { type: "image/png" })] })){
-        $("frameShare").hidden = false;
-        $("frameShare").addEventListener("click", async () => {
-          try { await navigator.share({ files: [new File([await blob()], fname(), { type: "image/png" })], title: `Vote ${full}` }); }
-          catch (e) { if (e.name !== "AbortError") toast("Sharing didn't work. Use Download instead."); }
-        });
-      }
-    } catch {}
-  }
-
   /* ---------- club quiz ---------- */
   const Q = (C.quiz && C.quiz.questions) || [];
   const quizOn = F.clubQuiz && Q.length && C.quiz.results;
@@ -1294,7 +1178,6 @@ footer a{color:#fff}
   const extras = [
     { id: "poll",  on: F.poll && liveReady && C.platform.length > 0, label: "Poll", tile: "Vote on what matters most to you.", go: "Take the poll" },
     { id: "ideas", on: F.ideaWall && liveReady, label: "Idea wall", tile: "Post what you'd change at Belmont.", go: "Add your idea" },
-    { id: "frame", on: !!F.photoFrame, label: "Photo frame", tile: `Put your photo in an \u201cI'm voting ${C.firstName}\u201d frame for your story.`, go: "Make yours" },
     { id: "quiz",  on: !!quizOn, label: "Club quiz", tile: "Find the club that fits you in 5 questions.", go: "Take the quiz" },
     { id: "snooze", on: !!F.snoozeGame, label: "Snooze game", tile: "Hit snooze as fast as you can. 10 seconds.", go: "Play" },
     { id: "dream", on: !!F.dreamCard, label: "Dream Belmont", tile: "Pick what you'd add to Belmont and get a card to post.", go: "Make yours" },
@@ -1304,7 +1187,6 @@ footer a{color:#fff}
   $("ddItem").hidden = !onPages.length;
   $("tiles").innerHTML = onPages.map(x => `<a class="tile" href="#/${x.id}"><h3>${x.label}</h3><p>${esc(x.tile)}</p><b>${x.go} &rarr;</b></a>`).join("");
   $("involved").hidden = !onPages.length;
-  if (!F.photoFrame) { $("ctaBtn").href = "#/contact"; $("ctaBtn").textContent = "Contact"; }
   if (F.ideaWall && liveReady) {
     const cb = $("communityBtn"); const ca = document.createElement("a"); ca.className = cb.className; ca.id = "communityBtn"; ca.href = "#/ideas"; ca.textContent = cb.textContent; cb.replaceWith(ca); }
   const ddItem = $("ddItem"), ddBtn = $("ddBtn");
@@ -1417,7 +1299,7 @@ footer a{color:#fff}
   });
 
   /* ---------- router ---------- */
-  const titles = { home: C.position ? `${full} for ${C.position}` : full, why:`Why ${C.firstName}`, video:"Campaign video", cabinet:"Meet the cabinet", agenda:"Agenda", poll:"Poll", ideas:"Idea wall", frame:"Photo frame", quiz:"Club quiz", qa:"Q&A", endorsements:"Endorsements", contact:"Contact", connect:"Connect with Belmont", snooze:"Snooze game", dream:"Dream Belmont" };
+  const titles = { home: C.position ? `${full} for ${C.position}` : full, why:`Why ${C.firstName}`, video:"Campaign video", cabinet:"Meet the cabinet", agenda:"Agenda", poll:"Poll", ideas:"Idea wall", quiz:"Club quiz", qa:"Q&A", endorsements:"Endorsements", contact:"Contact", connect:"Be a part of Belmont", snooze:"Snooze game", dream:"Dream Belmont" };
   const navList = $("navList"), menuBtn = $("menuBtn");
   const route = () => {
     const [pageId = "home", anchor] = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
@@ -1426,7 +1308,6 @@ footer a{color:#fff}
     document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === "page-" + id));
     document.querySelectorAll("#navList a").forEach(a => a.dataset.page === id ? a.setAttribute("aria-current","page") : a.removeAttribute("aria-current"));
     ddBtn.dataset.current = !!extras.find(x => x.id === id); ddSet(false);
-    if (id === "frame") drawFrame();
     document.title = id === "home" ? titles.home : `${titles[id]} · ${full}`;
     navList.classList.remove("open"); menuBtn.setAttribute("aria-expanded","false");
     const target = anchor && document.getElementById(anchor);
@@ -1446,7 +1327,7 @@ footer a{color:#fff}
   window.CAMPAIGN = { F, esc, toast, full };
 })();
 </script>
-<!-- Fun features: snooze game, dream card, hype meter, mood check-in, then vs now, easter egg -->
+<!-- Fun features: snooze game, dream card, mood check-in, then vs now, easter egg -->
 <script>
 (function(){
   const C = CONFIG, $ = id => document.getElementById(id), { F, esc, toast, full } = window.CAMPAIGN;
@@ -1467,7 +1348,7 @@ footer a{color:#fff}
   const alarm = () => { for (let i = 0; i < 6; i++) setTimeout(() => beep(1760, 0.07, 0.1), i * 140 + (i % 2) * 0); };
   const confetti = (n = 60) => {
     if (reduce) return;
-    const cols = ["#5B21B6", "#7C3AED", "#C4B5FD", "#FFFFFF", "#000000"];
+    const cols = ["#5B21B6", "#7C3AED", "#C4B5FD", "#FFFFFF", "#000000", "#5B21B6"];
     for (let i = 0; i < n; i++) {
       const c = document.createElement("i"); c.className = "confetti";
       c.style.left = Math.random() * 100 + "vw"; c.style.background = cols[i % cols.length];
@@ -1489,6 +1370,22 @@ footer a{color:#fff}
     else { const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); }
   };
   const clockSVG = `<svg viewBox="0 0 140 150" aria-hidden="true"><circle cx="36" cy="30" r="20" fill="#000"/><circle cx="104" cy="30" r="20" fill="#000"/><path d="M40 132 L28 146 M100 132 L112 146" stroke="#000" stroke-width="8" stroke-linecap="round"/><circle cx="70" cy="84" r="56" fill="#5B21B6" stroke="#000" stroke-width="7"/><circle cx="70" cy="84" r="44" fill="#fff"/><path d="M70 84 L70 54 M70 84 L90 96" stroke="#000" stroke-width="7" stroke-linecap="round"/></svg>`;
+
+
+  /* ---------- intro: tap the alarm to open the site ---------- */
+  const intro = $("intro");
+  if (F.intro === false) { intro.remove(); document.body.classList.remove("intro-on"); }
+  else {
+    const wake = () => {
+      if (intro.classList.contains("gone")) return;
+      alarm(); intro.classList.add("gone"); document.body.classList.remove("intro-on");
+      setTimeout(() => confetti(160), 150);
+      setTimeout(() => intro.remove(), 800);
+    };
+    $("introBtn").addEventListener("click", wake);
+    addEventListener("keydown", e => { if (e.key === "Escape" && document.contains(intro)) wake(); });
+    $("introBtn").focus();
+  }
 
   /* ---------- 1. snooze game ---------- */
   if (F.snoozeGame) {
@@ -1576,32 +1473,6 @@ footer a{color:#fff}
       cv.toBlob(b => { const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = fname(); a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); }); });
     if (navigator.canShare) { $("dreamShare").hidden = false; $("dreamShare").addEventListener("click", () => picked.length ? canvasShare(cv, fname()) : toast("Pick at least one first.")); }
   }
-
-  /* ---------- 3. hype meter ---------- */
-  if (F.hypeMeter) {
-    const btn = $("hypeBtn"), fill = $("hypeFill"), msg = $("hypeMsg"), sec = $("hypeSec");
-    let lvl = 0, holding = false, done = false, last = 0, beepAt = 0;
-    const loop = t => {
-      const dt = last ? (t - last) / 1000 : 0; last = t;
-      if (!done) lvl = Math.max(0, Math.min(1, lvl + (holding ? dt / 2.5 : -dt / 1.5)));
-      fill.style.width = lvl * 100 + "%";
-      if (holding && !done && t > beepAt) { beep(300 + lvl * 1200, 0.05, 0.05, "sawtooth"); beepAt = t + 120 - lvl * 70; }
-      if (lvl >= 1 && !done) {
-        done = true; holding = false; btn.classList.remove("held");
-        msg.textContent = "Belmont is awake!"; sec.classList.add("blast"); alarm(); confetti(90);
-        setTimeout(() => { sec.classList.remove("blast"); }, 1600);
-        setTimeout(() => { done = false; msg.textContent = ""; }, 4000);
-      }
-      if (holding || lvl > 0 || done) requestAnimationFrame(loop); else last = 0;
-    };
-    const down = e => { e.preventDefault(); if (done) return; holding = true; btn.classList.add("held"); if (!last) requestAnimationFrame(loop); };
-    const up = () => { holding = false; btn.classList.remove("held"); };
-    btn.addEventListener("pointerdown", down);
-    ["pointerup", "pointerleave", "pointercancel"].forEach(ev => btn.addEventListener(ev, up));
-    btn.addEventListener("keydown", e => { if ((e.key === " " || e.key === "Enter") && !e.repeat) down(e); });
-    btn.addEventListener("keyup", e => { if (e.key === " " || e.key === "Enter") up(); });
-    btn.addEventListener("contextmenu", e => e.preventDefault());
-  } else $("hypeSec").hidden = true;
 
   /* ---------- 4. mood check-in ---------- */
   const moods = [["😴", "Barely"], ["😐", "Meh"], ["🙂", "Okay"], ["😄", "Good"], ["🔥", "Ready"]];

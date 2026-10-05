@@ -101,16 +101,15 @@ const CONFIG = {
 
   // ---------- TURN FEATURES ON / OFF (true = on, false = off) ----------
   features: {
-    alarmClock: true,     // tap-to-wake alarm clock that reveals the plan
-    photoFrame: true,     // "I'm voting Jeremiah" photo frame maker (Join in page)
+    intro: true,          // dark "Wake up, Belmont" alarm screen when the site opens
+    alarmClock: false,    // extra alarm clock over "The plan" on the home page
     clubQuiz: true,       // club match quiz (Join in page)
     poll: true,           // live "What matters most?" poll (needs firebase below)
     supporters: true,     // live supporter counter (needs firebase below)
     ideaWall: true,       // live idea wall with approval (needs firebase below)
     snoozeGame: true,     // 10-second snooze button game (Get involved menu)
     dreamCard: true,      // "Dream Belmont" card maker (Get involved menu)
-    hypeMeter: true,      // press-and-hold hype meter (home page)
-    moodCheck: true,      // "How'd you wake up today?" check-in (Connect page; live totals need firebase)
+    moodCheck: true,      // "How'd you wake up today?" check-in (Be a part of Belmont page; live totals need firebase)
     easterEgg: true,      // tap the JD logo 5 times
   },
   supportersMinToShow: 10,  // hide the number until at least this many people join
