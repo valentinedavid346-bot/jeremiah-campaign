@@ -255,6 +255,20 @@ textarea{min-height:140px;resize:vertical}
 .reach .soc{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
 .reach .soc a{background:#fff;color:#000;text-decoration:none;padding:8px 16px;border-radius:999px;font-size:15px}
 
+/* ---------- belmont community + cooking club ---------- */
+.community .shout{font-family:var(--display);text-transform:uppercase;font-size:clamp(30px,4.5vw,46px);line-height:1;color:#000;margin-bottom:12px}
+.club-title{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(30px,4vw,40px);line-height:1;color:var(--blue);margin:56px 0 18px}
+.club-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.club-pic{padding:0;border:3px solid #000;border-radius:20px;overflow:hidden;cursor:zoom-in;background:#000;aspect-ratio:3/4;transition:transform .15s}
+.club-pic:hover{transform:translateY(-3px)}
+.club-pic img{width:100%;height:100%;object-fit:cover;display:block}
+.club-pic.big{grid-column:span 2;grid-row:span 2;aspect-ratio:auto;box-shadow:8px 8px 0 var(--blue)}
+@media (max-width:700px){.club-grid{grid-template-columns:repeat(2,1fr)}.club-pic.big{grid-row:span 1;aspect-ratio:3/4}}
+dialog.lightbox{border:0;padding:0;background:transparent;max-width:min(900px,100% - 32px);max-height:90vh;margin:auto}
+dialog.lightbox::backdrop{background:rgba(0,0,0,.85)}
+dialog.lightbox img{display:block;max-width:100%;max-height:90vh;border-radius:16px}
+.lb-close{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:#000;font-size:28px;line-height:1;cursor:pointer}
+
 /* ideas + share */
 .ideas{background:#000;color:#fff;border-top:8px solid var(--blue)}
 .ideas h2{color:#fff}
@@ -504,6 +518,31 @@ footer a{color:#fff}
       <div id="planks"></div>
     </div>
   </section>
+
+  <section class="block community" id="community">
+    <div class="wrap">
+      <h2>Belmont Community</h2>
+      <p class="shout">You say it, we shout it!</p>
+      <p class="lead">We want students to take the initiative in advocating for what they want at Belmont.</p>
+      <div class="actions">
+        <button class="btn btn-purple" type="button" id="communityBtn" data-msg="idea">Have a suggestion? Tap here</button>
+      </div>
+
+      <h3 class="club-title">Cooking Club</h3>
+      <div class="club-grid" id="clubGrid">
+        <button type="button" class="club-pic big" data-full="img/cooking-1.jpg"><img src="img/cooking-1.jpg" alt="A student cooking taco meat in a pan" loading="lazy"></button>
+        <button type="button" class="club-pic" data-full="img/cooking-2.jpg"><img src="img/cooking-2.jpg" alt="Taco bar spread with cheese, lettuce, tomatoes, sour cream and shells" loading="lazy"></button>
+        <button type="button" class="club-pic" data-full="img/cooking-3.jpg"><img src="img/cooking-3.jpg" alt="A finished taco on a plate" loading="lazy"></button>
+        <button type="button" class="club-pic" data-full="img/cooking-4.jpg"><img src="img/cooking-4.jpg" alt="A student and a teacher giving a thumbs up with a taco" loading="lazy"></button>
+        <button type="button" class="club-pic" data-full="img/cooking-5.jpg"><img src="img/cooking-5.jpg" alt="A student enjoying a taco" loading="lazy"></button>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Photo">
+    <button type="button" class="lb-close" id="lbClose" aria-label="Close">&times;</button>
+    <img id="lbImg" alt="">
+  </dialog>
 
   <section class="block" id="involved" hidden>
     <div class="wrap">
@@ -1110,7 +1149,8 @@ footer a{color:#fff}
   $("tiles").innerHTML = onPages.map(x => `<a class="tile" href="#/${x.id}"><h3>${x.label}</h3><p>${esc(x.tile)}</p><b>${x.go} &rarr;</b></a>`).join("");
   $("involved").hidden = !onPages.length;
   if (!F.photoFrame) { $("ctaBtn").href = "#/contact"; $("ctaBtn").textContent = "Contact"; }
-  if (F.ideaWall && liveReady) { const b = $("ideasBtn"); const a = document.createElement("a"); a.className = b.className; a.id = "ideasBtn"; a.href = "#/ideas"; a.textContent = "Post your idea"; b.replaceWith(a); }
+  if (F.ideaWall && liveReady) { const b = $("ideasBtn"); const a = document.createElement("a"); a.className = b.className; a.id = "ideasBtn"; a.href = "#/ideas"; a.textContent = "Post your idea"; b.replaceWith(a);
+    const cb = $("communityBtn"); const ca = document.createElement("a"); ca.className = cb.className; ca.id = "communityBtn"; ca.href = "#/ideas"; ca.textContent = cb.textContent; cb.replaceWith(ca); }
   const ddItem = $("ddItem"), ddBtn = $("ddBtn");
   const ddSet = open => { ddItem.classList.toggle("open", open); ddBtn.setAttribute("aria-expanded", open); };
   ddBtn.addEventListener("click", e => { e.stopPropagation(); ddSet(!ddItem.classList.contains("open")); });
@@ -1139,6 +1179,16 @@ footer a{color:#fff}
     if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
     setTimeout(() => mText.focus(), 50);
   }
+  // cooking club photo viewer
+  const lb = $("lightbox"), lbImg = $("lbImg");
+  $("clubGrid").addEventListener("click", e => {
+    const p = e.target.closest(".club-pic"); if (!p) return;
+    lbImg.src = p.dataset.full; lbImg.alt = p.querySelector("img").alt;
+    if (lb.showModal) lb.showModal(); else lb.setAttribute("open", "");
+  });
+  const closeLb = () => { if (lb.close) lb.close(); else lb.removeAttribute("open"); };
+  $("lbClose").addEventListener("click", closeLb);
+  lb.addEventListener("click", e => { if (e.target === lb) closeLb(); });
   const closeMsg = () => { if (dlg.close) dlg.close(); else dlg.removeAttribute("open"); };
   document.addEventListener("click", e => { const b = e.target.closest("[data-msg]"); if (b) { e.preventDefault(); openMsg(b.dataset.msg); } });
   $("msgClose").addEventListener("click", closeMsg);
