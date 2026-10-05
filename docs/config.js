@@ -107,7 +107,6 @@ const CONFIG = {
     poll: true,           // live "What matters most?" poll (needs firebase below)
     supporters: true,     // live supporter counter (needs firebase below)
     ideaWall: true,       // live idea wall with approval (needs firebase below)
-    snake: true,          // Snooze Snake game with daily + all-time leaderboards (Get involved menu)
     dreamCard: true,      // "Dream Belmont" card maker (Get involved menu)
     moodCheck: true,      // "How'd you wake up today?" check-in (Be a part of Belmont page; live totals need firebase)
     easterEgg: true,      // tap the JD logo 5 times
