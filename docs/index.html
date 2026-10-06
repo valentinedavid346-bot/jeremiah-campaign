@@ -73,6 +73,7 @@ a{color:inherit}
 .hero h1 .first{display:block;color:#fff}
 .hero h1 .last{display:block;color:#000}
 .hero .slogan{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(34px,4.6vw,56px);line-height:.95;margin-top:22px;max-width:none;letter-spacing:.01em}
+.hero .hero-say{font-size:clamp(18px,2vw,22px);font-weight:600;color:#fff;margin-top:14px;max-width:40ch;line-height:1.45}
 .hero .tagline{font-size:clamp(18px,2.2vw,24px);font-weight:700;color:var(--lilac);margin-top:10px;max-width:32ch}
 .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 16px var(--body);padding:14px 22px;border-radius:999px;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .15s}
@@ -722,10 +723,11 @@ footer a{color:#fff}
         <p class="for" id="forLine"></p>
         <h1><span class="first" id="first"></span><span class="last" id="last"></span></h1>
         <p class="slogan" id="slogan"></p>
+        <p class="hero-say">We want students to take the initiative in advocating for what they want at Belmont.</p>
         <p class="tagline" id="tagline" hidden></p>
         <div class="actions">
-          <a class="btn btn-white" href="#/home/platform">See the plan</a>
-          <button class="btn btn-ghost" type="button" data-share>Share this page</button>
+          <a class="btn btn-white" href="#/connect/suggest" id="ideasBtn">Have a suggestion? Tap here</a>
+          <a class="btn btn-ghost" href="#/home/platform">See the plan</a>
         </div>
       </div>
       <div class="badge-wrap" aria-hidden="true">
@@ -763,6 +765,21 @@ footer a{color:#fff}
       <button class="btn btn-purple" type="button" id="backBtn" aria-pressed="false">I'm backing Jeremiah</button>
     </div>
   </div>
+
+  <section class="block" id="nextUp" hidden>
+    <div class="wrap">
+      <h2>Next up</h2>
+      <div class="events" id="nextEvent"></div>
+      <div class="actions"><a class="btn btn-outline" href="#/agenda">See the full agenda</a></div>
+    </div>
+  </section>
+
+  <section class="block" id="vote" hidden>
+    <div class="wrap">
+      <h2>How to vote</h2>
+      <ol class="steps" id="steps"></ol>
+    </div>
+  </section>
 
   <section class="block about" id="about">
     <div class="wrap grid">
@@ -802,56 +819,6 @@ footer a{color:#fff}
     </div>
   </section>
 
-  <section class="block voice" id="voiceSec">
-    <div class="wrap">
-      <div class="mood" id="pollSec" hidden style="margin-top:0;border-top:0;padding-top:0">
-        <h3>What matters most to you?</h3>
-        <p class="lead">Pick one. It helps Jeremiah know where to start.</p>
-        <div class="poll-list" id="pollList" style="margin-top:20px"></div>
-        <p class="poll-note" id="pollNote"></p>
-      </div>
-      <div class="mood" id="moodSec" style="margin-top:0;border-top:0;padding-top:0">
-        <h3>How'd you wake up today?</h3>
-        <p class="lead" id="moodLead">Tap one. See how the rest of Belmont is feeling.</p>
-        <div class="mood-row" id="moodRow"></div>
-        <p class="mood-note" id="moodNote" role="status"></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="involved" hidden>
-    <div class="wrap">
-      <h2>Get inspired</h2>
-      <div class="tiles" id="tiles"></div>
-      <div class="actions"><a class="btn btn-outline" href="#/inspired">See everything</a></div>
-    </div>
-  </section>
-
-  <section class="block" id="nextUp" hidden>
-    <div class="wrap">
-      <h2>Next up</h2>
-      <div class="events" id="nextEvent"></div>
-      <div class="actions"><a class="btn btn-outline" href="#/agenda">See the full agenda</a></div>
-    </div>
-  </section>
-
-  <section class="block" id="vote" hidden>
-    <div class="wrap">
-      <h2>How to vote</h2>
-      <ol class="steps" id="steps"></ol>
-    </div>
-  </section>
-
-  <section class="block ideas">
-    <div class="wrap">
-      <h2>You say it, we shout it!</h2>
-      <p class="lead">We want students to take the initiative in advocating for what they want at Belmont.</p>
-      <div class="actions">
-        <a class="btn btn-white" href="#/connect/suggest" id="ideasBtn">Have a suggestion? Tap here</a>
-        <button class="btn btn-ghost" type="button" data-share>Share with a friend</button>
-      </div>
-    </div>
-  </section>
 </div>
 
 <!-- =============== WHY VOTE =============== -->
@@ -946,6 +913,22 @@ footer a{color:#fff}
     <p>Opportunities, ideas and people that make Belmont better. Find your next move.</p>
   </div></header>
   <section class="block"><div class="wrap" id="hubBody"></div></section>
+  <section class="block voice" id="voiceSec" style="padding-top:0">
+    <div class="wrap">
+      <div class="mood" id="pollSec" hidden style="margin-top:0;border-top:0;padding-top:0">
+        <h3>What matters most to you?</h3>
+        <p class="lead">Pick one. It helps Jeremiah know where to start.</p>
+        <div class="poll-list" id="pollList" style="margin-top:20px"></div>
+        <p class="poll-note" id="pollNote"></p>
+      </div>
+      <div class="mood" id="moodSec" style="margin-top:0;border-top:0;padding-top:0">
+        <h3>How'd you wake up today?</h3>
+        <p class="lead" id="moodLead">Tap one. See how the rest of Belmont is feeling.</p>
+        <div class="mood-row" id="moodRow"></div>
+        <p class="mood-note" id="moodNote" role="status"></p>
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- =============== OPPORTUNITIES =============== -->
@@ -1502,8 +1485,7 @@ footer a{color:#fff}
     const items = onPages.filter(x => x.g === i); if (!items.length) return "";
     return `<div class="hub-group"><h2>${gr.title}</h2><p>${gr.sub}</p><div class="tiles">${items.map(tileHTML).join("")}</div></div>`;
   }).join("");
-  $("tiles").innerHTML = onPages.slice(0, 6).map(tileHTML).join("");
-  $("involved").hidden = !onPages.length;
+
 
   /* ---------- opportunities ---------- */
   { const OPPS = C.opportunities || [];
