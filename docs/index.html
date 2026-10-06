@@ -464,6 +464,41 @@ body.intro-on{overflow:hidden}
 .spot .gr{font-weight:700;color:var(--blue);font-size:14px;margin-top:4px}
 .spot p{color:var(--muted);margin-top:10px}
 
+/* ---------- shoutouts + spotlight ---------- */
+.board-head{margin-bottom:22px}
+.board-head h2,.wall-head h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(36px,6vw,64px);line-height:1;color:var(--blue);margin:0}
+.board-head p{color:var(--muted);font-size:18px;margin-top:6px}
+.wall-head{margin:64px 0 20px}
+.prompts{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.prompt{text-align:left;font:inherit;border:0;border-radius:6px;padding:22px 22px 26px;cursor:pointer;display:grid;gap:6px;box-shadow:6px 6px 0 rgba(0,0,0,.85);transition:transform .15s,box-shadow .15s}
+.prompt .em{font-size:34px;line-height:1}
+.prompt b{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:30px;line-height:1}
+.prompt span:last-child{font-size:16px;opacity:.85}
+.prompt:hover{transform:rotate(0) translateY(-4px)!important;box-shadow:8px 10px 0 rgba(0,0,0,.85)}
+.prompt:focus-visible{outline:3px solid #000;outline-offset:4px}
+.p1{background:#FDE68A;transform:rotate(-1.5deg)}.p2{background:#C4B5FD;transform:rotate(1deg)}.p3{background:#5B21B6;color:#fff;transform:rotate(-.8deg)}
+.p4{background:#FBCFE8;transform:rotate(1.4deg)}.p5{background:#fff;transform:rotate(-1deg)}.p6{background:#000;color:#fff;transform:rotate(.8deg)}
+.spots .spot-feature,.quotes .cork{grid-column:1/-1}
+.cork{border:3px dashed var(--blue);border-radius:24px;padding:40px;text-align:center;background:repeating-linear-gradient(45deg,#fff 0 14px,#F4EFFD 14px 28px)}
+.cork p{font-size:20px}.cork b{color:var(--blue)}.cork .sm{font-size:15px;color:var(--muted);margin-top:6px}
+.spot-feature{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);border:4px solid #000;border-radius:32px;overflow:hidden;box-shadow:12px 12px 0 var(--blue);background:#fff}
+@media (max-width:760px){.spot-feature{grid-template-columns:1fr}}
+.sf-art{min-height:280px;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,#7C3AED,#2E1065 70%);position:relative;overflow:hidden}
+.sf-art::before{content:"";position:absolute;width:140%;height:60%;top:-10%;left:-20%;background:linear-gradient(180deg,rgba(255,255,255,.35),transparent);transform:rotate(-12deg)}
+.sf-art span{font-size:120px;color:#FACC15;text-shadow:0 0 40px rgba(250,204,21,.6);animation:twinkle 2.4s ease-in-out infinite}
+@keyframes twinkle{50%{transform:scale(1.12) rotate(8deg)}}
+.sf-tx{padding:clamp(24px,4vw,44px);display:grid;align-content:center;gap:12px;justify-items:start}
+.sf-tx .k{font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue)}
+.sf-tx h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(40px,6vw,68px);line-height:.95}
+.sf-tx p{color:var(--muted);font-size:18px}
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.cat{text-align:left;font:inherit;background:#fff;border:2px solid #000;border-radius:22px;padding:20px;cursor:pointer;display:grid;gap:6px;transition:transform .15s,box-shadow .15s,background .15s}
+.cat .em{font-size:32px;line-height:1}
+.cat b{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:26px;line-height:1}
+.cat span:last-child{font-size:15px;color:var(--muted)}
+.cat:hover{transform:translateY(-4px);box-shadow:6px 6px 0 var(--blue);background:#F4EFFD}
+@media (prefers-reduced-motion:reduce){.sf-art span{animation:none}}
+
 /* ideas + share */
 .ideas{background:#000;color:#fff;border-top:8px solid var(--blue)}
 .ideas h2{color:#fff}
@@ -954,7 +989,17 @@ footer a{color:#fff}
     <h1>Shoutouts</h1>
     <p>Shout out a teacher, a friend or a team that made your week.</p>
   </div></header>
-  <section class="block"><div class="wrap">
+  <section class="block shout-board"><div class="wrap">
+    <div class="board-head"><h2>Who made your week?</h2><p>Tap one to start your shoutout.</p></div>
+    <div class="prompts">
+      <button type="button" class="prompt p1" data-msg="shoutout" data-prefill="Shoutout to my teacher "><span class="em" aria-hidden="true">🍎</span><b>A teacher</b><span>who went above and beyond</span></button>
+      <button type="button" class="prompt p2" data-msg="shoutout" data-prefill="Shoutout to my friend "><span class="em" aria-hidden="true">🤝</span><b>A friend</b><span>who always has your back</span></button>
+      <button type="button" class="prompt p3" data-msg="shoutout" data-prefill="Shoutout to the team "><span class="em" aria-hidden="true">🏆</span><b>A team</b><span>that went off this week</span></button>
+      <button type="button" class="prompt p4" data-msg="shoutout" data-prefill="Shoutout to the club "><span class="em" aria-hidden="true">🎨</span><b>A club</b><span>doing something cool</span></button>
+      <button type="button" class="prompt p5" data-msg="shoutout" data-prefill="Shoutout to "><span class="em" aria-hidden="true">💜</span><b>Someone on staff</b><span>who keeps Belmont running</span></button>
+      <button type="button" class="prompt p6" data-msg="shoutout" data-prefill="Shoutout to "><span class="em" aria-hidden="true">📣</span><b>Anyone</b><span>who deserves it</span></button>
+    </div>
+    <div class="wall-head"><h2>The wall</h2></div>
     <div class="quotes notes" id="shoutList"></div>
     <div class="post-box" id="shoutPost"></div>
   </div></section>
@@ -977,7 +1022,14 @@ footer a{color:#fff}
   </div></header>
   <section class="block"><div class="wrap">
     <div class="spots" id="spotList"></div>
-    <div class="inspire-cta"><div><h3>Know someone who deserves the spotlight?</h3><p>An artist, an athlete, someone who started something. Nominate them.</p></div><button class="btn btn-purple" type="button" data-msg="spotlight">Nominate someone</button></div>
+    <div class="board-head" style="margin-top:56px"><h2>Who belongs here?</h2><p>Tap a category to nominate someone.</p></div>
+    <div class="cats">
+      <button type="button" class="cat" data-msg="spotlight" data-prefill="I'm nominating an artist: "><span class="em" aria-hidden="true">🎨</span><b>Artists</b><span>Art, music, dance, film, writing</span></button>
+      <button type="button" class="cat" data-msg="spotlight" data-prefill="I'm nominating an athlete: "><span class="em" aria-hidden="true">🏀</span><b>Athletes</b><span>Big games, big wins, big effort</span></button>
+      <button type="button" class="cat" data-msg="spotlight" data-prefill="I'm nominating a builder: "><span class="em" aria-hidden="true">🛠️</span><b>Builders</b><span>Coders, makers, scientists</span></button>
+      <button type="button" class="cat" data-msg="spotlight" data-prefill="I'm nominating a leader: "><span class="em" aria-hidden="true">🚀</span><b>Leaders</b><span>Started a club, a business, a movement</span></button>
+      <button type="button" class="cat" data-msg="spotlight" data-prefill="I'm nominating a helper: "><span class="em" aria-hidden="true">💜</span><b>Helpers</b><span>Tutors, volunteers, good people</span></button>
+    </div>
   </div></section>
 </div>
 
@@ -1430,7 +1482,7 @@ footer a{color:#fff}
     const adv = [...(C.advice || []), ...window.CAMPAIGN_WALLS.advice];
     $("adviceList").innerHTML = adv.length ? adv.map(quoteHTML).join("") : `<div class="empty"><p>No advice up yet. Seniors, you're up first.</p></div>`;
     const sh = [...(C.shoutouts || []), ...window.CAMPAIGN_WALLS.shoutout];
-    $("shoutList").innerHTML = sh.length ? sh.map(quoteHTML).join("") : `<div class="empty"><p>No shoutouts yet. Be the first to hype someone up.</p></div>`;
+    $("shoutList").innerHTML = sh.length ? sh.map(quoteHTML).join("") : `<div class="cork"><p>The wall is empty. <b>Be the first name on it.</b></p><p class="sm">Shoutouts show up here after a quick check.</p></div>`;
   };
   window.CAMPAIGN_WALLS.paint = paintWalls; paintWalls();
   const postBox = (id, kind, title, ph, msgType, extraLabel) => {
@@ -1455,7 +1507,7 @@ footer a{color:#fff}
   postBox("shoutPost", "shoutout", "Give a shoutout", "Example: Shoutout to Ms. R for staying after school to help me with chem.", "shoutout", "Your grade (optional)");
   { const sp = C.spotlights || [];
     $("spotList").innerHTML = sp.length ? sp.map(x => `<article class="spot"><div class="ph" style="${x.photo ? `background-image:url('${esc(x.photo)}')` : ""}"></div><div class="tx"><h3>${esc(x.name)}</h3>${x.grade ? `<div class="gr">${esc(x.grade)}</div>` : ""}<p>${esc(x.text)}</p></div></article>`).join("")
-      : `<div class="empty"><p>The first spotlight is coming soon. Know someone who deserves it? Nominate them below.</p></div>`; }
+      : `<div class="spot-feature"><div class="sf-art" aria-hidden="true"><span>★</span></div><div class="sf-tx"><p class="k">First spotlight coming soon</p><h3>This could be you.</h3><p>Or your friend. Or that kid in your class who's quietly doing something amazing. Every week we'll put a Belmont student in the spotlight.</p><button class="btn btn-purple" type="button" data-msg="spotlight">Nominate someone</button></div></div>`; }
 
   /* ---------- challenge of the week ---------- */
   { const CH = C.challenges || [];
@@ -1505,14 +1557,14 @@ footer a{color:#fff}
   const dlg = $("msgDialog"), mText = $("msgText"), mStatus = $("msgStatus"), mSend = $("msgSend");
   let mType = null;
   const canSendAny = () => !!(window.CAMPAIGN_SEND_LIVE || C.contactFormEndpoint || C.email);
-  function openMsg(type){
+  function openMsg(type, prefill){
     const m = MSG[type]; if (!m) return;
     if (m.form) { window.open(m.form, "_blank", "noopener"); return; }
-    mType = type; $("msgTitle").textContent = m.title; $("msgSub").textContent = m.sub; mText.placeholder = m.ph;
+    mType = type; $("msgTitle").textContent = m.title; $("msgSub").textContent = m.sub; mText.placeholder = m.ph; if (prefill) mText.value = prefill;
     mStatus.hidden = true; mSend.disabled = !canSendAny(); mSend.textContent = "Send";
     if (!canSendAny()) { mStatus.hidden = false; mStatus.className = "form-msg err"; mStatus.textContent = "Messages open soon. Check back in a few days."; }
     if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
-    setTimeout(() => mText.focus(), 50);
+    setTimeout(() => { mText.focus(); const n = mText.value.length; mText.setSelectionRange(n, n); }, 50);
   }
   // cooking club photo viewer
   const lb = $("lightbox"), lbImg = $("lbImg");
@@ -1525,7 +1577,7 @@ footer a{color:#fff}
   $("lbClose").addEventListener("click", closeLb);
   lb.addEventListener("click", e => { if (e.target === lb) closeLb(); });
   const closeMsg = () => { if (dlg.close) dlg.close(); else dlg.removeAttribute("open"); };
-  document.addEventListener("click", e => { const b = e.target.closest("[data-msg]"); if (b) { e.preventDefault(); openMsg(b.dataset.msg); } });
+  document.addEventListener("click", e => { const b = e.target.closest("[data-msg]"); if (b) { e.preventDefault(); openMsg(b.dataset.msg, b.dataset.prefill); } });
   $("msgClose").addEventListener("click", closeMsg);
   dlg.addEventListener("click", e => { if (e.target === dlg) closeMsg(); });
   $("msgForm").addEventListener("submit", async e => {
