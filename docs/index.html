@@ -670,7 +670,6 @@ footer a{color:#fff}
       <li><a href="#/cabinet" data-page="cabinet">Cabinet</a></li>
       <li><a href="#/agenda" data-page="agenda">Agenda</a></li>
       <li><a href="#/qa" data-page="qa">Q&amp;A</a></li>
-      <li><a href="#/endorsements" data-page="endorsements">Endorsements</a></li>
       <li class="dd" id="ddItem">
         <button class="dd-btn" type="button" id="ddBtn" aria-expanded="false" aria-controls="ddMenu">Get inspired</button>
         <ul class="dd-menu" id="ddMenu"></ul>
@@ -908,24 +907,6 @@ footer a{color:#fff}
   </div></section>
 </div>
 
-<!-- =============== ENDORSEMENTS =============== -->
-<div class="page" id="page-endorsements">
-  <header class="page-head"><div class="wrap">
-    <h1>Endorsements</h1>
-    <p>Students, clubs and teams backing Jeremiah.</p>
-  </div></header>
-  <section class="block"><div class="wrap">
-    <div id="voiceList"></div>
-    <div class="join">
-      <div>
-        <h2>Backing Jeremiah?</h2>
-        <p>Add your name and a line about why. It goes up once you say it's okay to post.</p>
-      </div>
-      <button class="btn btn-purple" type="button" id="endorseBtn" data-msg="endorse">Endorse Jeremiah</button>
-    </div>
-  </div></section>
-</div>
-
 <!-- =============== GET INSPIRED (hub) =============== -->
 <div class="page" id="page-inspired">
   <header class="page-head"><div class="wrap">
@@ -1115,7 +1096,7 @@ footer a{color:#fff}
         <select name="grade"><option value="">Choose one</option><option>9th</option><option>10th</option><option>11th</option><option>12th</option><option>Staff</option></select>
       </label>
       <label>What's this about?
-        <select name="topic"><option>An idea for the platform</option><option>A question</option><option>I want to endorse Jeremiah</option><option>I want to help with the campaign</option><option>Something else</option></select>
+        <select name="topic"><option>An idea for the platform</option><option>A question</option><option>I want to help with the campaign</option><option>Something else</option></select>
       </label>
       <label>Message <textarea name="message" required></textarea></label>
       <button class="btn btn-purple" type="submit" id="sendBtn">Send message</button>
@@ -1395,11 +1376,6 @@ footer a{color:#fff}
     : `<div class="empty"><p>Jeremiah's answers are on the way. Send in a question and it could be the first one up.</p></div>`;
 
 
-  /* ---------- endorsements ---------- */
-  $("voiceList").innerHTML = C.endorsements.length
-    ? `<div class="voices">${C.endorsements.map(e =>
-        `<figure class="voice"><q>${esc(e.quote)}</q><figcaption class="who"><b>${esc(e.name)}</b>${e.role ? ", " + esc(e.role) : ""}</figcaption></figure>`).join("")}</div>`
-    : `<div class="empty"><p>Endorsements are rolling in. Be one of the first names on this page.</p></div>`;
 
 
   /* ---------- club quiz ---------- */
@@ -1681,7 +1657,7 @@ footer a{color:#fff}
   addEventListener("hashchange", checkSuggestHash); checkSuggestHash();
 
   /* ---------- router ---------- */
-  const titles = { home: C.position ? `${full} for ${C.position}` : full, why:`Why ${C.firstName}`, video:"Campaign video", cabinet:"Meet the cabinet", agenda:"Agenda", inspired:"Get inspired", opps:"Opportunities", club:"Start a club", advice:"Senior advice", shoutouts:"Shoutouts", challenge:"Weekly challenge", spotlight:"Student spotlight", qa:"Q&A", endorsements:"Endorsements", contact:"Contact", connect:"Be a part of Belmont", dream:"Dream Belmont" };
+  const titles = { home: C.position ? `${full} for ${C.position}` : full, why:`Why ${C.firstName}`, video:"Campaign video", cabinet:"Meet the cabinet", agenda:"Agenda", inspired:"Get inspired", opps:"Opportunities", club:"Start a club", advice:"Senior advice", shoutouts:"Shoutouts", challenge:"Weekly challenge", spotlight:"Student spotlight", qa:"Q&A", contact:"Contact", connect:"Be a part of Belmont", dream:"Dream Belmont" };
   const navList = $("navList"), menuBtn = $("menuBtn");
   const route = () => {
     const [pageId = "home", anchor] = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
