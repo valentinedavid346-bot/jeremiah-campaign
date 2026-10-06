@@ -1591,7 +1591,7 @@ footer a{color:#fff}
   };
   const dlg = $("msgDialog"), mText = $("msgText"), mStatus = $("msgStatus"), mSend = $("msgSend");
   let mType = null;
-  const canSendAny = () => !!(window.CAMPAIGN_SEND_LIVE || C.contactFormEndpoint || C.email);
+  const canSendAny = () => !!(C.sheetEndpoint || window.CAMPAIGN_SEND_LIVE || C.contactFormEndpoint || C.email);
   function openMsg(type, prefill){
     const m = MSG[type]; if (!m) return;
     if (m.form) { window.open(m.form, "_blank", "noopener"); return; }
@@ -1637,6 +1637,15 @@ footer a{color:#fff}
   /* one way to send a message, used by the pop-up and the Contact page:
      Formspree (emails you) > Firebase inbox > email app */
   async function sendMessage(d){
+    if (C.sheetEndpoint) {
+      // Google Sheet inbox (Apps Script). "no-cors": the request goes through, we just can't read the reply.
+      let last = 0; try { last = +(sessionStorage.getItem("lastSend") || 0); } catch {}
+      if (Date.now() - last < 20000) throw new Error("slow");
+      const body = new URLSearchParams({ topic: String(d.topic || "").slice(0, 80), message: String(d.message || "").slice(0, 1000), name: String(d.name || "").slice(0, 60), grade: String(d.grade || "").slice(0, 10) });
+      await fetch(C.sheetEndpoint, { method: "POST", mode: "no-cors", body });
+      try { sessionStorage.setItem("lastSend", Date.now()); } catch {}
+      return "sent";
+    }
     if (C.contactFormEndpoint) {
       const fd = new FormData(); Object.entries(d).forEach(([k, v]) => fd.append(k, v));
       const r = await fetch(C.contactFormEndpoint, { method: "POST", body: fd, headers: { Accept: "application/json" } });
@@ -1664,7 +1673,7 @@ footer a{color:#fff}
   const paintContact = () => {
     const ok = canSendAny();
     $("formNote").textContent = !ok ? "Messages open soon." :
-      (C.contactFormEndpoint || window.CAMPAIGN_SEND_LIVE) ? "" : "This opens your email app with your message ready to send.";
+      (C.sheetEndpoint || C.contactFormEndpoint || window.CAMPAIGN_SEND_LIVE) ? "" : "This opens your email app with your message ready to send.";
     $("sendBtn").disabled = !ok; $("sendBtn").style.opacity = ok ? "" : .5;
   };
   paintContact(); window.addEventListener("campaign-live", paintContact);
@@ -1686,7 +1695,7 @@ footer a{color:#fff}
   const sg = $("suggest"), sgMsg = $("sgMsg");
   const paintSuggest = () => {
     const ok = canSendAny();
-    $("sgNote").textContent = !ok ? "Suggestions open soon." : (C.contactFormEndpoint || window.CAMPAIGN_SEND_LIVE) ? "" : "This opens your email app with your suggestion ready to send.";
+    $("sgNote").textContent = !ok ? "Suggestions open soon." : (C.sheetEndpoint || C.contactFormEndpoint || window.CAMPAIGN_SEND_LIVE) ? "" : "This opens your email app with your suggestion ready to send.";
     $("sgSend").disabled = !ok; $("sgSend").style.opacity = ok ? "" : .5;
   };
   paintSuggest(); window.addEventListener("campaign-live", paintSuggest);

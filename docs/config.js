@@ -91,6 +91,7 @@ const CONFIG = {
 
   // ---------- CONTACT ----------
   email: "",                    // campaign email (a new Gmail just for the campaign is best)
+  sheetEndpoint: "",            // Google Sheet inbox: the Apps Script Web app URL (ends in /exec). Every message lands in the sheet + an email alert.
   contactFormEndpoint: "",      // optional: a free Formspree link, e.g. "https://formspree.io/f/abcd1234"
   findHim: "",                  // e.g. "Room 204 during lunch, or after school by the front steps."
   ideasFormUrl: "",             // Google Form for platform ideas
