@@ -16,34 +16,6 @@
         ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() < 20 && newData.val() % 1 === 0"
       }
     },
-    "ideas": {
-      ".read": "query.orderByChild === 'approved' && query.equalTo === true",
-      ".indexOn": [
-        "approved"
-      ],
-      "$id": {
-        ".write": "auth != null && !data.exists() && newData.exists()",
-        ".validate": "newData.hasChildren(['text', 'approved', 'ts']) && newRoot.child('ideaTimes').child(auth.uid).val() === now",
-        "text": {
-          ".validate": "newData.isString() && newData.val().length >= 3 && newData.val().length <= 200"
-        },
-        "approved": {
-          ".validate": "newData.val() === false"
-        },
-        "ts": {
-          ".validate": "newData.val() === now"
-        },
-        "$other": {
-          ".validate": false
-        }
-      }
-    },
-    "ideaTimes": {
-      "$uid": {
-        ".write": "auth != null && auth.uid === $uid",
-        ".validate": "newData.val() === now && (!data.exists() || now - data.val() > 60000)"
-      }
-    },
     "messages": {
       "$id": {
         ".write": "auth != null && !data.exists() && newData.exists()",
@@ -81,6 +53,52 @@
         ".validate": "newData.hasChildren(['v','d']) && newData.child('v').isNumber() && newData.child('v').val() >= 0 && newData.child('v').val() <= 4 && newData.child('v').val() % 1 === 0 && newData.child('d').isString() && newData.child('d').val().length === 10",
         "$other": {
           ".validate": false
+        }
+      }
+    },
+    "wall": {
+      "$kind": {
+        ".read": "$kind.matches(/^(advice|shoutout)$/) && query.orderByChild === 'approved' && query.equalTo === true",
+        ".indexOn": [
+          "approved"
+        ],
+        "$id": {
+          ".write": "auth != null && !data.exists() && newData.exists() && $kind.matches(/^(advice|shoutout)$/)",
+          ".validate": "newData.hasChildren(['text','approved','ts']) && newRoot.child('wallTimes').child(auth.uid).val() === now",
+          "text": {
+            ".validate": "newData.isString() && newData.val().length >= 3 && newData.val().length <= 240"
+          },
+          "name": {
+            ".validate": "newData.isString() && newData.val().length <= 30"
+          },
+          "role": {
+            ".validate": "newData.isString() && newData.val().length <= 30"
+          },
+          "approved": {
+            ".validate": "newData.val() === false"
+          },
+          "ts": {
+            ".validate": "newData.val() === now"
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      }
+    },
+    "wallTimes": {
+      "$uid": {
+        ".write": "auth != null && auth.uid === $uid",
+        ".validate": "newData.val() === now && (!data.exists() || now - data.val() > 60000)"
+      }
+    },
+    "challenge": {
+      ".read": true,
+      "$week": {
+        ".validate": "$week.matches(/^\\d{4}-\\d{2}-\\d{2}$/)",
+        "$uid": {
+          ".write": "auth != null && auth.uid === $uid",
+          ".validate": "newData.val() === true"
         }
       }
     }

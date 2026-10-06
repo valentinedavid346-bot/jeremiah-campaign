@@ -367,6 +367,70 @@ body.intro-on{overflow:hidden}
 @keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
 @media (prefers-reduced-motion:reduce){.shake,.confetti{animation:none}}
 
+/* ---------- get inspired ---------- */
+.hub-group{margin-bottom:56px}
+.hub-group h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(32px,5vw,48px);line-height:1;color:var(--blue);margin-bottom:6px}
+.hub-group>p{color:var(--muted);font-size:18px;margin-bottom:20px}
+.tile .ico{font-size:30px;line-height:1;display:block;margin-bottom:10px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.filters button{font:700 15px var(--body);padding:8px 16px;border-radius:999px;border:2px solid #000;background:#fff;cursor:pointer}
+.filters button[aria-pressed="true"]{background:#000;color:#fff}
+.opps{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.opp{background:#fff;border:2px solid #000;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.opp h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:28px;line-height:1}
+.opp .org{font-weight:700;color:var(--blue);font-size:15px}
+.opp p{color:var(--muted)}
+.opp .who{font-size:15px;color:#000}
+.opp .tags{display:flex;flex-wrap:wrap;gap:6px}
+.opp .tags span{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:#EDE7FB;color:var(--blue)}
+.opp .tags span.paid{background:#DCFCE7;color:#15803D}
+.opp a.go{margin-top:auto;font-weight:700;color:var(--blue)}
+.inspire-cta{margin-top:48px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;background:#000;color:#fff;border-radius:28px;padding:28px 32px}
+.inspire-cta h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(26px,4vw,36px);line-height:1}
+.inspire-cta p{color:#ccc;margin-top:6px}
+.inspire-cta .btn-purple{background:#fff;color:#000}
+.club-steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;counter-reset:st}
+.club-steps li{counter-increment:st;background:#fff;border:2px solid #000;border-radius:24px;padding:24px}
+.club-steps li::before{content:counter(st);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--blue);color:#fff;font:400 22px var(--display);margin-bottom:12px}
+.club-steps h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:26px;line-height:1}
+.club-steps p{color:var(--muted);margin-top:8px}
+.fine{color:var(--muted);font-size:14px;margin-top:14px}
+.club-quiz{margin-top:64px;border-top:2px solid #000;padding-top:48px}
+.club-quiz h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(34px,5vw,52px);line-height:1;color:var(--blue);margin-bottom:8px}
+.club-quiz .quiz{margin-top:24px}
+.quotes{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.quote{background:#fff;border:2px solid #000;border-radius:24px 24px 24px 4px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.quote:nth-child(3n+2){background:var(--blue);color:#fff;border-color:var(--blue)}
+.quote:nth-child(3n){background:#000;color:#fff}
+.quote q{font-size:19px;font-weight:600;line-height:1.4;quotes:"\201C" "\201D"}
+.quote .by{font-size:14px;opacity:.8;margin-top:auto}
+.notes .quote{border-radius:6px;transform:rotate(-1deg);box-shadow:6px 6px 0 var(--blue)}
+.notes .quote:nth-child(even){transform:rotate(1deg)}
+.post-box{margin-top:40px;max-width:640px}
+.post-form{background:#fff;border:3px solid #000;border-radius:24px;padding:24px;display:grid;gap:14px}
+.post-form h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:30px;line-height:1;color:var(--blue)}
+.post-form .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.post-form .row2{grid-template-columns:1fr}}
+.post-form textarea{min-height:100px}
+.chal{background:var(--blue);color:#fff;border:4px solid #000;border-radius:32px;padding:clamp(28px,5vw,56px);box-shadow:12px 12px 0 #000;max-width:860px}
+.chal .wk{font-size:14px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--lilac)}
+.chal h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(40px,7vw,80px);line-height:.95;margin:10px 0 0;color:#fff}
+.chal p{font-size:19px;color:#EDE7FB;margin-top:14px;max-width:52ch}
+.chal .actions{align-items:center}
+.chal .done{background:#fff;color:#000}
+.chal .done[aria-pressed="true"]{background:#22C55E;color:#000}
+.chal .count{font-weight:700;color:#fff}
+.chal-list{margin-top:48px}
+.chal-list h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:30px;color:var(--blue)}
+.chal-list ol{margin:14px 0 0;padding-left:22px;display:grid;gap:8px;color:var(--muted);font-size:17px}
+.spots{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.spot{background:#fff;border:2px solid #000;border-radius:24px;overflow:hidden}
+.spot .ph{aspect-ratio:4/3;background:var(--blue) center/cover no-repeat}
+.spot .tx{padding:22px}
+.spot h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:28px;line-height:1}
+.spot .gr{font-weight:700;color:var(--blue);font-size:14px;margin-top:4px}
+.spot p{color:var(--muted);margin-top:10px}
+
 /* ideas + share */
 .ideas{background:#000;color:#fff;border-top:8px solid var(--blue)}
 .ideas h2{color:#fff}
@@ -643,6 +707,7 @@ footer a{color:#fff}
     <div class="wrap">
       <h2>Get inspired</h2>
       <div class="tiles" id="tiles"></div>
+      <div class="actions"><a class="btn btn-outline" href="#/inspired">See everything</a></div>
     </div>
   </section>
 
@@ -776,52 +841,92 @@ footer a{color:#fff}
   </div></section>
 </div>
 
-<!-- =============== POLL =============== -->
-<div class="page" id="page-poll">
+<!-- =============== GET INSPIRED (hub) =============== -->
+<div class="page" id="page-inspired">
   <header class="page-head"><div class="wrap">
-    <h1>Poll</h1>
-    <p>What matters most to you? Pick one. It helps Jeremiah know where to start.</p>
+    <h1>Get inspired</h1>
+    <p>Opportunities, ideas and people that make Belmont better. Find your next move.</p>
+  </div></header>
+  <section class="block"><div class="wrap" id="hubBody"></div></section>
+</div>
+
+<!-- =============== OPPORTUNITIES =============== -->
+<div class="page" id="page-opps">
+  <header class="page-head"><div class="wrap">
+    <h1>Opportunities</h1>
+    <p>Free programs, paid internships and scholarships for Bronx and NYC students. Every link goes to the official site.</p>
   </div></header>
   <section class="block"><div class="wrap">
-    <div class="poll-list" id="pollList"><div class="empty"><p>The poll opens soon.</p></div></div>
-    <p class="poll-note" id="pollNote"></p>
+    <div class="filters" id="oppFilters" role="group" aria-label="Filter opportunities"></div>
+    <div class="opps" id="oppList"></div>
+    <div class="inspire-cta"><div><h3>Know about an opportunity?</h3><p>Send it in and we'll add it for everyone.</p></div><button class="btn btn-purple" type="button" data-msg="opp">Share an opportunity</button></div>
   </div></section>
 </div>
 
-<!-- =============== IDEA WALL =============== -->
-<div class="page" id="page-ideas">
+<!-- =============== START A CLUB =============== -->
+<div class="page" id="page-club">
   <header class="page-head"><div class="wrap">
-    <h1>Idea wall</h1>
-    <p>What would you change at Belmont? Post it. Approved ideas go up on the wall for everyone to see.</p>
-  </div></header>
-  <section class="block ideas"><div class="wrap">
-    <div class="empty ideas-empty" id="ideasEmpty"><p>The idea wall opens soon. You can still send Jeremiah your idea.</p>
-      <button class="btn btn-white" type="button" data-msg="idea">Send your idea</button></div>
-    <form class="idea-form" id="ideaForm" hidden style="margin-top:0">
-      <label for="ideaText" style="color:#fff">Your idea</label>
-      <textarea id="ideaText" maxlength="200" placeholder="Example: A study room that's open during lunch"></textarea>
-      <div class="row">
-        <small id="ideaCount">0 / 200. Ideas show up after they're approved.</small>
-        <button class="btn btn-white" type="submit" id="ideaSend">Post idea</button>
-      </div>
-      <p class="idea-msg" id="ideaMsg" role="status" hidden></p>
-    </form>
-    <div class="wall" id="wall"></div>
-  </div></section>
-</div>
-
-<!-- =============== CLUB QUIZ =============== -->
-<div class="page" id="page-quiz">
-  <header class="page-head"><div class="wrap">
-    <h1>Club quiz</h1>
-    <p>Five quick questions. Jeremiah wants more clubs at Belmont, so if yours doesn't exist yet, tell him.</p>
+    <h1>Start a club</h1>
+    <p>Got an idea for a club Belmont doesn't have yet? Here's how to make it real.</p>
   </div></header>
   <section class="block"><div class="wrap">
-    <div class="quiz" id="quiz"></div>
+    <ol class="club-steps" id="clubSteps"></ol>
+    <p class="fine" id="clubNote"></p>
+    <div class="inspire-cta"><div><h3>Ready to start yours?</h3><p>Tell Jeremiah your club idea. He wants to help new clubs get off the ground.</p></div><button class="btn btn-purple" type="button" data-msg="club">Start your club</button></div>
+    <div class="club-quiz" id="clubQuizSec">
+      <h2>Not sure what you're into?</h2>
+      <p class="lead">Five quick questions to find the kind of club that fits you.</p>
+      <div class="quiz" id="quiz"></div>
+    </div>
   </div></section>
 </div>
 
-<!-- =============== DREAM BELMONT =============== -->
+<!-- =============== SENIOR ADVICE =============== -->
+<div class="page" id="page-advice">
+  <header class="page-head"><div class="wrap">
+    <h1>Senior advice</h1>
+    <p>What seniors wish they knew sooner. Real advice from people who've been through Belmont.</p>
+  </div></header>
+  <section class="block"><div class="wrap">
+    <div class="quotes" id="adviceList"></div>
+    <div class="post-box" id="advicePost"></div>
+  </div></section>
+</div>
+
+<!-- =============== SHOUTOUTS =============== -->
+<div class="page" id="page-shoutouts">
+  <header class="page-head"><div class="wrap">
+    <h1>Shoutouts</h1>
+    <p>Shout out a teacher, a friend or a team that made your week.</p>
+  </div></header>
+  <section class="block"><div class="wrap">
+    <div class="quotes notes" id="shoutList"></div>
+    <div class="post-box" id="shoutPost"></div>
+  </div></section>
+</div>
+
+<!-- =============== CHALLENGE OF THE WEEK =============== -->
+<div class="page" id="page-challenge">
+  <header class="page-head"><div class="wrap">
+    <h1>Challenge of the week</h1>
+    <p>One small thing each week that makes Belmont feel more like a community.</p>
+  </div></header>
+  <section class="block"><div class="wrap" id="challengeBody"></div></section>
+</div>
+
+<!-- =============== STUDENT SPOTLIGHT =============== -->
+<div class="page" id="page-spotlight">
+  <header class="page-head"><div class="wrap">
+    <h1>Student spotlight</h1>
+    <p>Belmont students doing something worth seeing.</p>
+  </div></header>
+  <section class="block"><div class="wrap">
+    <div class="spots" id="spotList"></div>
+    <div class="inspire-cta"><div><h3>Know someone who deserves the spotlight?</h3><p>An artist, an athlete, someone who started something. Nominate them.</p></div><button class="btn btn-purple" type="button" data-msg="spotlight">Nominate someone</button></div>
+  </div></section>
+</div>
+
+<!-- =============== DREAM BELMONT =============== --><!-- =============== DREAM BELMONT =============== -->
 <div class="page" id="page-dream">
   <header class="page-head"><div class="wrap">
     <h1>Dream Belmont</h1>
@@ -880,6 +985,12 @@ footer a{color:#fff}
       <p class="form-note" id="sgNote"></p>
       <p class="form-msg" id="sgMsg" role="status" hidden></p>
     </form>
+    <div class="mood" id="pollSec" hidden>
+      <h3>What matters most to you?</h3>
+      <p class="lead">Pick one. It helps Jeremiah know where to start.</p>
+      <div class="poll-list" id="pollList" style="margin-top:20px"></div>
+      <p class="poll-note" id="pollNote"></p>
+    </div>
     <div class="mood" id="moodSec">
       <h3>How'd you wake up today?</h3>
       <p class="lead" id="moodLead">Tap one. See how the rest of Belmont is feeling.</p>
@@ -950,7 +1061,7 @@ footer a{color:#fff}
       await navigator.clipboard.writeText(url); toast("Link copied");
     } catch(e){ if (e.name !== "AbortError") toast("Copy the link from your address bar"); }
   }); }); }
-  const F = Object.assign({ alarmClock:true, intro:true, clubQuiz:true, poll:true, supporters:true, ideaWall:true, dreamCard:true, moodCheck:true, easterEgg:true }, C.features || {});
+  const F = Object.assign({ alarmClock:true, intro:true, clubQuiz:true, poll:true, supporters:true, opportunities:true, startClub:true, advice:true, shoutouts:true, challenge:true, spotlight:true, dreamCard:true, moodCheck:true, easterEgg:true }, C.features || {});
   const mailto = subj => C.email ? `mailto:${C.email}?subject=${encodeURIComponent(subj)}` : "";
 
   /* ---------- home ---------- */
@@ -1211,19 +1322,116 @@ footer a{color:#fff}
   }
   if (quizOn) quizStart();
 
-  /* ---------- get involved pages: dropdown + home tiles ---------- */
+  /* ---------- get inspired: dropdown, hub page and home tiles ---------- */
   const liveReady = !!(C.firebase && C.firebase.apiKey && C.firebase.databaseURL);
-  const extras = [
-    { id: "poll",  on: F.poll && liveReady && C.platform.length > 0, label: "Poll", tile: "Vote on what matters most to you.", go: "Take the poll" },
-    { id: "ideas", on: F.ideaWall && liveReady, label: "Idea wall", tile: "Post what you'd change at Belmont.", go: "Add your idea" },
-    { id: "quiz",  on: !!quizOn, label: "Club quiz", tile: "Find the club that fits you in 5 questions.", go: "Take the quiz" },
-    { id: "dream", on: !!F.dreamCard, label: "Dream Belmont", tile: "Pick what you'd add to Belmont and get a card to post.", go: "Make yours" },
+  const GROUPS = [
+    { title: "Find your next step", sub: "Programs, internships and clubs to get into." },
+    { title: "Hear from Belmont", sub: "Advice, shoutouts and students worth knowing." },
+    { title: "Make your mark", sub: "Small moves that make Belmont better." },
   ];
-  const onPages = extras.filter(x => x.on);
-  $("ddMenu").innerHTML = onPages.map(x => `<li><a href="#/${x.id}" data-page="${x.id}">${x.label}</a></li>`).join("");
+  const extras = [
+    { id: "opps", g: 0, on: F.opportunities !== false, ico: "🚀", label: "Opportunities", tile: "Free programs, paid internships and scholarships.", go: "Browse" },
+    { id: "club", g: 0, on: F.startClub !== false, ico: "🧩", label: "Start a club", tile: "Turn your idea into a real club, plus a quiz to find your fit.", go: "Get started" },
+    { id: "advice", g: 1, on: F.advice !== false, ico: "🎓", label: "Senior advice", tile: "What seniors wish they knew sooner.", go: "Read it" },
+    { id: "spotlight", g: 1, on: F.spotlight !== false, ico: "⭐", label: "Student spotlight", tile: "Belmont students doing something worth seeing.", go: "Meet them" },
+    { id: "shoutouts", g: 1, on: F.shoutouts !== false, ico: "📣", label: "Shoutouts", tile: "Shout out a teacher, friend or team.", go: "Give one" },
+    { id: "challenge", g: 2, on: F.challenge !== false, ico: "🔥", label: "Weekly challenge", tile: "One small thing this week that brings Belmont together.", go: "See this week's" },
+    { id: "dream", g: 2, on: !!F.dreamCard, ico: "💭", label: "Dream Belmont", tile: "Pick or write what you'd add to Belmont and get a card to post.", go: "Make yours" },
+    { id: "inspired", g: -1, on: true, label: "Get inspired" },
+  ];
+  const onPages = extras.filter(x => x.on && x.g >= 0);
+  const tileHTML = x => `<a class="tile" href="#/${x.id}"><span class="ico" aria-hidden="true">${x.ico}</span><h3>${x.label}</h3><p>${esc(x.tile)}</p><b>${x.go} &rarr;</b></a>`;
+  $("ddMenu").innerHTML = `<li><a href="#/inspired" data-page="inspired"><b>Everything</b></a></li>` + onPages.map(x => `<li><a href="#/${x.id}" data-page="${x.id}">${x.ico} ${x.label}</a></li>`).join("");
   $("ddItem").hidden = !onPages.length;
-  $("tiles").innerHTML = onPages.map(x => `<a class="tile" href="#/${x.id}"><h3>${x.label}</h3><p>${esc(x.tile)}</p><b>${x.go} &rarr;</b></a>`).join("");
+  $("hubBody").innerHTML = GROUPS.map((gr, i) => {
+    const items = onPages.filter(x => x.g === i); if (!items.length) return "";
+    return `<div class="hub-group"><h2>${gr.title}</h2><p>${gr.sub}</p><div class="tiles">${items.map(tileHTML).join("")}</div></div>`;
+  }).join("");
+  $("tiles").innerHTML = onPages.slice(0, 6).map(tileHTML).join("");
   $("involved").hidden = !onPages.length;
+
+  /* ---------- opportunities ---------- */
+  { const OPPS = C.opportunities || [];
+    const tags = ["All", ...new Set(OPPS.flatMap(o => o.tags || []))];
+    let f = "All";
+    const paint = () => {
+      $("oppFilters").innerHTML = tags.length > 2 ? tags.map(t => `<button type="button" data-t="${esc(t)}" aria-pressed="${t === f}">${esc(t)}</button>`).join("") : "";
+      const list = OPPS.filter(o => f === "All" || (o.tags || []).includes(f));
+      $("oppList").innerHTML = list.length ? list.map(o => `<article class="opp">
+        <div class="tags">${(o.tags || []).map(t => `<span class="${t === "Paid" ? "paid" : ""}">${esc(t)}</span>`).join("")}</div>
+        <h3>${esc(o.title)}</h3>${o.org ? `<span class="org">${esc(o.org)}</span>` : ""}
+        <p>${esc(o.detail)}</p>${o.who ? `<p class="who"><b>Who:</b> ${esc(o.who)}</p>` : ""}${o.when ? `<p class="who"><b>When:</b> ${esc(o.when)}</p>` : ""}
+        ${o.url ? `<a class="go" href="${esc(o.url)}" target="_blank" rel="noopener">Learn more &rarr;</a>` : ""}</article>`).join("")
+        : `<div class="empty"><p>Opportunities are coming soon.</p></div>`;
+    };
+    $("oppFilters").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; f = b.dataset.t; paint(); });
+    paint(); }
+
+  /* ---------- start a club ---------- */
+  { const steps = C.clubSteps || [];
+    $("clubSteps").innerHTML = steps.map(st => `<li><h3>${esc(st.title)}</h3><p>${esc(st.detail)}</p></li>`).join("");
+    $("clubNote").textContent = C.clubStepsNote || "";
+    if (!quizOn) $("clubQuizSec").hidden = true; }
+
+  /* ---------- senior advice, shoutouts, spotlight ---------- */
+  const quoteHTML = q => `<figure class="quote"><q>${esc(q.text)}</q><figcaption class="by">${esc(q.name || "Anonymous")}${q.role ? ", " + esc(q.role) : ""}</figcaption></figure>`;
+  window.CAMPAIGN_WALLS = { advice: [], shoutout: [] };
+  const paintWalls = () => {
+    const adv = [...(C.advice || []), ...window.CAMPAIGN_WALLS.advice];
+    $("adviceList").innerHTML = adv.length ? adv.map(quoteHTML).join("") : `<div class="empty"><p>No advice up yet. Seniors, you're up first.</p></div>`;
+    const sh = [...(C.shoutouts || []), ...window.CAMPAIGN_WALLS.shoutout];
+    $("shoutList").innerHTML = sh.length ? sh.map(quoteHTML).join("") : `<div class="empty"><p>No shoutouts yet. Be the first to hype someone up.</p></div>`;
+  };
+  window.CAMPAIGN_WALLS.paint = paintWalls; paintWalls();
+  const postBox = (id, kind, title, ph, msgType, extraLabel) => {
+    $(id).innerHTML = `<div class="inspire-cta" style="margin-top:0"><div><h3>${title}</h3><p>Posts go up after a quick check.</p></div><button class="btn btn-purple" type="button" data-msg="${msgType}">${kind === "advice" ? "Share your advice" : "Give a shoutout"}</button></div>`;
+    window.addEventListener("campaign-walls", () => {
+      $(id).innerHTML = `<form class="post-form" data-kind="${kind}" novalidate><h3>${title}</h3>
+        <textarea maxlength="240" placeholder="${ph}" aria-label="${title}"></textarea>
+        <div class="row2"><input maxlength="30" placeholder="Your name (optional)" aria-label="Your name (optional)"><input maxlength="30" placeholder="${extraLabel}" aria-label="${extraLabel}"></div>
+        <button class="btn btn-purple" type="submit">Post it</button><p class="form-msg" role="status" hidden></p></form>`;
+      const fm = $(id).querySelector("form"), st = fm.querySelector(".form-msg");
+      fm.addEventListener("submit", async e => {
+        e.preventDefault();
+        const [ta] = fm.querySelectorAll("textarea"), [nm, rl] = fm.querySelectorAll("input");
+        const text = ta.value.trim(); st.hidden = false;
+        if (text.length < 3) { st.className = "form-msg err"; st.textContent = "Write a little more, then post."; return; }
+        try { await window.CAMPAIGN_WALLS.post(kind, { text, name: nm.value.trim(), role: rl.value.trim() }); fm.reset(); st.className = "form-msg ok"; st.textContent = "Posted! It shows up after a quick check."; }
+        catch { st.className = "form-msg err"; st.textContent = "Hold on a minute before posting again."; }
+      });
+    });
+  };
+  postBox("advicePost", "advice", "Seniors: drop your advice", "Example: Join something freshman year. You'll thank yourself.", "advice", "Grade or class (e.g. Class of 2027)");
+  postBox("shoutPost", "shoutout", "Give a shoutout", "Example: Shoutout to Ms. R for staying after school to help me with chem.", "shoutout", "Your grade (optional)");
+  { const sp = C.spotlights || [];
+    $("spotList").innerHTML = sp.length ? sp.map(x => `<article class="spot"><div class="ph" style="${x.photo ? `background-image:url('${esc(x.photo)}')` : ""}"></div><div class="tx"><h3>${esc(x.name)}</h3>${x.grade ? `<div class="gr">${esc(x.grade)}</div>` : ""}<p>${esc(x.text)}</p></div></article>`).join("")
+      : `<div class="empty"><p>The first spotlight is coming soon. Know someone who deserves it? Nominate them below.</p></div>`; }
+
+  /* ---------- challenge of the week ---------- */
+  { const CH = C.challenges || [];
+    const start = new Date((C.challengeStart || "2026-10-05") + "T00:00");
+    const wk = Math.max(0, Math.floor((new Date() - start) / 6048e5));
+    const cur = CH.length ? CH[wk % CH.length] : null;
+    const weekKey = new Date(start.getTime() + wk * 6048e5).toLocaleDateString("en-CA");
+    window.CAMPAIGN_CHALLENGE = { weekKey, count: null, save: null };
+    let done = false; try { done = localStorage.getItem("chal-" + weekKey) === "1"; } catch {}
+    const paintC = () => {
+      if (!cur) { $("challengeBody").innerHTML = `<div class="empty"><p>The first challenge drops soon.</p></div>`; return; }
+      const n = window.CAMPAIGN_CHALLENGE.count;
+      $("challengeBody").innerHTML = `<div class="chal"><p class="wk">This week's challenge</p><h2>${esc(cur.title)}</h2>${cur.detail ? `<p>${esc(cur.detail)}</p>` : ""}
+        <div class="actions"><button class="btn done" type="button" id="chalDone" aria-pressed="${done}">${done ? "Done ✓" : "I did it"}</button>
+        <button class="btn btn-ghost" type="button" data-share>Challenge a friend</button>
+        ${n !== null ? `<span class="count">${n} ${n === 1 ? "student has" : "students have"} done it</span>` : ""}</div></div>
+        <div class="chal-list"><h3>Coming up</h3><ol>${[1, 2, 3].map(i => CH[(wk + i) % CH.length]).filter(Boolean).map(c => `<li>${esc(c.title)}</li>`).join("")}</ol></div>`;
+      bindShare();
+      $("chalDone").addEventListener("click", async () => {
+        done = !done; try { localStorage.setItem("chal-" + weekKey, done ? "1" : "0"); } catch {}
+        if (done && window.CAMPAIGN_CONFETTI) window.CAMPAIGN_CONFETTI(70);
+        if (window.CAMPAIGN_CHALLENGE.save) { try { await window.CAMPAIGN_CHALLENGE.save(done); } catch {} }
+        paintC();
+      });
+    };
+    window.CAMPAIGN_CHALLENGE.paint = paintC; paintC(); }
   const ddItem = $("ddItem"), ddBtn = $("ddBtn");
   const ddSet = open => { ddItem.classList.toggle("open", open); ddBtn.setAttribute("aria-expanded", open); };
   ddBtn.addEventListener("click", e => { e.stopPropagation(); ddSet(!ddItem.classList.contains("open")); });
@@ -1233,7 +1441,11 @@ footer a{color:#fff}
   /* ---------- quick message pop-up ---------- */
   const MSG = {
     idea:     { title: "Share your idea", sub: `What would you fix, add or keep at Belmont? ${C.firstName} reads every one.`, topic: "Idea for the platform", ph: "Example: A study room that's open during lunch", form: C.ideasFormUrl },
-    club:     { title: "Suggest a club", sub: `What club should Belmont have? ${C.firstName} wants to help new ones start.`, topic: "Club suggestion", ph: "Example: A photography club" },
+    opp:      { title: "Share an opportunity", sub: "A program, internship, scholarship or event other students should know about. Include a link if you have one.", topic: "Opportunity", ph: "Name, link and who it's for" },
+    advice:   { title: "Share your advice", sub: "What do you wish you knew sooner at Belmont? It may go up on the Senior advice page.", topic: "Senior advice", ph: "Example: Join something freshman year. You'll thank yourself." },
+    shoutout: { title: "Give a shoutout", sub: "Shout out a teacher, a friend or a team. It may go up on the Shoutouts page.", topic: "Shoutout", ph: "Example: Shoutout to the robotics team for..." },
+    spotlight:{ title: "Nominate someone", sub: "Who deserves the spotlight and why? Their name, grade and what they're doing.", topic: "Spotlight nomination", ph: "Who and why" },
+    club:     { title: "Start your club", sub: `What club should Belmont have? ${C.firstName} wants to help new ones start.`, topic: "Club suggestion", ph: "Example: A photography club" },
     question: { title: "Ask Jeremiah", sub: "Ask anything about the campaign. The best questions get answered on the Q&A page.", topic: "Question", ph: "Your question", form: C.questionsFormUrl },
     endorse:  { title: `Endorse ${C.firstName}`, sub: "Say why you're backing him. It only goes on the site with your permission.", topic: "Endorsement", ph: `Why are you backing ${C.firstName}?`, form: C.endorseFormUrl },
     why:      { title: "Tell us why", sub: `Why are you voting for ${C.firstName}? Your reason could end up on this page.`, topic: "Why I'm voting for Jeremiah", ph: "I'm voting for him because..." },
@@ -1357,7 +1569,7 @@ footer a{color:#fff}
   addEventListener("hashchange", () => { if (/^#\/connect\/suggest/.test(location.hash)) { sg.classList.remove("flash"); void sg.offsetWidth; sg.classList.add("flash"); setTimeout(() => $("sgText").focus({ preventScroll: true }), 400); } });
 
   /* ---------- router ---------- */
-  const titles = { home: C.position ? `${full} for ${C.position}` : full, why:`Why ${C.firstName}`, video:"Campaign video", cabinet:"Meet the cabinet", agenda:"Agenda", poll:"Poll", ideas:"Idea wall", quiz:"Club quiz", qa:"Q&A", endorsements:"Endorsements", contact:"Contact", connect:"Be a part of Belmont", dream:"Dream Belmont" };
+  const titles = { home: C.position ? `${full} for ${C.position}` : full, why:`Why ${C.firstName}`, video:"Campaign video", cabinet:"Meet the cabinet", agenda:"Agenda", inspired:"Get inspired", opps:"Opportunities", club:"Start a club", advice:"Senior advice", shoutouts:"Shoutouts", challenge:"Weekly challenge", spotlight:"Student spotlight", qa:"Q&A", endorsements:"Endorsements", contact:"Contact", connect:"Be a part of Belmont", dream:"Dream Belmont" };
   const navList = $("navList"), menuBtn = $("menuBtn");
   const route = () => {
     const [pageId = "home", anchor] = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
@@ -1676,7 +1888,7 @@ if (fb.apiKey && fb.databaseURL && wantLive) {
           try { await D.set(D.ref(db, `votes/${id}`), +b.dataset.v); } catch { fail(); }
         }));
       };
-      D.onValue(D.ref(db, "votes"), snap => { votes = snap.val() || {}; paint(); }, () => {});
+      D.onValue(D.ref(db, "votes"), snap => { votes = snap.val() || {}; paint(); $("pollSec").hidden = false; }, () => {});
       ready.then(paint);
     }
 
@@ -1690,36 +1902,30 @@ if (fb.apiKey && fb.databaseURL && wantLive) {
       }, () => {});
     }
 
-    /* ----- idea wall ----- */
-    if (F.ideaWall) {
-      $("ideaForm").hidden = false; $("ideasEmpty").hidden = true;
-      const q = D.query(D.ref(db, "ideas"), D.orderByChild("approved"), D.equalTo(true));
-      D.onValue(q, snap => {
-        const list = []; snap.forEach(c => { list.push(c.val()); });
-        list.sort((a, b) => (b.ts || 0) - (a.ts || 0));
-        $("wall").innerHTML = list.slice(0, 30).map(i => `<div class="note">${esc(i.text)}</div>`).join("");
-      }, e => console.warn("Idea wall read failed", e));
-      const txt = $("ideaText"), msg = $("ideaMsg");
-      txt.addEventListener("input", () => { $("ideaCount").textContent = `${txt.value.length} / 200. Ideas show up after they're approved.`; });
-      $("ideaForm").addEventListener("submit", async e => {
-        e.preventDefault();
-        const text = txt.value.trim();
-        msg.hidden = false;
-        if (text.length < 3) { msg.textContent = "Write a little more, then post."; return; }
-        $("ideaSend").disabled = true;
-        try {
-          const id = await ready, key = D.push(D.ref(db, "ideas")).key;
-          await D.update(D.ref(db), {
-            [`ideas/${key}`]: { text, approved: false, ts: D.serverTimestamp() },
-            [`ideaTimes/${id}`]: D.serverTimestamp(),
-          });
-          txt.value = ""; txt.dispatchEvent(new Event("input"));
-          msg.textContent = "Got it! Your idea shows up on the wall once it's approved.";
-        } catch {
-          msg.textContent = "Hold on a minute before posting another idea.";
-        }
-        $("ideaSend").disabled = false;
+    /* ----- senior advice + shoutouts (approved posts only) ----- */
+    if (window.CAMPAIGN_WALLS && (F.advice !== false || F.shoutouts !== false)) {
+      const W = window.CAMPAIGN_WALLS;
+      W.post = async (kind, d) => {
+        const id = await ready, key = D.push(D.ref(db, `wall/${kind}`)).key;
+        await D.update(D.ref(db), {
+          [`wall/${kind}/${key}`]: { text: d.text.slice(0, 240), name: d.name.slice(0, 30), role: d.role.slice(0, 30), approved: false, ts: D.serverTimestamp() },
+          [`wallTimes/${id}`]: D.serverTimestamp(),
+        });
+      };
+      ["advice", "shoutout"].forEach(kind => {
+        D.onValue(D.query(D.ref(db, `wall/${kind}`), D.orderByChild("approved"), D.equalTo(true)), snap => {
+          const list = []; snap.forEach(c => { list.push(c.val()); });
+          list.sort((a, b) => (b.ts || 0) - (a.ts || 0)); W[kind] = list.slice(0, 60); W.paint();
+        }, () => {});
       });
+      window.dispatchEvent(new Event("campaign-walls"));
+    }
+
+    /* ----- challenge of the week counter ----- */
+    if (window.CAMPAIGN_CHALLENGE && F.challenge !== false) {
+      const CH = window.CAMPAIGN_CHALLENGE, r = D.ref(db, `challenge/${CH.weekKey}`);
+      CH.save = async on => { const id = await ready; on ? await D.set(D.ref(db, `challenge/${CH.weekKey}/${id}`), true) : await D.remove(D.ref(db, `challenge/${CH.weekKey}/${id}`)); };
+      D.onValue(r, snap => { CH.count = snap.size; CH.paint(); }, () => {});
     }
   } catch (e) {
     console.warn("Live features are off: couldn't load Firebase.", e);

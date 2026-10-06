@@ -103,16 +103,81 @@ const CONFIG = {
   features: {
     intro: true,          // ringing alarm clock on a black screen when the site opens, then the countdown
     alarmClock: true,     // tap-the-alarm clock that reveals "The plan" on the home page
-    clubQuiz: true,       // club match quiz (Join in page)
-    poll: true,           // live "What matters most?" poll (needs firebase below)
+    clubQuiz: true,       // club match quiz (on the Start a club page)
+    poll: true,           // live "What matters most?" poll on Be a part of Belmont (needs firebase below)
     supporters: true,     // live supporter counter (needs firebase below)
-    ideaWall: true,       // live idea wall with approval (needs firebase below)
+    opportunities: true,  // Get inspired > Opportunities board
+    startClub: true,      // Get inspired > Start a club (includes the club quiz)
+    advice: true,         // Get inspired > Senior advice (live posting needs firebase)
+    spotlight: true,      // Get inspired > Student spotlight
+    shoutouts: true,      // Get inspired > Shoutouts (live posting needs firebase)
+    challenge: true,      // Get inspired > Weekly challenge (live counter needs firebase)
     dreamCard: true,      // "Dream Belmont" card maker (Get involved menu)
     moodCheck: true,      // "How'd you wake up today?" check-in (Be a part of Belmont page; live totals need firebase)
     easterEgg: true,      // tap the JD logo 5 times
   },
   supportersMinToShow: 10,  // hide the number until at least this many people join
   alarmSound: true,          // alarm clock beeps when tapped (false = silent)
+
+  // ---------- GET INSPIRED ----------
+  // Opportunities: double-check dates on each official site before sharing.
+  opportunities: [
+    { title: "Summer Youth Employment (SYEP)", org: "NYC Dept. of Youth & Community Development", tags: ["Paid", "Summer"],
+      detail: "NYC's biggest youth jobs program. Paid summer work experience and career exploration.",
+      who: "NYC youth ages 14 to 24", when: "Applications open in the spring. Watch for the next round.", url: "https://nyc.gov/SYEP" },
+    { title: "Ladders for Leaders", org: "NYC Dept. of Youth & Community Development", tags: ["Paid", "Summer"],
+      detail: "Paid summer internships at real companies and organizations in a bunch of industries.",
+      who: "NYC high school and college students", url: "https://www.nyc.gov/site/dycd/services/jobs-internships/nyc-ladders-for-leaders-students.page" },
+    { title: "College Now", org: "CUNY (City College)", tags: ["Free", "College"],
+      detail: "Take real college courses for free and earn college credit while you're still in high school.",
+      who: "NYC public high school students in the Bronx and Manhattan", url: "https://www.ccny.cuny.edu/collegenow/programs" },
+    { title: "Einstein Enrichment Program", org: "Albert Einstein College of Medicine", tags: ["Free", "STEM"],
+      detail: "Pre-college STEM and health science program for students thinking about medicine or science.",
+      who: "Bronx students in grades 7 to 12 with an 85+ average", when: "Runs in the fall and spring", url: "https://einsteinmed.edu/education/pathway-programs/pathway-programs-middle-high-school-students/einstein-enrichment-program" },
+    { title: "Project TRUE", org: "Bronx Zoo (WCS) and Fordham University", tags: ["STEM"],
+      detail: "Teens research urban ecology and wildlife in the Bronx alongside scientists.",
+      who: "NYC teens", url: "https://bronxzoo.com/teens/project-true" },
+    { title: "NYPL TeenLink", org: "New York Public Library", tags: ["Free"],
+      detail: "Free tutoring, teen centers with tech and art supplies, programs, and paid internships at the library.",
+      who: "NYC teens", url: "https://teenlink.nypl.org" },
+    { title: "QuestBridge National College Match", org: "QuestBridge", tags: ["Scholarship", "College"],
+      detail: "Full four-year scholarships to top colleges for high-achieving students from lower-income families.",
+      who: "High school seniors (juniors: plan ahead)", when: "Deadline is early fall of senior year", url: "https://www.questbridge.org/high-school-students/national-college-match" },
+  ],
+
+  // Start a club: general steps. Check Belmont's exact process with the administration.
+  clubSteps: [
+    { title: "Find your people", detail: "Get a few students who would actually show up. Even 5 is a start." },
+    { title: "Find an advisor", detail: "Ask a teacher or staff member who's into the same thing to sponsor the club." },
+    { title: "Write your pitch", detail: "What the club does, when it meets, and why Belmont needs it. Keep it short." },
+    { title: "Get it approved", detail: "Bring your pitch to the administration. Jeremiah wants to make this step easier." },
+  ],
+  clubStepsNote: "Every school's process is a little different. Ask the main office or the student council how clubs get approved at Belmont.",
+
+  // Senior advice and shoutouts: add ones people give you (with permission).
+  advice: [
+    // { text: "Join something freshman year. You'll thank yourself.", name: "Maria R.", role: "Class of 2027" },
+  ],
+  shoutouts: [
+    // { text: "Shoutout to Ms. R for staying late to help with chem.", name: "Anonymous", role: "11th grade" },
+  ],
+
+  // Student spotlight: one card per student (with their permission).
+  spotlights: [
+    // { name: "The Cooking Club", grade: "All grades", text: "Tacos from scratch.", photo: "img/cooking-2.jpg" },
+  ],
+
+  // Weekly challenge: rotates every Monday starting from challengeStart.
+  challengeStart: "2026-10-05",
+  challenges: [
+    { title: "Sit with someone new at lunch", detail: "Pick a table you've never sat at and say hi. That's it." },
+    { title: "Go to a game or show you've never been to", detail: "Support a team, a performance or an event you usually skip." },
+    { title: "Thank a teacher", detail: "Tell a teacher who helped you that it mattered. Out loud or on a sticky note." },
+    { title: "Visit a club you've never tried", detail: "Sit in on one meeting. Worst case, you got a free snack." },
+    { title: "Hype up a classmate", detail: "Notice someone's win, big or small, and say it." },
+    { title: "Share one idea for Belmont", detail: "Drop a suggestion on the Be a part of Belmont page. You say it, we shout it." },
+    { title: "Leave it better than you found it", detail: "Pick up one thing, fix one thing or help one person at school this week." },
+  ],
 
   // ---------- THEN VS NOW SLIDER (Why Jeremiah page) ----------
   // Put two photos of the same spot next to this page. Stays hidden until both are filled in.
