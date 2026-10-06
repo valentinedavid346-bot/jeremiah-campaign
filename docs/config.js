@@ -90,12 +90,13 @@ const CONFIG = {
   endorseFormUrl: "",           // Google Form where people can sign on as supporters
 
   // ---------- CONTACT ----------
-  email: "",                    // campaign email (a new Gmail just for the campaign is best)
+  email: "jeremiah4belmont@gmail.com",                    // campaign email (a new Gmail just for the campaign is best)
   sheetEndpoint: "https://script.google.com/macros/s/AKfycbzvR2w9j26DIJAPPFvNLcHmICqQ1VOEksVa0FOJrGljnO1ZJhFKq242shovHUps_PIr/exec",            // Google Sheet inbox: the Apps Script Web app URL (ends in /exec). Every message lands in the sheet + an email alert.
   contactFormEndpoint: "",      // optional: a free Formspree link, e.g. "https://formspree.io/f/abcd1234"
   findHim: "",                  // e.g. "Room 204 during lunch, or after school by the front steps."
   ideasFormUrl: "",             // Google Form for platform ideas
   socials: [
+    { label: "Instagram", url: "https://instagram.com/jerryysno" },
     // { label: "Instagram", url: "https://instagram.com/..." },
     // { label: "TikTok", url: "https://tiktok.com/@..." },
   ],
