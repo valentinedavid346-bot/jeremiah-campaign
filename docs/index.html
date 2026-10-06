@@ -278,14 +278,37 @@ dialog.lightbox::backdrop{background:rgba(0,0,0,.85)}
 dialog.lightbox img{display:block;max-width:100%;max-height:82vh;border-radius:16px;margin:auto}
 .lb-cap{color:#fff;text-align:center;font-weight:700;font-size:18px;margin-top:10px}
 .lb-close{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:#000;font-size:28px;line-height:1;cursor:pointer}
-.connect .shout{font-family:var(--display);text-transform:uppercase;font-size:clamp(40px,7vw,76px);line-height:.95;color:var(--blue);margin-bottom:18px}
-.suggest{scroll-margin-top:84px;margin-top:48px;background:#fff;border:3px solid #000;border-radius:28px;padding:32px;display:grid;gap:16px;max-width:760px;box-shadow:10px 10px 0 var(--blue)}
-.suggest h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(32px,5vw,48px);line-height:1;color:var(--blue)}
-.suggest .sub{color:var(--muted);font-size:17px;margin-top:-6px}
-.suggest .sg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.shout-hero{background:#000;color:#fff;position:relative;overflow:hidden;padding:72px 0 80px}
+.shout-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(45% 70% at 15% 30%,rgba(124,58,237,.45),transparent 70%);pointer-events:none}
+.shout-hero::after{content:"";position:absolute;inset:auto 0 0 0;height:10px;background:repeating-linear-gradient(90deg,var(--blue) 0 40px,#fff 40px 80px)}
+.shout-grid{position:relative;display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+@media (max-width:900px){.shout-grid{grid-template-columns:1fr;gap:36px}.shout-hero{padding:48px 0 60px}}
+.shout-msg .kicker{font-size:14px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--lilac)}
+.shout-msg h1{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(44px,6.2vw,88px);line-height:.92;margin-top:14px}
+.shout-msg h1 span{color:var(--lilac)}
+.shout-msg .say{font-size:clamp(19px,2.4vw,24px);line-height:1.4;color:#EDE7FB;margin-top:22px;max-width:30ch}
+.tap{margin-top:30px;display:inline-flex;align-items:center;gap:10px;font:600 19px var(--body);color:#fff;background:none;border:0;border-bottom:2px solid var(--lilac);padding:4px 0;cursor:pointer}
+.tap b{color:var(--lilac)}
+.tap .arr::before{content:"\2192";display:inline-block;animation:nudge 1.2s ease-in-out infinite}
+@media (max-width:900px){.tap .arr::before{content:"\2193"}}
+@keyframes nudge{50%{transform:translate(4px,2px)}}
+.suggest{scroll-margin-top:84px;background:#fff;color:#000;border-radius:28px;padding:28px;display:grid;gap:14px;box-shadow:12px 12px 0 var(--blue)}
+.suggest .big{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(28px,4vw,38px);line-height:1;color:var(--blue)}
+.suggest textarea{min-height:130px}
+.suggest .kinds{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
+.suggest .kinds legend{font-weight:700;font-size:15px;margin-bottom:8px;padding:0}
+.suggest .kinds label{display:inline-flex;cursor:pointer;font-weight:600}
+.suggest .kinds input{position:absolute;opacity:0;pointer-events:none}
+.suggest .kinds span{padding:8px 14px;border:2px solid #000;border-radius:999px;font-size:15px;background:#fff}
+.suggest .kinds input:checked+span{background:var(--blue);border-color:var(--blue);color:#fff}
+.suggest .kinds input:focus-visible+span{outline:3px solid var(--lilac);outline-offset:2px}
+.suggest .sg-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.suggest .btn{justify-self:start;padding-inline:40px}
 .suggest.flash{animation:sgflash 1s ease}
-@keyframes sgflash{30%{box-shadow:0 0 0 6px var(--lilac),10px 10px 0 var(--blue)}}
-@media (max-width:560px){.suggest{padding:22px}.suggest .sg-row{grid-template-columns:1fr}}
+@keyframes sgflash{30%{box-shadow:0 0 0 6px var(--lilac),12px 12px 0 var(--blue)}}
+@media (max-width:560px){.suggest{padding:22px}.suggest .sg-row{grid-template-columns:1fr}.suggest .btn{justify-self:stretch}}
+.how h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(38px,6vw,64px);line-height:1;color:var(--blue);margin-bottom:0}
+.how .connect-steps{margin-top:28px}
 .connect-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
 .connect-steps>div{background:#fff;border:2px solid #000;border-radius:24px;padding:24px}
 .connect-steps>div:nth-child(2){background:var(--blue);color:#fff;border-color:var(--blue)}
@@ -707,6 +730,23 @@ footer a{color:#fff}
     </div>
   </section>
 
+  <section class="block voice" id="voiceSec">
+    <div class="wrap">
+      <div class="mood" id="pollSec" hidden style="margin-top:0;border-top:0;padding-top:0">
+        <h3>What matters most to you?</h3>
+        <p class="lead">Pick one. It helps Jeremiah know where to start.</p>
+        <div class="poll-list" id="pollList" style="margin-top:20px"></div>
+        <p class="poll-note" id="pollNote"></p>
+      </div>
+      <div class="mood" id="moodSec" style="margin-top:0;border-top:0;padding-top:0">
+        <h3>How'd you wake up today?</h3>
+        <p class="lead" id="moodLead">Tap one. See how the rest of Belmont is feeling.</p>
+        <div class="mood-row" id="moodRow"></div>
+        <p class="mood-note" id="moodNote" role="status"></p>
+      </div>
+    </div>
+  </section>
+
   <section class="block" id="involved" hidden>
     <div class="wrap">
       <h2>Get inspired</h2>
@@ -963,48 +1003,40 @@ footer a{color:#fff}
 
 <!-- =============== BE A PART OF BELMONT =============== -->
 <div class="page" id="page-connect">
-  <header class="page-head"><div class="wrap">
-    <h1>Be a part of Belmont</h1>
-    <p>Your ideas. Your school. Your voice.</p>
-  </div></header>
-  <section class="block connect"><div class="wrap">
-    <p class="shout">You say it, we shout it!</p>
-    <p class="lead">We want students to take the initiative in advocating for what they want at Belmont.</p>
-    <div class="actions">
-      <a class="btn btn-purple" href="#/connect/suggest" id="communityBtn">Have a suggestion? Tap here</a>
-      <button class="btn btn-outline" type="button" data-share>Share with a friend</button>
+  <section class="shout-hero">
+    <div class="wrap shout-grid">
+      <div class="shout-msg">
+        <p class="kicker">Be a part of Belmont</p>
+        <h1>You say it,<br><span>we shout it!</span></h1>
+        <p class="say">We want students to take the initiative in advocating for what they want at Belmont.</p>
+        <button class="tap" type="button" id="tapHere">Have a suggestion? <b>Tap here</b> <span class="arr" aria-hidden="true"></span></button>
+      </div>
+      <form class="suggest" id="suggest" novalidate>
+        <label class="big" for="sgText">Your suggestion</label>
+        <textarea id="sgText" maxlength="1000" placeholder="Example: A study room that's open during lunch"></textarea>
+        <fieldset class="kinds"><legend>What kind of idea?</legend>
+          <label><input type="radio" name="sgKind" value="A new club or activity" checked><span>Club or activity</span></label>
+          <label><input type="radio" name="sgKind" value="An event"><span>Event</span></label>
+          <label><input type="radio" name="sgKind" value="Something to fix"><span>Something to fix</span></label>
+          <label><input type="radio" name="sgKind" value="Resources or support"><span>Resources</span></label>
+          <label><input type="radio" name="sgKind" value="Something else"><span>Other</span></label>
+        </fieldset>
+        <div class="sg-row">
+          <input id="sgName" autocomplete="name" maxlength="60" placeholder="Name (optional)" aria-label="Name (optional)">
+          <select id="sgGrade" aria-label="Grade (optional)"><option value="">Grade (optional)</option><option>9th</option><option>10th</option><option>11th</option><option>12th</option><option>Staff</option></select>
+        </div>
+        <button class="btn btn-purple" type="submit" id="sgSend">Send it</button>
+        <p class="form-note" id="sgNote"></p>
+        <p class="form-msg" id="sgMsg" role="status" hidden></p>
+      </form>
     </div>
+  </section>
+  <section class="block how"><div class="wrap">
+    <h2>How it works</h2>
     <div class="connect-steps">
       <div><b>1</b><h3>You recommend</h3><p>Send us your idea. A club, an event, a change at Belmont. Big or small, it counts.</p></div>
       <div><b>2</b><h3>We listen</h3><p>We read every idea and bring the strongest ones to the student council.</p></div>
       <div><b>3</b><h3>We push it</h3><p>We take it to the staff, advocating and working with <strong>you</strong> to make it a reality.</p></div>
-    </div>
-    <form class="suggest" id="suggest" novalidate>
-      <h3>Have a suggestion?</h3>
-      <p class="sub">Tell us what you want to see at Belmont. Every suggestion gets read.</p>
-      <label>Your idea <textarea id="sgText" maxlength="1000" placeholder="Example: A study room that's open during lunch"></textarea></label>
-      <label>What kind of idea is it?
-        <select id="sgType"><option>A new club or activity</option><option>An event</option><option>Something to fix</option><option>Resources or support</option><option>Something else</option></select>
-      </label>
-      <div class="sg-row">
-        <label>Name <small>(optional)</small><input id="sgName" autocomplete="name" maxlength="60"></label>
-        <label>Grade <small>(optional)</small><select id="sgGrade"><option value="">Choose</option><option>9th</option><option>10th</option><option>11th</option><option>12th</option><option>Staff</option></select></label>
-      </div>
-      <button class="btn btn-purple" type="submit" id="sgSend">Send my suggestion</button>
-      <p class="form-note" id="sgNote"></p>
-      <p class="form-msg" id="sgMsg" role="status" hidden></p>
-    </form>
-    <div class="mood" id="pollSec" hidden>
-      <h3>What matters most to you?</h3>
-      <p class="lead">Pick one. It helps Jeremiah know where to start.</p>
-      <div class="poll-list" id="pollList" style="margin-top:20px"></div>
-      <p class="poll-note" id="pollNote"></p>
-    </div>
-    <div class="mood" id="moodSec">
-      <h3>How'd you wake up today?</h3>
-      <p class="lead" id="moodLead">Tap one. See how the rest of Belmont is feeling.</p>
-      <div class="mood-row" id="moodRow"></div>
-      <p class="mood-note" id="moodNote" role="status"></p>
     </div>
   </div></section>
 </div>
@@ -1569,12 +1601,14 @@ footer a{color:#fff}
     if (text.length < 3) { sgShow("Write your idea, then send.", false); $("sgText").focus(); return; }
     $("sgSend").disabled = true; $("sgSend").textContent = "Sending\u2026";
     try {
-      const how = await sendMessage({ topic: `Suggestion: ${$("sgType").value}`, message: text, name: $("sgName").value.trim(), grade: $("sgGrade").value });
+      const how = await sendMessage({ topic: `Suggestion: ${(sg.querySelector("input[name=sgKind]:checked") || {}).value || "Idea"}`, message: text, name: $("sgName").value.trim(), grade: $("sgGrade").value });
       if (how !== "mail") { sg.reset(); sgShow("Got it! You said it. Now we'll shout it.", true); }
       else sgShow("Your email app opened with your suggestion ready. Hit send there.", true);
     } catch (err) { sgShow(err && err.message === "slow" ? "Hold on a minute before sending another one." : "That didn't send. Check your connection and try again.", false); }
     $("sgSend").disabled = false; $("sgSend").textContent = "Send my suggestion";
   });
+  const pingSuggest = () => { sg.classList.remove("flash"); void sg.offsetWidth; sg.classList.add("flash"); sg.scrollIntoView({ behavior: "smooth", block: "center" }); setTimeout(() => $("sgText").focus({ preventScroll: true }), 450); };
+  $("tapHere").addEventListener("click", pingSuggest);
   addEventListener("hashchange", () => { if (/^#\/connect\/suggest/.test(location.hash)) { sg.classList.remove("flash"); void sg.offsetWidth; sg.classList.add("flash"); setTimeout(() => $("sgText").focus({ preventScroll: true }), 400); } });
 
   /* ---------- router ---------- */
