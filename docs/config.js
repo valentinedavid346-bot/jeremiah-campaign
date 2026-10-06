@@ -196,7 +196,7 @@ const CONFIG = {
   firebase: {
     apiKey: "AIzaSyAxVUVkEib60rPQeAxiwLXpl9dHKHTd1YQ",
     authDomain: "jeremiah-campaign.firebaseapp.com",
-    databaseURL: "",
+    databaseURL: "https://jeremiah-campaign-default-rtdb.firebaseio.com",
     projectId: "jeremiah-campaign",
     appId: "1:714665024743:web:06e682555cb7fec4575642",
   },
