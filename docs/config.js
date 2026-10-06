@@ -117,6 +117,7 @@ const CONFIG = {
     moodCheck: true,      // "How'd you wake up today?" check-in (Be a part of Belmont page; live totals need firebase)
     easterEgg: true,      // tap the JD logo 5 times
   },
+  livePosting: false,       // true = shoutouts post straight to the wall (needs the admin panel to approve). false = they go to the Google Sheet.
   supportersMinToShow: 10,  // hide the number until at least this many people join
   alarmSound: true,          // alarm clock beeps when tapped (false = silent)
 

@@ -2074,7 +2074,7 @@ if (fb.apiKey && fb.databaseURL && wantLive) {
           list.sort((a, b) => (b.ts || 0) - (a.ts || 0)); W[kind] = list.slice(0, 60); W.paint();
         }, () => {});
       });
-      window.dispatchEvent(new Event("campaign-walls"));
+      if (C.livePosting) window.dispatchEvent(new Event("campaign-walls")); // on once the admin panel can approve posts
     }
 
     /* ----- challenge of the week counter ----- */
