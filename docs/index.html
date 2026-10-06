@@ -811,7 +811,7 @@ footer a{color:#fff}
           </svg>
         </button>
         <div>
-          <p class="wake-title" id="wakeTitle">Wake up, Belmont.</p>
+          <p class="wake-title" id="wakeTitle">Make the alarm worth it.</p>
           <p class="wake-sub" id="wakeSub">Tap the alarm to see the plan.</p>
         </div>
       </div>
@@ -1221,7 +1221,7 @@ footer a{color:#fff}
       const asleep = $("planks").classList.toggle("asleep");
       $("alarmBtn").classList.toggle("ringing", asleep);
       $("alarmBtn").setAttribute("aria-label", asleep ? "Turn off the alarm and see the plan" : "Hide the plan");
-      $("wakeTitle").textContent = asleep ? "Wake up, Belmont." : "Good morning, Belmont.";
+      $("wakeTitle").textContent = asleep ? "Make the alarm worth it." : "Good morning, Belmont.";
       $("wakeSub").textContent = asleep ? "Tap the alarm to see the plan." : `Here's how ${C.firstName} makes the alarm worth it.`;
     });
   }

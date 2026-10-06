@@ -10,7 +10,7 @@ const CONFIG = {
   position: "Student Council President",
   school: "Belmont Preparatory High School",
   slogan: "You say it, we shout it!",   // primary slogan
-  tagline: "Make the alarm worth it.",   // second slogan, shown under the main one
+  tagline: "",                    // optional line under the slogan in the header (empty = hidden). "Make the alarm worth it." now lives on The plan.
 
   // ---------- HOME ----------
   // Election: date-time in local time, e.g. "2026-10-15T08:00"
