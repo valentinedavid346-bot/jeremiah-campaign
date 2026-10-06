@@ -108,7 +108,7 @@ const CONFIG = {
     supporters: true,     // live supporter counter (needs firebase below)
     opportunities: true,  // Get inspired > Opportunities board
     startClub: true,      // Get inspired > Start a club (includes the club quiz)
-    advice: true,         // Get inspired > Senior advice (live posting needs firebase)
+    advice: false,        // Get inspired > Senior advice (saved for after the win; set true to bring it back)
     spotlight: true,      // Get inspired > Student spotlight
     shoutouts: true,      // Get inspired > Shoutouts (live posting needs firebase)
     challenge: true,      // Get inspired > Weekly challenge (live counter needs firebase)
