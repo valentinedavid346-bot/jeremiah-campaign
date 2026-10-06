@@ -19,7 +19,7 @@
     "messages": {
       "$id": {
         ".write": "auth != null && !data.exists() && newData.exists()",
-        ".validate": "newData.hasChildren(['topic', 'text', 'name', 'grade', 'ts']) && newRoot.child('msgTimes').child(auth.uid).val() === now",
+        ".validate": "newData.hasChildren(['topic', 'text', 'name', 'grade', 'ts']) && newData.parent().parent().child('msgTimes').child(auth.uid).val() === now",
         "topic": {
           ".validate": "newData.isString() && newData.val().length <= 60"
         },
@@ -64,7 +64,7 @@
         ],
         "$id": {
           ".write": "auth != null && !data.exists() && newData.exists() && $kind.matches(/^(advice|shoutout)$/)",
-          ".validate": "newData.hasChildren(['text','approved','ts']) && newRoot.child('wallTimes').child(auth.uid).val() === now",
+          ".validate": "newData.hasChildren(['text','approved','ts']) && newData.parent().parent().parent().child('wallTimes').child(auth.uid).val() === now",
           "text": {
             ".validate": "newData.isString() && newData.val().length >= 3 && newData.val().length <= 240"
           },
