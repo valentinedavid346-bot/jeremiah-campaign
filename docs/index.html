@@ -1207,7 +1207,7 @@ footer a{color:#fff}
 <script>
 /* Admin-edited content lives in Firebase at /content. Load it before the page renders. */
 (function(){
-  const LIST = ["events","howToVote","spotlights","opportunities","challenges","shoutouts","cabinet","videos"];
+  const LIST = ["events","howToVote","faq","spotlights","opportunities","challenges","shoutouts","cabinet","videos"];
   const TEXT = ["electionDate","findHim"];
   const toArr = v => Array.isArray(v) ? v.filter(x => x != null) : (v && typeof v === "object" ? Object.keys(v).sort((a,b) => a - b).map(k => v[k]) : []);
   window.applyCampaignContent = d => {
@@ -2199,6 +2199,8 @@ if (fb.apiKey && fb.databaseURL && wantLive) {
           fields: [["date", "Date", "date"], ["time", "Time", "text", "12:15 PM"], ["title", "Title", "text", "Lunch meet & greet"], ["place", "Place", "text", "Cafeteria"], ["detail", "Details", "textarea"]] },
         { key: "howToVote", title: "How to vote", desc: "Steps shown on the home page, in order.", item: "Step",
           fields: [["text", "Step", "text", "Vote in your homeroom during first period."]] },
+        { key: "faq", title: "Q&A", desc: "Questions and Jeremiah's answers on the Q&A page, in this order.", item: "Question",
+          fields: [["q", "Question", "text", "Why are you running?"], ["a", "Jeremiah's answer", "textarea"]] },
         { key: "shoutouts", title: "Shoutout wall", desc: "Copy good shoutouts from your Google Sheet here to put them up on the wall.", item: "Shoutout",
           fields: [["text", "Shoutout", "textarea"], ["name", "From (optional)"], ["role", "Grade (optional)"]] },
         { key: "spotlights", title: "Student spotlight", desc: "Only with the student's permission.", item: "Spotlight",
@@ -2272,6 +2274,7 @@ if (fb.apiKey && fb.databaseURL && wantLive) {
               const sc = SCHEMA.find(x => x.key === key);
               const items = readItems(key).filter(o => Object.values(o).some(Boolean));
               if (key === "events" && items.some(o => !o.date)) throw new Error("Every event needs a date.");
+              if (key === "faq" && items.some(o => !o.q || !o.a)) throw new Error("Every question needs an answer.");
               if (sc.fields.some(f => f[0] === "title") && items.some(o => !o.title)) throw new Error("Every item needs a title.");
               const clean = items.map(o => Object.fromEntries(Object.entries(o).filter(([, v]) => v)));
               await D.set(D.ref(db, `content/${key}`), clean.length ? clean : "none");
