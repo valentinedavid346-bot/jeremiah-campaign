@@ -372,6 +372,10 @@ body.intro-on{overflow:hidden}
 .hub-group h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(32px,5vw,48px);line-height:1;color:var(--blue);margin-bottom:6px}
 .hub-group>p{color:var(--muted);font-size:18px;margin-bottom:20px}
 .tile .ico{font-size:30px;line-height:1;display:block;margin-bottom:10px}
+.opp-intro{margin-bottom:28px;padding-left:20px;border-left:6px solid var(--blue)}
+.opp-intro .lead{max-width:64ch}.opp-intro b{color:#000}
+.opp-promise{margin-top:40px;background:var(--blue);color:#fff;border-radius:28px;padding:28px 32px}
+.opp-promise p{font-family:var(--display);text-transform:uppercase;font-size:clamp(24px,3.6vw,36px);line-height:1.05}
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
 .filters button{font:700 15px var(--body);padding:8px 16px;border-radius:999px;border:2px solid #000;background:#fff;cursor:pointer}
 .filters button[aria-pressed="true"]{background:#000;color:#fff}
@@ -854,11 +858,16 @@ footer a{color:#fff}
 <div class="page" id="page-opps">
   <header class="page-head"><div class="wrap">
     <h1>Opportunities</h1>
-    <p>Free programs, paid internships and scholarships for Bronx and NYC students. Every link goes to the official site.</p>
+    <p>Access to resources starts now.</p>
   </div></header>
   <section class="block"><div class="wrap">
+    <div class="opp-intro">
+      <p class="lead"><b>Access to the resources you need</b> is one of Jeremiah's promises. A lot of great programs are out there, and most students never hear about them. Here's a head start: free programs, paid internships and scholarships for Bronx and NYC students.</p>
+    </div>
     <div class="filters" id="oppFilters" role="group" aria-label="Filter opportunities"></div>
     <div class="opps" id="oppList"></div>
+    <p class="fine">Every link goes to the program's official site. Check dates there before you apply.</p>
+    <div class="opp-promise"><p>If elected, Jeremiah will push to bring more programs like these to Belmont and make them easy to find.</p></div>
     <div class="inspire-cta"><div><h3>Know about an opportunity?</h3><p>Send it in and we'll add it for everyone.</p></div><button class="btn btn-purple" type="button" data-msg="opp">Share an opportunity</button></div>
   </div></section>
 </div>
@@ -1330,7 +1339,7 @@ footer a{color:#fff}
     { title: "Make your mark", sub: "Small moves that make Belmont better." },
   ];
   const extras = [
-    { id: "opps", g: 0, on: F.opportunities !== false, ico: "🚀", label: "Opportunities", tile: "Free programs, paid internships and scholarships.", go: "Browse" },
+    { id: "opps", g: 0, on: F.opportunities !== false, ico: "🚀", label: "Opportunities", tile: "Access to resources starts now. Free programs, paid internships and scholarships.", go: "Browse" },
     { id: "club", g: 0, on: F.startClub !== false, ico: "🧩", label: "Start a club", tile: "Turn your idea into a real club, plus a quiz to find your fit.", go: "Get started" },
     { id: "advice", g: 1, on: F.advice !== false, ico: "🎓", label: "Senior advice", tile: "What seniors wish they knew sooner.", go: "Read it" },
     { id: "spotlight", g: 1, on: F.spotlight !== false, ico: "⭐", label: "Student spotlight", tile: "Belmont students doing something worth seeing.", go: "Meet them" },
