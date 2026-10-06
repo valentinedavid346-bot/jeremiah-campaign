@@ -279,6 +279,13 @@ dialog.lightbox img{display:block;max-width:100%;max-height:82vh;border-radius:1
 .lb-cap{color:#fff;text-align:center;font-weight:700;font-size:18px;margin-top:10px}
 .lb-close{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:#000;font-size:28px;line-height:1;cursor:pointer}
 .connect .shout{font-family:var(--display);text-transform:uppercase;font-size:clamp(40px,7vw,76px);line-height:.95;color:var(--blue);margin-bottom:18px}
+.suggest{scroll-margin-top:84px;margin-top:48px;background:#fff;border:3px solid #000;border-radius:28px;padding:32px;display:grid;gap:16px;max-width:760px;box-shadow:10px 10px 0 var(--blue)}
+.suggest h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(32px,5vw,48px);line-height:1;color:var(--blue)}
+.suggest .sub{color:var(--muted);font-size:17px;margin-top:-6px}
+.suggest .sg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.suggest.flash{animation:sgflash 1s ease}
+@keyframes sgflash{30%{box-shadow:0 0 0 6px var(--lilac),10px 10px 0 var(--blue)}}
+@media (max-width:560px){.suggest{padding:22px}.suggest .sg-row{grid-template-columns:1fr}}
 .connect-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
 .connect-steps>div{background:#fff;border:2px solid #000;border-radius:24px;padding:24px}
 .connect-steps>div:nth-child(2){background:var(--blue);color:#fff;border-color:var(--blue)}
@@ -536,10 +543,9 @@ footer a{color:#fff}
         <button class="dd-btn" type="button" id="ddBtn" aria-expanded="false" aria-controls="ddMenu">Get involved</button>
         <ul class="dd-menu" id="ddMenu"></ul>
       </li>
-      <li><a href="#/connect" data-page="connect">Be a part of Belmont</a></li>
     </ul>
     <div class="right">
-      <a href="#/connect" class="vote-btn" id="ctaBtn">Share an idea</a>
+      <a href="#/connect" class="vote-btn" id="ctaBtn">Be a part of Belmont</a>
       <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navList">Menu</button>
     </div>
   </div>
@@ -657,10 +663,10 @@ footer a{color:#fff}
 
   <section class="block ideas">
     <div class="wrap">
-      <h2>What should change at Belmont?</h2>
-      <p class="lead">This campaign is built on what students actually want. Tell Jeremiah what you'd fix, add or keep.</p>
+      <h2>You say it, we shout it!</h2>
+      <p class="lead">We want students to take the initiative in advocating for what they want at Belmont.</p>
       <div class="actions">
-        <a class="btn btn-white" href="#/connect" id="ideasBtn">Have a suggestion?</a>
+        <a class="btn btn-white" href="#/connect/suggest" id="ideasBtn">Have a suggestion? Tap here</a>
         <button class="btn btn-ghost" type="button" data-share>Share with a friend</button>
       </div>
     </div>
@@ -849,9 +855,9 @@ footer a{color:#fff}
   </div></header>
   <section class="block connect"><div class="wrap">
     <p class="shout">You say it, we shout it!</p>
-    <p class="lead">We want students to take the initiative in advocating for what they want at Belmont. Got an idea for a club, an event, or something that should change? Tell us and we'll push for it.</p>
+    <p class="lead">We want students to take the initiative in advocating for what they want at Belmont.</p>
     <div class="actions">
-      <button class="btn btn-purple" type="button" id="communityBtn" data-msg="idea">Have a suggestion? Tap here</button>
+      <a class="btn btn-purple" href="#/connect/suggest" id="communityBtn">Have a suggestion? Tap here</a>
       <button class="btn btn-outline" type="button" data-share>Share with a friend</button>
     </div>
     <div class="connect-steps">
@@ -859,6 +865,21 @@ footer a{color:#fff}
       <div><b>2</b><h3>We listen</h3><p>We read every idea and bring the strongest ones to the student council.</p></div>
       <div><b>3</b><h3>We push it</h3><p>We take it to the staff, advocating and working with <strong>you</strong> to make it a reality.</p></div>
     </div>
+    <form class="suggest" id="suggest" novalidate>
+      <h3>Have a suggestion?</h3>
+      <p class="sub">Tell us what you want to see at Belmont. Every suggestion gets read.</p>
+      <label>Your idea <textarea id="sgText" maxlength="1000" placeholder="Example: A study room that's open during lunch"></textarea></label>
+      <label>What kind of idea is it?
+        <select id="sgType"><option>A new club or activity</option><option>An event</option><option>Something to fix</option><option>Resources or support</option><option>Something else</option></select>
+      </label>
+      <div class="sg-row">
+        <label>Name <small>(optional)</small><input id="sgName" autocomplete="name" maxlength="60"></label>
+        <label>Grade <small>(optional)</small><select id="sgGrade"><option value="">Choose</option><option>9th</option><option>10th</option><option>11th</option><option>12th</option><option>Staff</option></select></label>
+      </div>
+      <button class="btn btn-purple" type="submit" id="sgSend">Send my suggestion</button>
+      <p class="form-note" id="sgNote"></p>
+      <p class="form-msg" id="sgMsg" role="status" hidden></p>
+    </form>
     <div class="mood" id="moodSec">
       <h3>How'd you wake up today?</h3>
       <p class="lead" id="moodLead">Tap one. See how the rest of Belmont is feeling.</p>
@@ -1203,8 +1224,6 @@ footer a{color:#fff}
   $("ddItem").hidden = !onPages.length;
   $("tiles").innerHTML = onPages.map(x => `<a class="tile" href="#/${x.id}"><h3>${x.label}</h3><p>${esc(x.tile)}</p><b>${x.go} &rarr;</b></a>`).join("");
   $("involved").hidden = !onPages.length;
-  if (F.ideaWall && liveReady) {
-    const cb = $("communityBtn"); const ca = document.createElement("a"); ca.className = cb.className; ca.id = "communityBtn"; ca.href = "#/ideas"; ca.textContent = cb.textContent; cb.replaceWith(ca); }
   const ddItem = $("ddItem"), ddBtn = $("ddBtn");
   const ddSet = open => { ddItem.classList.toggle("open", open); ddBtn.setAttribute("aria-expanded", open); };
   ddBtn.addEventListener("click", e => { e.stopPropagation(); ddSet(!ddItem.classList.contains("open")); });
@@ -1313,6 +1332,29 @@ footer a{color:#fff}
     } catch (err) { show(err && err.message === "slow" ? "Hold on a minute before sending another message." : "That didn't send. Check your connection and try again.", false); }
     $("sendBtn").disabled = false; $("sendBtn").textContent = "Send message";
   });
+
+  /* ---------- suggestion box (Be a part of Belmont) ---------- */
+  const sg = $("suggest"), sgMsg = $("sgMsg");
+  const paintSuggest = () => {
+    const ok = canSendAny();
+    $("sgNote").textContent = !ok ? "Suggestions open soon." : (C.contactFormEndpoint || window.CAMPAIGN_SEND_LIVE) ? "" : "This opens your email app with your suggestion ready to send.";
+    $("sgSend").disabled = !ok; $("sgSend").style.opacity = ok ? "" : .5;
+  };
+  paintSuggest(); window.addEventListener("campaign-live", paintSuggest);
+  const sgShow = (t, ok) => { sgMsg.hidden = false; sgMsg.className = "form-msg " + (ok ? "ok" : "err"); sgMsg.textContent = t; };
+  sg.addEventListener("submit", async ev => {
+    ev.preventDefault();
+    const text = $("sgText").value.trim();
+    if (text.length < 3) { sgShow("Write your idea, then send.", false); $("sgText").focus(); return; }
+    $("sgSend").disabled = true; $("sgSend").textContent = "Sending\u2026";
+    try {
+      const how = await sendMessage({ topic: `Suggestion: ${$("sgType").value}`, message: text, name: $("sgName").value.trim(), grade: $("sgGrade").value });
+      if (how !== "mail") { sg.reset(); sgShow("Got it! You said it. Now we'll shout it.", true); }
+      else sgShow("Your email app opened with your suggestion ready. Hit send there.", true);
+    } catch (err) { sgShow(err && err.message === "slow" ? "Hold on a minute before sending another one." : "That didn't send. Check your connection and try again.", false); }
+    $("sgSend").disabled = false; $("sgSend").textContent = "Send my suggestion";
+  });
+  addEventListener("hashchange", () => { if (/^#\/connect\/suggest/.test(location.hash)) { sg.classList.remove("flash"); void sg.offsetWidth; sg.classList.add("flash"); setTimeout(() => $("sgText").focus({ preventScroll: true }), 400); } });
 
   /* ---------- router ---------- */
   const titles = { home: C.position ? `${full} for ${C.position}` : full, why:`Why ${C.firstName}`, video:"Campaign video", cabinet:"Meet the cabinet", agenda:"Agenda", poll:"Poll", ideas:"Idea wall", quiz:"Club quiz", qa:"Q&A", endorsements:"Endorsements", contact:"Contact", connect:"Be a part of Belmont", dream:"Dream Belmont" };
