@@ -153,7 +153,39 @@ section.block{padding:80px 0}
 .steps li{counter-increment:s;display:grid;grid-template-columns:56px 1fr;align-items:center;gap:16px;font-size:19px;font-weight:500}
 .steps li::before{content:counter(s);width:56px;height:56px;border-radius:50%;background:#000;color:#fff;font-family:var(--display);font-size:28px;display:grid;place-items:center}
 
-/* ---------- agenda board ---------- */
+/* ---------- agenda calendar ---------- */
+.calx{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:32px;align-items:start}
+@media (max-width:860px){.calx{grid-template-columns:1fr}}
+.cal-card{background:#fff;border:3px solid #000;border-radius:28px;padding:clamp(16px,3vw,28px);box-shadow:10px 10px 0 var(--blue)}
+.cal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.cal-head h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(28px,4.4vw,44px);line-height:1;color:var(--blue);margin:0;text-align:center}
+.cal-nav{width:46px;height:46px;border-radius:50%;border:2px solid #000;background:#fff;font-size:28px;line-height:1;cursor:pointer;flex:none}
+.cal-nav:hover:not(:disabled){background:#000;color:#fff}
+.cal-nav:disabled{opacity:.3;cursor:default}
+.cal-dow,.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal-dow span{text-align:center;font-size:13px;font-weight:700;color:var(--muted);padding-bottom:6px}
+.cal-cell{position:relative;aspect-ratio:1;border:0;border-radius:14px;background:#F4EFFD;font:600 clamp(14px,2vw,18px) var(--body);color:#000;display:grid;place-items:center;cursor:default;padding:0}
+.cal-cell.blank{background:none}
+.cal-cell.past{color:#aaa}
+.cal-cell.today{box-shadow:inset 0 0 0 3px #000}
+.cal-cell.has{background:var(--blue);color:#fff;cursor:pointer;transition:transform .12s}
+.cal-cell.has:hover{transform:scale(1.07)}
+.cal-cell.has.past{background:#A78BFA}
+.cal-cell.elec{background:var(--blue);box-shadow:inset 0 0 0 3px #FACC15}
+.cal-cell.sel{outline:3px solid var(--lilac);outline-offset:2px;transform:scale(1.07)}
+.cal-cell .dot{position:absolute;bottom:14%;width:6px;height:6px;border-radius:50%;background:#fff}
+.cal-cell .st{position:absolute;top:6%;right:10%;font-size:12px;color:#FACC15}
+.cal-cell:focus-visible{outline:3px solid #000;outline-offset:2px}
+.cal-legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;font-size:14px;color:var(--muted)}
+.cal-legend span{display:inline-flex;align-items:center;gap:6px}
+.lg{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:5px;font-style:normal;font-size:10px}
+.lg.ev{background:var(--blue)}.lg.td{box-shadow:inset 0 0 0 2px #000;background:#F4EFFD}.lg.el{background:var(--blue);color:#FACC15;box-shadow:inset 0 0 0 2px #FACC15}
+.cal-detail{display:grid;gap:14px}
+.cd-day{font-family:var(--display);text-transform:uppercase;font-size:clamp(26px,3.6vw,36px);line-height:1;color:var(--blue)}
+.cd-empty{border:3px dashed var(--blue);border-radius:24px;padding:36px 28px;text-align:center;background:#fff;display:grid;gap:8px;justify-items:center}
+.cd-empty span{font-size:40px}.cd-empty p{font-size:18px}.cd-empty .sm{font-size:15px;color:var(--muted)}
+
+/* ---------- agenda event cards ---------- */
 .board-group+.board-group{margin-top:56px}
 .board-group h2{font-size:clamp(34px,5vw,52px);margin-bottom:20px}
 .events{display:grid;gap:14px}
@@ -1339,7 +1371,11 @@ footer a{color:#fff}
   /* ---------- agenda board ---------- */
   function parseDay(d){ const [y,m,dd] = d.split("-").map(Number); return new Date(y, m-1, dd); }
   const today = new Date(); today.setHours(0,0,0,0);
-  const evs = C.events.filter(e => e.date).map(e => ({...e, day: parseDay(e.date)})).sort((a,b) => a.day - b.day);
+  const evs = C.events.filter(e => e.date).map(e => ({...e, day: parseDay(e.date)}));
+  if (C.electionDate) { const ed = new Date(C.electionDate);
+    evs.push({ title: "Election Day", time: /T\d/.test(C.electionDate) ? ed.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" }) : "", place: C.school,
+      detail: `Vote ${full}${C.position ? " for " + C.position : ""}. ${C.slogan || ""}`, day: new Date(ed.getFullYear(), ed.getMonth(), ed.getDate()), election: true }); }
+  evs.sort((a,b) => a.day - b.day);
   const upcoming = evs.filter(e => e.day >= today), past = evs.filter(e => e.day < today).reverse();
   const eventCard = (e, isNext) => `
     <article class="event${isNext ? " next" : ""}">
@@ -1357,18 +1393,59 @@ footer a{color:#fff}
       </div>
     </article>`;
   function eventCal(e){
+    if (e.election && C.electionDate) { const allDay = !/T\d/.test(C.electionDate); return calLinks({ title: `Election day: vote ${full}`, start: allDay ? new Date(e.day) : new Date(C.electionDate), allDay, place: C.school, detail: e.detail }); }
     const t = parseTime(e.time), start = new Date(e.day);
     if (t) start.setHours(t[0], t[1]);
     return calLinks({ title: e.title, start, allDay: !t, place: [e.place, C.school].filter(Boolean).join(", "), detail: e.detail });
   }
-  $("agendaBody").innerHTML = !evs.length
-    ? `<div class="empty"><p>Campaign events go up here as soon as they're scheduled: meet and greets, debates, speeches.</p>
-       <button class="btn btn-purple" type="button" data-msg="invite">Invite Jeremiah to your club</button></div>`
-    : `<div class="board-group"><h2>Coming up</h2><div class="events">${
-        upcoming.length ? upcoming.map((e,i) => eventCard(e, i === 0)).join("") :
-        `<div class="empty"><p>No events scheduled right now. Check back soon.</p></div>`}</div></div>
-       ${past.length ? `<div class="board-group past"><h2>Already happened</h2><div class="events">${past.map(e => eventCard(e,false)).join("")}</div></div>` : ""}`;
-  if (upcoming.length){ $("nextUp").hidden = false; $("nextEvent").innerHTML = eventCard(upcoming[0], true); }
+  /* calendar: event days are purple; tap one to see what's happening */
+  { const key = d => `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+    const byDay = {}; evs.forEach(e => { (byDay[key(e.day)] = byDay[key(e.day)] || []).push(e); });
+    const first = upcoming[0] ? upcoming[0].day : today;
+    let view = new Date(first.getFullYear(), first.getMonth(), 1), sel = upcoming[0] ? new Date(upcoming[0].day) : null;
+    const minM = evs.length ? new Date(evs[0].day.getFullYear(), evs[0].day.getMonth(), 1) : new Date(today.getFullYear(), today.getMonth(), 1);
+    const lastEv = evs.length ? evs[evs.length - 1].day : today;
+    const maxM = new Date(Math.max(new Date(lastEv.getFullYear(), lastEv.getMonth(), 1), new Date(today.getFullYear(), today.getMonth() + 2, 1)));
+    $("agendaBody").innerHTML = `<div class="calx">
+      <div class="cal-card">
+        <div class="cal-head"><button type="button" class="cal-nav" id="calPrev" aria-label="Previous month">&#8249;</button><h2 id="calMonth" aria-live="polite"></h2><button type="button" class="cal-nav" id="calNext" aria-label="Next month">&#8250;</button></div>
+        <div class="cal-dow" aria-hidden="true"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+        <div class="cal-grid" id="calGrid" role="grid"></div>
+        <div class="cal-legend"><span><i class="lg ev"></i>Event</span><span><i class="lg td"></i>Today</span><span><i class="lg el">★</i>Election Day</span></div>
+      </div>
+      <div class="cal-detail" id="calDetail"></div>
+    </div>
+    <div class="inspire-cta"><div><h3>Want Jeremiah at your club or team?</h3><p>Tell him where and when.</p></div><button class="btn btn-purple" type="button" data-msg="invite">Invite Jeremiah</button></div>`;
+    const paintDetail = () => {
+      const list = sel ? (byDay[key(sel)] || []) : [];
+      $("calDetail").innerHTML = list.length
+        ? `<p class="cd-day">${sel.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}</p>` + list.map(e => eventCard(e, false)).join("")
+        : `<div class="cd-empty"><span aria-hidden="true">📅</span><p>${sel ? "Nothing scheduled that day." : "Tap a purple date to see what's happening."}</p>${!upcoming.length ? `<p class="sm">New events go up here as soon as they're scheduled: meet and greets, debates, speeches.</p>` : ""}</div>`;
+    };
+    const paint = () => {
+      const y = view.getFullYear(), m = view.getMonth(), startDow = new Date(y, m, 1).getDay(), days = new Date(y, m + 1, 0).getDate();
+      $("calMonth").textContent = view.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+      let html = "";
+      for (let i = 0; i < startDow; i++) html += `<span class="cal-cell blank"></span>`;
+      for (let d = 1; d <= days; d++) {
+        const dt = new Date(y, m, d), k = key(dt), has = byDay[k], el = has && has.some(e => e.election);
+        const cls = ["cal-cell", has ? "has" : "", el ? "elec" : "", dt.getTime() === today.getTime() ? "today" : "", dt < today ? "past" : "", sel && key(sel) === k ? "sel" : ""].filter(Boolean).join(" ");
+        const label = dt.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }) + (has ? `, ${has.length} event${has.length > 1 ? "s" : ""}: ${has.map(e => e.title).join(", ")}` : "");
+        html += `<button type="button" class="${cls}" data-d="${d}" aria-label="${esc(label)}" ${has ? "" : 'tabindex="-1"'}><span class="n">${d}</span>${el ? '<span class="st" aria-hidden="true">★</span>' : has ? '<span class="dot" aria-hidden="true"></span>' : ""}</button>`;
+      }
+      $("calGrid").innerHTML = html;
+      $("calPrev").disabled = view <= minM; $("calNext").disabled = view >= maxM;
+      paintDetail();
+    };
+    $("calGrid").addEventListener("click", e => {
+      const b = e.target.closest("button[data-d]"); if (!b) return;
+      sel = new Date(view.getFullYear(), view.getMonth(), +b.dataset.d); paint();
+      if (byDay[key(sel)] && matchMedia("(max-width: 860px)").matches) $("calDetail").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+    $("calPrev").addEventListener("click", () => { view = new Date(view.getFullYear(), view.getMonth() - 1, 1); paint(); });
+    $("calNext").addEventListener("click", () => { view = new Date(view.getFullYear(), view.getMonth() + 1, 1); paint(); });
+    paint(); }
+  { const nx = upcoming.filter(e => !e.election); if (nx.length){ $("nextUp").hidden = false; $("nextEvent").innerHTML = eventCard(nx[0], true); } }
 
   /* ---------- Q&A ---------- */
   $("faqList").innerHTML = C.faq.length
