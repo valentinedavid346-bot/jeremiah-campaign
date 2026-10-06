@@ -101,6 +101,10 @@
           ".validate": "newData.val() === true"
         }
       }
+    },
+    "content": {
+      ".read": true,
+      ".write": "auth != null && auth.token.email === 'jeremiah4belmont@gmail.com' && auth.token.firebase.sign_in_provider === 'password'"
     }
   }
 }

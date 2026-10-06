@@ -357,6 +357,28 @@ dialog.lightbox img{display:block;max-width:100%;max-height:82vh;border-radius:1
 .connect-steps p{margin-top:8px;font-size:17px}
 @media (max-width:760px){.connect-steps{grid-template-columns:1fr}}
 .foot-contact{font-weight:700}
+.foot-admin{background:none;border:0;color:#C4B5FD;font:600 14px var(--body);text-decoration:underline;cursor:pointer;padding:0}
+.adm-forgot{background:none;border:0;color:var(--blue);font:600 14px var(--body);text-decoration:underline;cursor:pointer;justify-self:start;padding:0}
+.adm-top{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.adm-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;position:sticky;top:64px;z-index:5;background:var(--paper);padding:10px 0}
+.adm-nav a{font:700 14px var(--body);padding:8px 14px;border:2px solid #000;border-radius:999px;text-decoration:none;color:#000;background:#fff}
+.adm-sec{background:#fff;border:3px solid #000;border-radius:24px;padding:clamp(18px,3vw,28px);margin-bottom:28px;scroll-margin-top:130px}
+.adm-sec h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(28px,4vw,40px);line-height:1;color:var(--blue);margin:0}
+.adm-sec>p{color:var(--muted);margin-top:6px}
+.adm-items{display:grid;gap:14px;margin-top:18px}
+.adm-item{border:2px solid var(--line);border-radius:18px;padding:16px;display:grid;gap:10px;background:var(--paper)}
+.adm-item .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.adm-item .num{font-weight:700;color:var(--blue)}
+.adm-item .tools{display:flex;gap:6px}
+.adm-item .tools button{font:700 13px var(--body);padding:6px 10px;border-radius:10px;border:2px solid #000;background:#fff;cursor:pointer}
+.adm-item .tools .del{border-color:#A11;color:#A11}
+.adm-item label{font-size:14px}
+.adm-item textarea{min-height:80px}
+.adm-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
+.adm-actions .st{font-weight:700;font-size:14px}
+.adm-actions .st.ok{color:#15803D}.adm-actions .st.err{color:#A11}
+.adm-empty{color:var(--muted);font-style:italic}
+@media (max-width:700px){.adm-nav{position:static}}
 
 
 
@@ -1098,6 +1120,25 @@ footer a{color:#fff}
   </div></section>
 </div>
 
+<!-- =============== ADMIN =============== -->
+<div class="page" id="page-admin">
+  <header class="page-head"><div class="wrap">
+    <h1>Admin</h1>
+    <p id="admWho">Sign in to update the site.</p>
+  </div></header>
+  <section class="block"><div class="wrap">
+    <div class="empty" id="admGate"><p>Sign in with the campaign admin account to edit the site.</p><button class="btn btn-purple" type="button" id="admOpen">Sign in</button></div>
+    <div id="admBody" hidden>
+      <div class="adm-top">
+        <a class="btn btn-outline" href="#/">View site</a>
+        <button class="btn btn-outline" type="button" id="admOut">Sign out</button>
+      </div>
+      <nav class="adm-nav" id="admNav" aria-label="Admin sections"></nav>
+      <div id="admSections"></div>
+    </div>
+  </div></section>
+</div>
+
 <!-- =============== CONTACT =============== -->
 <div class="page" id="page-contact">
   <header class="page-head"><div class="wrap">
@@ -1126,6 +1167,7 @@ footer a{color:#fff}
   <div class="wrap">
     <span id="footLine"></span>
     <a href="#/contact" class="foot-contact">Contact Jeremiah</a>
+    <button type="button" class="foot-admin" id="adminLink">Admin</button>
     <div class="soc" id="footSocials"></div>
   </div>
 </footer>
@@ -1145,10 +1187,48 @@ footer a{color:#fff}
   </form>
 </dialog>
 
+<dialog class="msg" id="adminDialog" aria-labelledby="admTitle">
+  <form class="msg-card" id="adminForm" novalidate>
+    <button class="msg-close" type="button" id="adminClose" aria-label="Close">&times;</button>
+    <h2 id="admTitle">Admin sign in</h2>
+    <p class="sub">For the campaign team only.</p>
+    <input type="email" id="admEmail" autocomplete="username" placeholder="Email" aria-label="Email">
+    <input type="password" id="admPass" autocomplete="current-password" placeholder="Password" aria-label="Password">
+    <button class="btn btn-purple" type="submit" id="admGo">Sign in</button>
+    <button class="adm-forgot" type="button" id="admForgot">Forgot password?</button>
+    <p class="form-msg" id="admMsg" role="status" hidden></p>
+  </form>
+</dialog>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
+/* Admin-edited content lives in Firebase at /content. Load it before the page renders. */
 (function(){
+  const LIST = ["events","howToVote","spotlights","opportunities","challenges","shoutouts","cabinet","videos"];
+  const TEXT = ["electionDate","findHim"];
+  const toArr = v => Array.isArray(v) ? v.filter(x => x != null) : (v && typeof v === "object" ? Object.keys(v).sort((a,b) => a - b).map(k => v[k]) : []);
+  window.applyCampaignContent = d => {
+    LIST.forEach(k => {
+      if (d[k] === undefined || d[k] === null) return;
+      let a = toArr(d[k]);
+      if (k === "howToVote") a = a.map(x => typeof x === "string" ? x : x && x.text).filter(Boolean);
+      if (k === "opportunities") a = a.map(o => ({ ...o, tags: Array.isArray(o.tags) ? o.tags : String(o.tags || "").split(",").map(t => t.trim()).filter(Boolean) }));
+      CONFIG[k] = a;
+    });
+    TEXT.forEach(k => { if (typeof d[k] === "string") CONFIG[k] = d[k]; });
+  };
+  const url = CONFIG.firebase && CONFIG.firebase.databaseURL;
+  let done = false;
+  window.__contentReady = !url ? Promise.resolve() : Promise.race([
+    fetch(url.replace(/\/$/, "") + "/content.json", { cache: "no-store" }).then(r => r.ok ? r.json() : null)
+      .then(d => { if (!done && d && typeof d === "object") window.applyCampaignContent(d); }).catch(() => {}),
+    new Promise(r => setTimeout(r, 2500)),
+  ]).then(() => { done = true; });
+})();
+</script>
+<script>
+window.__mainDone = window.__contentReady.then(function(){
   const C = CONFIG, $ = id => document.getElementById(id);
   const full = `${C.firstName} ${C.lastName}`;
   const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1725,7 +1805,7 @@ footer a{color:#fff}
   addEventListener("hashchange", checkSuggestHash); checkSuggestHash();
 
   /* ---------- router ---------- */
-  const titles = { home: C.position ? `${full} for ${C.position}` : full, why:`Why ${C.firstName}`, video:"Campaign video", cabinet:"Meet the cabinet", agenda:"Agenda", inspired:"Get inspired", opps:"Opportunities", club:"Start a club", advice:"Senior advice", shoutouts:"Shoutouts", challenge:"Weekly challenge", spotlight:"Student spotlight", qa:"Q&A", contact:"Contact", connect:"Be a part of Belmont", dream:"Dream Belmont" };
+  const titles = { home: C.position ? `${full} for ${C.position}` : full, why:`Why ${C.firstName}`, video:"Campaign video", cabinet:"Meet the cabinet", agenda:"Agenda", inspired:"Get inspired", opps:"Opportunities", club:"Start a club", advice:"Senior advice", shoutouts:"Shoutouts", challenge:"Weekly challenge", spotlight:"Student spotlight", qa:"Q&A", contact:"Contact", admin:"Admin", connect:"Be a part of Belmont", dream:"Dream Belmont" };
   const navList = $("navList"), menuBtn = $("menuBtn");
   const route = () => {
     const [pageId = "home", anchor] = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
@@ -1751,11 +1831,11 @@ footer a{color:#fff}
   const toast = t => { const el=$("toast"); el.textContent=t; el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),2200); };
   bindShare();
   window.CAMPAIGN = { F, esc, toast, full };
-})();
+}).catch(e => console.error(e));
 </script>
 <!-- Fun features: intro, dream card, mood check-in, then vs now, easter egg -->
 <script>
-(function(){
+window.__funDone = window.__mainDone.then(function(){
   const C = CONFIG, $ = id => document.getElementById(id), { F, esc, toast, full } = window.CAMPAIGN;
   const store = { get(k){ try { return localStorage.getItem(k); } catch { return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch {} } };
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1970,10 +2050,11 @@ footer a{color:#fff}
       o.querySelector("button").focus();
     });
   }
-})();
+}).catch(e => console.error(e));
 </script>
 <!-- Live features: poll, supporter counter, idea wall (Firebase Realtime Database) -->
 <script type="module">
+await window.__funDone;
 const C = CONFIG, fb = C.firebase || {}, { F, esc, toast, full } = window.CAMPAIGN;
 const $ = id => document.getElementById(id);
 const wantLive = true; // the message inbox is always useful once Firebase is set up
@@ -2075,6 +2156,143 @@ if (fb.apiKey && fb.databaseURL && wantLive) {
         }, () => {});
       });
       if (C.livePosting) window.dispatchEvent(new Event("campaign-walls")); // on once the admin panel can approve posts
+    }
+
+    /* ----- admin panel: sign in with the campaign account, edit /content ----- */
+    {
+      const ADMIN = String(C.adminEmail || "").toLowerCase();
+      const isAdmin = u => !!(u && !u.isAnonymous && ADMIN && String(u.email || "").toLowerCase() === ADMIN);
+      const dlg = $("adminDialog"), msg = $("admMsg");
+      const say = (t, ok) => { msg.hidden = false; msg.className = "form-msg " + (ok ? "ok" : "err"); msg.textContent = t; };
+      const openLogin = () => { msg.hidden = true; dlg.showModal ? dlg.showModal() : dlg.setAttribute("open", ""); setTimeout(() => $("admEmail").focus(), 50); };
+      const closeLogin = () => { dlg.close ? dlg.close() : dlg.removeAttribute("open"); };
+      $("adminLink").addEventListener("click", () => isAdmin(auth.currentUser) ? (location.hash = "#/admin") : openLogin());
+      $("admOpen").addEventListener("click", openLogin);
+      $("adminClose").addEventListener("click", closeLogin);
+      dlg.addEventListener("click", e => { if (e.target === dlg) closeLogin(); });
+      $("adminForm").addEventListener("submit", async e => {
+        e.preventDefault();
+        const email = $("admEmail").value.trim(), pw = $("admPass").value;
+        if (!email || !pw) { say("Enter the email and password."); return; }
+        $("admGo").disabled = true; $("admGo").textContent = "Signing in…";
+        try {
+          const cred = await A.signInWithEmailAndPassword(auth, email, pw);
+          if (!isAdmin(cred.user)) { await A.signOut(auth); await A.signInAnonymously(auth); say("That account isn't the campaign admin."); }
+          else { $("admPass").value = ""; closeLogin(); location.hash = "#/admin"; toast("Signed in as admin"); }
+        } catch (err) {
+          say(/too-many/.test(err.code) ? "Too many tries. Wait a few minutes." : "Wrong email or password.");
+        }
+        $("admGo").disabled = false; $("admGo").textContent = "Sign in";
+      });
+      $("admForgot").addEventListener("click", async () => {
+        const email = $("admEmail").value.trim();
+        if (!email) { say("Type the admin email first, then tap Forgot password."); return; }
+        try { await A.sendPasswordResetEmail(auth, email); say("If that's the admin email, a reset link is on its way.", true); }
+        catch { say("Couldn't send the reset email. Check the address."); }
+      });
+      $("admOut").addEventListener("click", async () => { await A.signOut(auth); await A.signInAnonymously(auth).catch(() => {}); location.hash = "#/"; toast("Signed out"); });
+
+      const SCHEMA = [
+        { key: "events", title: "Calendar events", desc: "Each one shows up as a purple day on the Agenda calendar.", item: "Event",
+          fields: [["date", "Date", "date"], ["time", "Time", "text", "12:15 PM"], ["title", "Title", "text", "Lunch meet & greet"], ["place", "Place", "text", "Cafeteria"], ["detail", "Details", "textarea"]] },
+        { key: "howToVote", title: "How to vote", desc: "Steps shown on the home page, in order.", item: "Step",
+          fields: [["text", "Step", "text", "Vote in your homeroom during first period."]] },
+        { key: "shoutouts", title: "Shoutout wall", desc: "Copy good shoutouts from your Google Sheet here to put them up on the wall.", item: "Shoutout",
+          fields: [["text", "Shoutout", "textarea"], ["name", "From (optional)"], ["role", "Grade (optional)"]] },
+        { key: "spotlights", title: "Student spotlight", desc: "Only with the student's permission.", item: "Spotlight",
+          fields: [["name", "Name"], ["grade", "Grade or group"], ["text", "What they're doing", "textarea"], ["photo", "Photo link (optional)", "url"]] },
+        { key: "challenges", title: "Weekly challenges", desc: "A new one shows each Monday, in this order.", item: "Challenge",
+          fields: [["title", "Challenge"], ["detail", "Details", "textarea"]] },
+        { key: "opportunities", title: "Opportunities", desc: "Always link to the official site.", item: "Opportunity",
+          fields: [["title", "Name"], ["org", "Organization"], ["tags", "Tags, separated by commas", "text", "Paid, Summer"], ["detail", "Description", "textarea"], ["who", "Who it's for"], ["when", "When"], ["url", "Official link", "url"]] },
+        { key: "cabinet", title: "Cabinet", item: "Member",
+          fields: [["name", "Name"], ["role", "Role", "text", "Vice President"], ["grade", "Grade"], ["photo", "Photo link (optional)", "url"], ["bio", "Short bio", "textarea"]] },
+        { key: "videos", title: "Campaign videos", desc: "YouTube links. The first one is featured.", item: "Video",
+          fields: [["title", "Title"], ["youtube", "YouTube link", "url"], ["caption", "Caption"]] },
+      ];
+      const SETTINGS = [["electionDate", "Election day and time", "datetime-local"], ["findHim", "Where to find Jeremiah at school", "text", "Room 204 during lunch"]];
+      const fromConfig = k => {
+        const v = C[k] || [];
+        if (k === "howToVote") return v.map(t => ({ text: t }));
+        if (k === "opportunities") return v.map(o => ({ ...o, tags: (o.tags || []).join(", ") }));
+        return v.map(o => ({ ...o }));
+      };
+      const state = {};
+      const field = (sec, i, [f, label, type = "text", ph = ""], val) => {
+        const id = `adm-${sec}-${i}-${f}`, v = esc(val ?? "");
+        return type === "textarea"
+          ? `<label for="${id}">${esc(label)}<textarea id="${id}" data-f="${f}" placeholder="${esc(ph)}">${v}</textarea></label>`
+          : `<label for="${id}">${esc(label)}<input id="${id}" data-f="${f}" type="${type}" value="${v}" placeholder="${esc(ph)}"></label>`;
+      };
+      const readItems = key => [...document.querySelectorAll(`#adm-${key} .adm-item`)].map(el => {
+        const o = {}; el.querySelectorAll("[data-f]").forEach(inp => { o[inp.dataset.f] = inp.value.trim(); }); return o;
+      });
+      const paintSection = key => {
+        const sc = SCHEMA.find(x => x.key === key), items = state[key];
+        $(`adm-${key}-list`).innerHTML = items.length ? items.map((it, i) => `<div class="adm-item" data-i="${i}">
+            <div class="row"><span class="num">${esc(sc.item)} ${i + 1}</span><span class="tools">
+              <button type="button" data-act="up" ${i ? "" : "disabled"} aria-label="Move up">&uarr;</button>
+              <button type="button" data-act="down" ${i < items.length - 1 ? "" : "disabled"} aria-label="Move down">&darr;</button>
+              <button type="button" class="del" data-act="del">Delete</button></span></div>
+            ${sc.fields.map(f => field(key, i, f, it[f[0]])).join("")}</div>`).join("")
+          : `<p class="adm-empty">Nothing here yet.</p>`;
+      };
+      const renderAdmin = () => {
+        $("admNav").innerHTML = [...SCHEMA.map(x => `<a href="#/admin/adm-${x.key}">${esc(x.title)}</a>`), `<a href="#/admin/adm-settings">Settings</a>`].join("");
+        $("admSections").innerHTML = SCHEMA.map(sc => `<section class="adm-sec" id="adm-${sc.key}"><h2>${esc(sc.title)}</h2>${sc.desc ? `<p>${esc(sc.desc)}</p>` : ""}
+            <div class="adm-items" id="adm-${sc.key}-list"></div>
+            <div class="adm-actions"><button class="btn btn-outline" type="button" data-add="${sc.key}">+ Add ${esc(sc.item.toLowerCase())}</button>
+              <button class="btn btn-purple" type="button" data-save="${sc.key}">Save ${esc(sc.title.toLowerCase())}</button><span class="st" id="adm-${sc.key}-st" role="status"></span></div></section>`).join("")
+          + `<section class="adm-sec" id="adm-settings"><h2>Settings</h2><div class="adm-items"><div class="adm-item">
+              ${SETTINGS.map(f => field("settings", 0, f, C[f[0]])).join("")}</div></div>
+              <div class="adm-actions"><button class="btn btn-purple" type="button" data-save="settings">Save settings</button><span class="st" id="adm-settings-st" role="status"></span></div></section>`;
+        SCHEMA.forEach(sc => { state[sc.key] = fromConfig(sc.key); paintSection(sc.key); });
+      };
+      $("admSections").addEventListener("click", async e => {
+        const b = e.target.closest("button"); if (!b) return;
+        const sec = b.closest(".adm-sec"), key = sec && sec.id.replace("adm-", "");
+        if (b.dataset.act) {
+          state[key] = readItems(key); const i = +b.closest(".adm-item").dataset.i, L = state[key];
+          if (b.dataset.act === "del") { if (!confirm("Delete this one?")) return; L.splice(i, 1); }
+          if (b.dataset.act === "up" && i > 0) [L[i - 1], L[i]] = [L[i], L[i - 1]];
+          if (b.dataset.act === "down" && i < L.length - 1) [L[i + 1], L[i]] = [L[i], L[i + 1]];
+          paintSection(key); $(`adm-${key}-st`).textContent = "Not saved yet"; $(`adm-${key}-st`).className = "st";
+        } else if (b.dataset.add) {
+          state[key] = readItems(key); state[key].push({}); paintSection(key);
+          const last = sec.querySelector(".adm-item:last-child input, .adm-item:last-child textarea"); if (last) last.focus();
+        } else if (b.dataset.save) {
+          const st = $(`adm-${key}-st`); st.className = "st"; st.textContent = "Saving…"; b.disabled = true;
+          try {
+            if (key === "settings") {
+              const upd = {}; SETTINGS.forEach(([f]) => { upd[`content/${f}`] = $(`adm-settings-0-${f}`).value.trim(); });
+              await D.update(D.ref(db), upd);
+            } else {
+              const sc = SCHEMA.find(x => x.key === key);
+              const items = readItems(key).filter(o => Object.values(o).some(Boolean));
+              if (key === "events" && items.some(o => !o.date)) throw new Error("Every event needs a date.");
+              if (sc.fields.some(f => f[0] === "title") && items.some(o => !o.title)) throw new Error("Every item needs a title.");
+              const clean = items.map(o => Object.fromEntries(Object.entries(o).filter(([, v]) => v)));
+              await D.set(D.ref(db, `content/${key}`), clean.length ? clean : "none");
+              state[key] = clean; paintSection(key);
+            }
+            st.className = "st ok"; st.textContent = "Saved! It's live. Refresh the site to see it.";
+          } catch (err) {
+            st.className = "st err"; st.textContent = /PERMISSION/i.test(String(err && (err.code || err.message))) ? "Not allowed. Sign in again or check the database rules." : (err.message || "Didn't save. Try again.");
+          }
+          b.disabled = false;
+        }
+      });
+      $("admSections").addEventListener("input", e => { const sec = e.target.closest(".adm-sec"); if (sec) { const st = $(`${sec.id}-st`); if (st) { st.className = "st"; st.textContent = "Not saved yet"; } } });
+      let rendered = false;
+      const paintGate = () => {
+        const u = auth.currentUser, ok = isAdmin(u);
+        $("admGate").hidden = ok; $("admBody").hidden = !ok;
+        $("admWho").textContent = ok ? `Signed in as ${u.email}` : "Sign in to update the site.";
+        if (ok && !rendered) { renderAdmin(); rendered = true; }
+        if (!ok) rendered = false;
+      };
+      A.onAuthStateChanged(auth, paintGate); paintGate();
+      addEventListener("beforeunload", e => { if (document.querySelector(".adm-actions .st:not(.ok):not(.err)")?.textContent === "Not saved yet") { e.preventDefault(); e.returnValue = ""; } });
     }
 
     /* ----- challenge of the week counter ----- */
