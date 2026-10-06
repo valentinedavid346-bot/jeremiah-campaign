@@ -194,11 +194,11 @@ const CONFIG = {
   // Paste your project's web config here. Until apiKey and databaseURL are
   // filled in, the poll, supporter counter and idea wall stay hidden.
   firebase: {
-    apiKey: "",
-    authDomain: "",
+    apiKey: "AIzaSyAxVUVkEib60rPQeAxiwLXpl9dHKHTd1YQ",
+    authDomain: "jeremiah-campaign.firebaseapp.com",
     databaseURL: "",
-    projectId: "",
-    appId: "",
+    projectId: "jeremiah-campaign",
+    appId: "1:714665024743:web:06e682555cb7fec4575642",
   },
 
   // ---------- CLUB MATCH QUIZ ----------
